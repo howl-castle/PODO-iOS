@@ -93,6 +93,7 @@
 		CEFEFAC929BF6AF500052DBA /* ExpertDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAC429BF6AF500052DBA /* ExpertDetailViewController.swift */; };
 		CEFEFACA29BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAC729BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift */; };
 		CEFEFACB29BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAC829BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift */; };
+		CEFEFACE29BF6B3200052DBA /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFACD29BF6B3200052DBA /* SpeechSynthesizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -179,6 +180,7 @@
 		CEFEFAC429BF6AF500052DBA /* ExpertDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpertDetailViewController.swift; sourceTree = "<group>"; };
 		CEFEFAC729BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpertDetailQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		CEFEFAC829BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpertDetailAnswerTableViewCell.swift; sourceTree = "<group>"; };
+		CEFEFACD29BF6B3200052DBA /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 		CE3F420629A647BF0085C436 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CEFEFACC29BF6B3200052DBA /* Util */,
 				CEFEF9F329BF692100052DBA /* CommonView */,
 				CEFEF9FF29BF692100052DBA /* Data */,
 				CEFEF9EC29BF692100052DBA /* Extensions */,
@@ -902,6 +905,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		CEFEFACC29BF6B3200052DBA /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				CEFEFACD29BF6B3200052DBA /* SpeechSynthesizer.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1019,6 +1030,7 @@
 				CEFEFAC929BF6AF500052DBA /* ExpertDetailViewController.swift in Sources */,
 				CEFEFAB029BF6A3400052DBA /* ContentViewModel.swift in Sources */,
 				CEFEFABB29BF6A8800052DBA /* SignInViewController.swift in Sources */,
+				CEFEFACE29BF6B3200052DBA /* SpeechSynthesizer.swift in Sources */,
 				CEFEFA1929BF692100052DBA /* InterestData.swift in Sources */,
 				CEFEFA9729BF698100052DBA /* RevenueHeaderTableViewCell.swift in Sources */,
 				CE3F422029A647BF0085C436 /* SceneDelegate.swift in Sources */,
