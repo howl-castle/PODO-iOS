@@ -86,6 +86,7 @@
 		CEFEFAB629BF6A3400052DBA /* ContentUserInfoTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAAB29BF6A3400052DBA /* ContentUserInfoTableViewHeaderView.swift */; };
 		CEFEFAB729BF6A3400052DBA /* ContentTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAAC29BF6A3400052DBA /* ContentTableViewHeaderView.swift */; };
 		CEFEFAB829BF6A3400052DBA /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAAE29BF6A3400052DBA /* ContentCollectionViewCell.swift */; };
+		CEFEFABB29BF6A8800052DBA /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFABA29BF6A8800052DBA /* SignInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,6 +166,7 @@
 		CEFEFAAB29BF6A3400052DBA /* ContentUserInfoTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentUserInfoTableViewHeaderView.swift; sourceTree = "<group>"; };
 		CEFEFAAC29BF6A3400052DBA /* ContentTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTableViewHeaderView.swift; sourceTree = "<group>"; };
 		CEFEFAAE29BF6A3400052DBA /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
+		CEFEFABA29BF6A8800052DBA /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 		CE3F420829A647BF0085C436 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				CEFEFAB929BF6A8800052DBA /* SignIn */,
 				CEFEFA1A29BF698100052DBA /* Tab */,
 				CEFEFA9D29BF6A3400052DBA /* Content */,
 			);
@@ -841,6 +844,14 @@
 			path = CollectionView;
 			sourceTree = "<group>";
 		};
+		CEFEFAB929BF6A8800052DBA /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				CEFEFABA29BF6A8800052DBA /* SignInViewController.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -954,6 +965,7 @@
 				CEFEFA0D29BF692100052DBA /* CommonSelectionTableViewCell.swift in Sources */,
 				CEFEFA8929BF698100052DBA /* ExpertViewController.swift in Sources */,
 				CEFEFAB029BF6A3400052DBA /* ContentViewModel.swift in Sources */,
+				CEFEFABB29BF6A8800052DBA /* SignInViewController.swift in Sources */,
 				CEFEFA1929BF692100052DBA /* InterestData.swift in Sources */,
 				CEFEFA9729BF698100052DBA /* RevenueHeaderTableViewCell.swift in Sources */,
 				CE3F422029A647BF0085C436 /* SceneDelegate.swift in Sources */,
