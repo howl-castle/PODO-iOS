@@ -13,7 +13,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        self.initApp()
         return true
+    }
+
+    private func initApp() {
+        self.setupWindow()
+    }
+
+    private func setupWindow() {
+        let rootViewController = TabBarController(nibName: nil, bundle: nil)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = rootViewController
+        self.window?.makeKeyAndVisible()
     }
 
     /*
