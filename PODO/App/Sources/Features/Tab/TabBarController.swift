@@ -40,6 +40,7 @@ final class TabBarController: UITabBarController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.showLoginViewIfNeeded()
     }
 
     override func viewDidLayoutSubviews() {
@@ -48,6 +49,19 @@ final class TabBarController: UITabBarController {
         let height: CGFloat = 95.0
         self.tabBar.frame.size.height = height
         self.tabBar.frame.origin.y = self.view.frame.height - height
+    }
+
+    //
+    var didShow = false
+
+    private func showLoginViewIfNeeded() {
+        guard self.didShow == false else { return }
+        self.didShow = true
+        let viewController = SignInViewController()
+        let navigationController = PortraitNavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .overFullScreen
+        navigationController.isNavigationBarHidden = true
+        self.present(navigationController, animated: false)
     }
 
     private func setupUI() {
