@@ -94,6 +94,7 @@
 		CEFEFACA29BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAC729BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift */; };
 		CEFEFACB29BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAC829BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift */; };
 		CEFEFACE29BF6B3200052DBA /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFACD29BF6B3200052DBA /* SpeechSynthesizer.swift */; };
+		CEFEFAD129BF6B8400052DBA /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAD029BF6B8400052DBA /* WebViewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -181,6 +182,7 @@
 		CEFEFAC729BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpertDetailQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		CEFEFAC829BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpertDetailAnswerTableViewCell.swift; sourceTree = "<group>"; };
 		CEFEFACD29BF6B3200052DBA /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
+		CEFEFAD029BF6B8400052DBA /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 		CE3F420829A647BF0085C436 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				CEFEFACF29BF6B8400052DBA /* WebView */,
 				CEFEFA1A29BF698100052DBA /* Tab */,
 				CEFEFA9D29BF6A3400052DBA /* Content */,
 				CEFEFAC329BF6AF500052DBA /* ExpertDetail */,
@@ -913,6 +916,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		CEFEFACF29BF6B8400052DBA /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				CEFEFAD029BF6B8400052DBA /* WebViewViewController.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1039,6 +1050,7 @@
 				CEFEFA7A29BF698100052DBA /* HomeHottestCollectionViewCell.swift in Sources */,
 				CEFEFA0829BF692100052DBA /* UITableView+.swift in Sources */,
 				CEFEFA9229BF698100052DBA /* RevenueMyAnswerListViewController.swift in Sources */,
+				CEFEFAD129BF6B8400052DBA /* WebViewViewController.swift in Sources */,
 				CEFEFA9829BF698100052DBA /* RevenueListTableViewHeaderView.swift in Sources */,
 				CEFEFA8D29BF698100052DBA /* ExperMyCollectionViewCell.swift in Sources */,
 				CEFEFA1329BF692100052DBA /* CommonBottomButtonView.swift in Sources */,

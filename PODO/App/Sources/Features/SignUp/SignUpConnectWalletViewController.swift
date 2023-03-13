@@ -26,10 +26,10 @@ final class SignUpConnectWalletViewController: UIViewController {
     }
 
     @objc private func didTapConnectButton(_ sender: UIButton) {
-        //let viewController = SignUpFinishViewController()
-        //self.navigationController?.pushViewController(viewController, animated: false)
-        let viewController = WebViewViewController(nibName: nil, bundle: nil)
-        self.present(viewController, animated: true)
+        let viewController = SignUpFinishViewController()
+        self.navigationController?.pushViewController(viewController, animated: false)
+        //let viewController = WebViewViewController(nibName: nil, bundle: nil)
+        //self.present(viewController, animated: true)
     }
 
     private func setupUI() {
