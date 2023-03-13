@@ -90,6 +90,9 @@
 		CEFEFAC029BF6AC000052DBA /* SignUpInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFABD29BF6AC000052DBA /* SignUpInputViewController.swift */; };
 		CEFEFAC129BF6AC000052DBA /* SignUpFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFABE29BF6AC000052DBA /* SignUpFinishViewController.swift */; };
 		CEFEFAC229BF6AC000052DBA /* SignUpConnectWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFABF29BF6AC000052DBA /* SignUpConnectWalletViewController.swift */; };
+		CEFEFAC929BF6AF500052DBA /* ExpertDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAC429BF6AF500052DBA /* ExpertDetailViewController.swift */; };
+		CEFEFACA29BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAC729BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift */; };
+		CEFEFACB29BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEFAC829BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -173,6 +176,9 @@
 		CEFEFABD29BF6AC000052DBA /* SignUpInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpInputViewController.swift; sourceTree = "<group>"; };
 		CEFEFABE29BF6AC000052DBA /* SignUpFinishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFinishViewController.swift; sourceTree = "<group>"; };
 		CEFEFABF29BF6AC000052DBA /* SignUpConnectWalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpConnectWalletViewController.swift; sourceTree = "<group>"; };
+		CEFEFAC429BF6AF500052DBA /* ExpertDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpertDetailViewController.swift; sourceTree = "<group>"; };
+		CEFEFAC729BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpertDetailQuestionTableViewCell.swift; sourceTree = "<group>"; };
+		CEFEFAC829BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpertDetailAnswerTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +258,7 @@
 			children = (
 				CEFEFA1A29BF698100052DBA /* Tab */,
 				CEFEFA9D29BF6A3400052DBA /* Content */,
+				CEFEFAC329BF6AF500052DBA /* ExpertDetail */,
 				CEFEFAB929BF6A8800052DBA /* SignIn */,
 				CEFEFABC29BF6AC000052DBA /* SignUp */,
 			);
@@ -869,6 +876,32 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		CEFEFAC329BF6AF500052DBA /* ExpertDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CEFEFAC429BF6AF500052DBA /* ExpertDetailViewController.swift */,
+				CEFEFAC529BF6AF500052DBA /* View */,
+			);
+			path = ExpertDetail;
+			sourceTree = "<group>";
+		};
+		CEFEFAC529BF6AF500052DBA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEFEFAC629BF6AF500052DBA /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CEFEFAC629BF6AF500052DBA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CEFEFAC729BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift */,
+				CEFEFAC829BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -964,6 +997,7 @@
 				CEFEFA1229BF692100052DBA /* PortraitNavigationController.swift in Sources */,
 				CEFEFAC229BF6AC000052DBA /* SignUpConnectWalletViewController.swift in Sources */,
 				CEFEFA7629BF698100052DBA /* HomeDataModel.swift in Sources */,
+				CEFEFACB29BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift in Sources */,
 				CEFEFA9029BF698100052DBA /* RevenueViewController.swift in Sources */,
 				CEFEFA8029BF698100052DBA /* SettingViewController.swift in Sources */,
 				CEFEFA7929BF698100052DBA /* HomeInsightTableViewCell.swift in Sources */,
@@ -982,6 +1016,7 @@
 				CEFEFA9929BF698100052DBA /* RevenueExpertTableViewHeaderView.swift in Sources */,
 				CEFEFA0D29BF692100052DBA /* CommonSelectionTableViewCell.swift in Sources */,
 				CEFEFA8929BF698100052DBA /* ExpertViewController.swift in Sources */,
+				CEFEFAC929BF6AF500052DBA /* ExpertDetailViewController.swift in Sources */,
 				CEFEFAB029BF6A3400052DBA /* ContentViewModel.swift in Sources */,
 				CEFEFABB29BF6A8800052DBA /* SignInViewController.swift in Sources */,
 				CEFEFA1929BF692100052DBA /* InterestData.swift in Sources */,
@@ -1021,6 +1056,7 @@
 				CEFEFA8429BF698100052DBA /* MySubscriptionListViewController.swift in Sources */,
 				CE3F421F29A647BF0085C436 /* AppDelegate.swift in Sources */,
 				CEFEFA7829BF698100052DBA /* NoticeViewController.swift in Sources */,
+				CEFEFACA29BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift in Sources */,
 				CEFEFA0F29BF692100052DBA /* CommonOnOffButtonView.swift in Sources */,
 				CEFEFA0E29BF692100052DBA /* CommonSelectionViewController.swift in Sources */,
 				CEFEFA1629BF692100052DBA /* HomeData.swift in Sources */,
