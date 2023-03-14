@@ -16,6 +16,77 @@ final class ExpertViewController: UIViewController {
         self.setupUI()
     }
 
+    private var navigationView: UIView?
+    private var titleLabel: UILabel?
+    private var notificationButton: UIButton?
+    private var tableViewTopBackgroundView: UIView?
+    private var tableViewBottomBackgroundView: UIView?
+    private var tableView: UITableView?
+
+    private let viewModel = ExpertViewModel()
+}
+
+// MARK: - TableView DataSource
+extension ExpertViewController: UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        self.viewModel.numberOfSections
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.viewModel.numberOfRowsInSection(section)
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cellType = self.viewModel.cellTypeForSection(indexPath.section) else {
+            return UITableViewCell()
+        }
+
+        guard let cell = tableView.dequeueReusableCell(cellType, for: indexPath)  else {
+            return UITableViewCell()
+        }
+
+        self.configureCell(cell, atIndexPath: indexPath)
+        cell.selectionStyle = .none
+        return cell
+    }
+
+    private func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        if let cell = cell as? ExpertTrendingTableViewCell {
+            let data = self.viewModel.dataForSection(indexPath.section)
+            cell.updateData(data)
+        } else if let cell = cell as? ExpertRecommendTableViewCell {
+            guard let data = self.viewModel.dataForIndexPath(indexPath) else { return }
+            cell.updateData(data)
+        }
+    }
+}
+
+// MARK: - TableView Delegate
+extension ExpertViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        self.viewModel.heightForRowInSection(indexPath.section)
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        self.viewModel.heightForHeaderInSection(section)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let viewType = self.viewModel.headerViewTypeForSection(section) else { return nil }
+        guard let view = tableView.dequeueReusableHeaderFooterView(viewType)  else { return nil }
+        return view
+    }
+}
+
+// MARK: - Setup
+extension ExpertViewController {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -110,70 +181,5 @@ final class ExpertViewController: UIViewController {
             ExpertViewModel.cellTypes.forEach   { view.register(cell: $0)             }
             ExpertViewModel.headerTypes.forEach { view.register(headerFooterView: $0) }
         }
-    }
-
-    private var navigationView: UIView?
-    private var titleLabel: UILabel?
-    private var notificationButton: UIButton?
-    private var tableViewTopBackgroundView: UIView?
-    private var tableViewBottomBackgroundView: UIView?
-    private var tableView: UITableView?
-
-    private let viewModel = ExpertViewModel()
-}
-
-extension ExpertViewController: UITableViewDataSource {
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        self.viewModel.numberOfSections
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.numberOfRowsInSection(section)
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cellType = self.viewModel.cellTypeForSection(indexPath.section) else {
-            return UITableViewCell()
-        }
-
-        guard let cell = tableView.dequeueReusableCell(cellType, for: indexPath)  else {
-            return UITableViewCell()
-        }
-
-        self.configureCell(cell, atIndexPath: indexPath)
-        cell.selectionStyle = .none
-        return cell
-    }
-
-    private func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        if let cell = cell as? ExpertTrendingTableViewCell {
-            let data = self.viewModel.dataForSection(indexPath.section)
-            cell.updateData(data)
-        } else if let cell = cell as? ExpertRecommendTableViewCell {
-            guard let data = self.viewModel.dataForIndexPath(indexPath) else { return }
-            cell.updateData(data)
-        }
-    }
-}
-
-extension ExpertViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        self.viewModel.heightForRowInSection(indexPath.section)
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        self.viewModel.heightForHeaderInSection(section)
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let viewType = self.viewModel.headerViewTypeForSection(section) else { return nil }
-        guard let view = tableView.dequeueReusableHeaderFooterView(viewType)  else { return nil }
-        return view
     }
 }

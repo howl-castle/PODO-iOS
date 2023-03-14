@@ -27,7 +27,11 @@ final class HomeViewModel {
     private var model: HomeDataModel?
 }
 
-// MARK: UI Setting Data
+// MARK: - API Request
+extension HomeViewModel {
+}
+
+// MARK: - UI Setting Data
 extension HomeViewModel {
 
     static var cellTypes: [UITableViewCell.Type] {
@@ -97,10 +101,7 @@ extension HomeViewModel {
     }
 }
 
-// MARK: API Request
-extension HomeViewModel {
-}
-
+// MARK: - SectionType
 extension HomeViewModel {
 
     enum SectionType: Int, CaseIterable {

@@ -28,6 +28,13 @@ final class CommonAccessoryView: UIView {
         self.rightButton.setTitle(rightTitle, for: .normal)
     }
 
+    private let buttonHeight: CGFloat = 17.0
+    private let margin: CGFloat = 20.0
+}
+
+// MARK: - Setup
+extension CommonAccessoryView {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -75,7 +82,4 @@ final class CommonAccessoryView: UIView {
             $0.setTitleColor(.mint, for: .normal)
         }
     }
-
-    private let buttonHeight: CGFloat = 17.0
-    private let margin: CGFloat = 20.0
 }

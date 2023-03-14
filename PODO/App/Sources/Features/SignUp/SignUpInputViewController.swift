@@ -11,24 +11,6 @@ import Then
 
 final class SignUpInputViewController: UIViewController {
 
-    private func setupAccessoryView() {
-        self.accessoryView.snp.makeConstraints {
-            $0.height.equalTo(55.0)
-            $0.width.equalTo(self.view.bounds.width)
-        }
-
-//        self.accessoryView.do {
-//            $0.leftButton.addTarget(self, action: #selector(self.didTapAccessoryLeftButton), for: .touchUpInside)
-//            $0.rightButton.addTarget(self, action: #selector(self.didTapAccessoryRightButton), for: .touchUpInside)
-//        }
-    }
-
-    private let accessoryView = CommonAccessoryView(frame: .zero)
-
-    override var inputAccessoryView: UIView? {
-        self.accessoryView
-    }
-
     init() {
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .fullScreen
@@ -56,6 +38,50 @@ final class SignUpInputViewController: UIViewController {
         self.present(viewController, animated: false)
     }
 
+    private let titleLabel = UILabel(frame: .zero)
+    private let subtitleLabel = UILabel(frame: .zero)
+    private let stepStackView = UIStackView(frame: .zero)
+    private let firstStepView = UIView(frame: .zero)
+    private let secondStepView = UIView(frame: .zero)
+    private let inputStackView = UIStackView(frame: .zero)
+    private let idInputView = CommonInputView(frame: .zero)
+    private let passwordInputView = CommonInputView(frame: .zero)
+    private let passwordVerifyInputView = CommonInputView(frame: .zero)
+    private let nicknameInputView = CommonInputView(frame: .zero)
+    private let specialtyInputView = CommonInputView(frame: .zero)
+    private let interestSelectView = CommonSelectView(frame: .zero)
+    private let confirmButtonView = CommonBottomButtonView(frame: .zero)
+}
+
+extension SignUpInputViewController: CommonInputViewDelegate {
+
+    func commonInputViewBeginEditing(view: CommonInputView) {
+    }
+
+    func commonInputViewEndEditing(view: CommonInputView) {
+    }
+
+    func commonInputViewDidTapNextButton(view: CommonInputView) {
+        if view == self.specialtyInputView {
+            print("@@@@@@ aaaaa")
+        }
+    }
+}
+
+extension SignUpInputViewController: CommonSelectionViewControllerDelegate {
+
+    func commonSelectionViewController(_ viewController: CommonSelectionViewController, didSelectItem item: String) {
+        self.interestSelectView.updateSelected(text: item)
+    }
+
+    func commonSelectionViewControllerWillDisappear(viewController: CommonSelectionViewController) {
+        self.interestSelectView.isSelected = false
+    }
+}
+
+// MARK: - Setup
+extension SignUpInputViewController {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -64,7 +90,6 @@ final class SignUpInputViewController: UIViewController {
         self.setupStepStackView()
         self.setupInputStackView()
         self.setupConfirmButton()
-        self.setupAccessoryView()
     }
 
     private func setupProperties() {
@@ -203,45 +228,5 @@ final class SignUpInputViewController: UIViewController {
             //
             $0.updateUI(enable: true)
         }
-    }
-
-    private let titleLabel = UILabel(frame: .zero)
-    private let subtitleLabel = UILabel(frame: .zero)
-    private let stepStackView = UIStackView(frame: .zero)
-    private let firstStepView = UIView(frame: .zero)
-    private let secondStepView = UIView(frame: .zero)
-    private let inputStackView = UIStackView(frame: .zero)
-    private let idInputView = CommonInputView(frame: .zero)
-    private let passwordInputView = CommonInputView(frame: .zero)
-    private let passwordVerifyInputView = CommonInputView(frame: .zero)
-    private let nicknameInputView = CommonInputView(frame: .zero)
-    private let specialtyInputView = CommonInputView(frame: .zero)
-    private let interestSelectView = CommonSelectView(frame: .zero)
-    private let confirmButtonView = CommonBottomButtonView(frame: .zero)
-}
-
-extension SignUpInputViewController: CommonInputViewDelegate {
-
-    func commonInputViewBeginEditing(view: CommonInputView) {
-    }
-
-    func commonInputViewEndEditing(view: CommonInputView) {
-    }
-
-    func commonInputViewDidTapNextButton(view: CommonInputView) {
-        if view == self.specialtyInputView {
-            print("@@@@@@ aaaaa")
-        }
-    }
-}
-
-extension SignUpInputViewController: CommonSelectionViewControllerDelegate {
-
-    func commonSelectionViewController(_ viewController: CommonSelectionViewController, didSelectItem item: String) {
-        self.interestSelectView.updateSelected(text: item)
-    }
-
-    func commonSelectionViewControllerWillDisappear(viewController: CommonSelectionViewController) {
-        self.interestSelectView.isSelected = false
     }
 }

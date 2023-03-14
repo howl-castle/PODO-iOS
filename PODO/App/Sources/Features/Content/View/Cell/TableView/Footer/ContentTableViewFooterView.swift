@@ -20,6 +20,13 @@ final class ContentTableViewFooterView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private let topBackGroundView = UIView(frame: .zero)
+    private let contentLabel = UILabel(frame: .zero)
+}
+
+// MARK: - Setup
+extension ContentTableViewFooterView {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -65,7 +72,4 @@ final class ContentTableViewFooterView: UITableViewHeaderFooterView {
             $0.text = "Your support is greatly appreciated!"
         }
     }
-
-    private let topBackGroundView = UIView(frame: .zero)
-    private let contentLabel = UILabel(frame: .zero)
 }

@@ -36,6 +36,79 @@ final class HomeHottestTableViewCell: UITableViewCell {
 
     }
 
+    private var articles: [ArticleData] = []
+
+    private let titleLabel = UILabel(frame: .zero)
+    private let collectionView = UICollectionView(frame: .zero,
+                                                  collectionViewLayout: UICollectionViewFlowLayout())
+}
+
+// MARK: - CollectionView DataSource
+extension HomeHottestTableViewCell: UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.articles.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(HomeHottestCollectionViewCell.self, for: indexPath) else { return UICollectionViewCell(frame: .zero) }
+        if let data = self.articles[safe: indexPath.item] {
+            cell.updateData(data)
+        }
+        return cell
+    }
+}
+
+// MARK: - CollectionView DelegateFlowLayout
+extension HomeHottestTableViewCell: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = CollectionViewLayout.default.calculateItemWidth(fromWidth: collectionView.bounds.width)
+        return CGSize(width: width, height: collectionView.bounds.height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        CollectionViewLayout.default.insets
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        CollectionViewLayout.default.lineSpacing
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = self.articles[safe: indexPath.item] else { return }
+        self.delegate?.homeTableViewCell(self, didTapItem: item, atIndex: indexPath.item)
+    }
+}
+
+// MARK: - CollectionView Layout
+private extension HomeHottestTableViewCell {
+
+    struct CollectionViewLayout {
+
+        static let `default` = CollectionViewLayout(insets: .init(top: .zero,
+                                                                  left: 20.0,
+                                                                  bottom: .zero,
+                                                                  right: 20.0),
+                                                    lineSpacing: 8.0)
+
+        let insets: UIEdgeInsets
+        let lineSpacing: CGFloat
+    }
+}
+
+private extension HomeHottestTableViewCell.CollectionViewLayout {
+
+    func calculateItemWidth(fromWidth width: CGFloat) -> CGFloat {
+        let margin = self.insets.left + self.lineSpacing * 2
+        let width = (width - margin) / 2.0
+        return width
+    }
+}
+
+// MARK: - Setup
+extension HomeHottestTableViewCell {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -89,71 +162,5 @@ final class HomeHottestTableViewCell: UITableViewCell {
             let flowLayout = $0.collectionViewLayout as? UICollectionViewFlowLayout
             flowLayout?.scrollDirection = .horizontal
         }
-    }
-
-    private var articles: [ArticleData] = []
-
-    private let titleLabel = UILabel(frame: .zero)
-    private let collectionView = UICollectionView(frame: .zero,
-                                                  collectionViewLayout: UICollectionViewFlowLayout())
-}
-
-extension HomeHottestTableViewCell: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.articles.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(HomeHottestCollectionViewCell.self, for: indexPath) else { return UICollectionViewCell(frame: .zero) }
-        if let data = self.articles[safe: indexPath.item] {
-            cell.updateData(data)
-        }
-        return cell
-    }
-}
-
-extension HomeHottestTableViewCell: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = CollectionViewLayout.default.calculateItemWidth(fromWidth: collectionView.bounds.width)
-        return CGSize(width: width, height: collectionView.bounds.height)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        CollectionViewLayout.default.insets
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        CollectionViewLayout.default.lineSpacing
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let item = self.articles[safe: indexPath.item] else { return }
-        self.delegate?.homeTableViewCell(self, didTapItem: item, atIndex: indexPath.item)
-    }
-}
-
-private extension HomeHottestTableViewCell {
-
-    struct CollectionViewLayout {
-
-        static let `default` = CollectionViewLayout(insets: .init(top: .zero,
-                                                                  left: 20.0,
-                                                                  bottom: .zero,
-                                                                  right: 20.0),
-                                                    lineSpacing: 8.0)
-
-        let insets: UIEdgeInsets
-        let lineSpacing: CGFloat
-    }
-}
-
-private extension HomeHottestTableViewCell.CollectionViewLayout {
-
-    func calculateItemWidth(fromWidth width: CGFloat) -> CGFloat {
-        let margin = self.insets.left + self.lineSpacing * 2
-        let width = (width - margin) / 2.0
-        return width
     }
 }

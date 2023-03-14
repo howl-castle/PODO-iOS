@@ -36,6 +36,20 @@ final class ContentTableViewHeaderView: UITableViewHeaderFooterView {
         self.bookmarkButton.isSelected = data.isBookmarked ?? false
     }
 
+    private let containerView = UIView(frame: .zero)
+    private let profileImageView = UIImageView(frame: .zero)
+    private let nameLabel = UILabel(frame: .zero)
+    private let jobLabel = UILabel(frame: .zero)
+    private let bookmarkButton = CommonOnOffButtonView(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let summaryLabel = UILabel(frame: .zero)
+    private let dateLabel = UILabel(frame: .zero)
+    private let separatorView = UIView(frame: .zero)
+}
+
+// MARK: - Setup
+extension ContentTableViewHeaderView {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -187,14 +201,4 @@ final class ContentTableViewHeaderView: UITableViewHeaderFooterView {
             $0.backgroundColor = .gray2
         }
     }
-
-    private let containerView = UIView(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
-    private let nameLabel = UILabel(frame: .zero)
-    private let jobLabel = UILabel(frame: .zero)
-    private let bookmarkButton = CommonOnOffButtonView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-    private let summaryLabel = UILabel(frame: .zero)
-    private let dateLabel = UILabel(frame: .zero)
-    private let separatorView = UIView(frame: .zero)
 }

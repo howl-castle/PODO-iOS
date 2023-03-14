@@ -247,6 +247,249 @@ final class ContentViewController: UIViewController {
                                               at: .centeredHorizontally, animated: true)
     }
 
+    private lazy var speechSynthesizer: SpeechSynthesizer = {
+        let synthesizer = SpeechSynthesizer()
+        synthesizer.delegate = self
+        return synthesizer
+    }()
+
+    private var tableViewContentInsets: UIEdgeInsets {
+        let safeAreaBottom = self.view.safeAreaInsets.bottom
+        let bottomInsets = self.playerContainerViewHeight + safeAreaBottom
+        return UIEdgeInsets(top: .zero, left: .zero, bottom: bottomInsets, right: .zero)
+    }
+
+    private var currentImageIndex: Int = .zero
+    private var currentPlayIndex: Int = .zero
+
+    private let playerContainerViewHeight: CGFloat = 65.0
+    private let viewModel: ContentViewModel
+
+    // TODO: Optional 로 변경
+    private let imageContainerView = UIView(frame: .zero)
+    private let imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    //
+    private let imageOverlayView = UIView(frame: .zero)
+    private let closeButton = UIButton(frame: .zero)
+    private let leftButton = UIButton(frame: .zero)
+    private let rightButton = UIButton(frame: .zero)
+    private let pageCountContainerView = UIView(frame: .zero)
+    private let pageCountLabel = UILabel(frame: .zero)
+
+    private let contentContainerView = UIView(frame: .zero)
+    private let contentTableView = UITableView(frame: .zero, style: .grouped)
+    private let contentBottomBackgroundView = UIView(frame: .zero)
+    //
+    private let contentOverlayView = UIView(frame: .zero)
+        //
+    // TODO: View 분리 시키기
+    private let playerContainerView = UIView(frame: .zero)
+    private let playPauseButton = UIButton(frame: .zero)
+    private let rewindButton = UIButton(frame: .zero)
+    private let fastForwardButton = UIButton(frame: .zero)
+        //
+    // TODO: View 분리 시키기
+    private let floatingButtonContainerView = UIView(frame: .zero)
+    private let floatingButtonSeperateView = UIView(frame: .zero)
+    private let bookmarkButton = UIButton(frame: .zero)
+    private let sendMessageButton = UIButton(frame: .zero)
+    private let contentOverlayBottomView = UIView(frame: .zero)
+}
+
+// MARK: - CollectionView DataSource
+extension ContentViewController: UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.viewModel.imageCount
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(ContentCollectionViewCell.self, for: indexPath) else { return UICollectionViewCell(frame: .zero) }
+
+        if let imagePath = self.viewModel.imagePathForIndex(indexPath.item) {
+            cell.updateImage(path: imagePath)
+        }
+        return cell
+    }
+}
+
+// MARK: - CollectionView DelegateFlowLayout
+extension ContentViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        collectionView.bounds.size
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        .zero
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        .zero
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        .zero
+    }
+}
+
+// MARK: - TableView DataSource
+extension ContentViewController: UITableViewDataSource {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.updateContentOverlayLayout(fromScrollView: scrollView)
+    }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        guard scrollView == self.contentTableView else { return }
+        UIView.animate(withDuration: 0.2) {
+            self.contentOverlayView.snp.updateConstraints {
+                let contentSize = scrollView.contentSize.height - scrollView.frame.size.height - self.tableViewContentInsets.bottom
+                if scrollView.contentOffset.y >= contentSize || velocity.y < .zero {
+                    $0.bottom.equalToSuperview()
+                } else {
+                    let height = self.contentOverlayView.bounds.height
+                    $0.bottom.equalToSuperview().offset(height)
+                }
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.updateContentOverlayLayout(fromScrollView: scrollView)
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        self.viewModel.numberOfSections
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.viewModel.numberOfRowsInSection(section)
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cellType = self.viewModel.cellTypeForSection(indexPath.section) else {
+            return UITableViewCell()
+        }
+
+        guard let cell = tableView.dequeueReusableCell(cellType, for: indexPath)  else {
+            return UITableViewCell()
+        }
+
+        self.configureCell(cell, atIndexPath: indexPath)
+        cell.selectionStyle = .none
+        return cell
+    }
+
+    private func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        if let cell = cell as? ContentTableViewCell {
+            guard let data = self.viewModel.contentForIndex(indexPath.row) else { return }
+            cell.updateContent(data)
+        } else if let cell = cell as? ContentUserInfoTableViewCell {
+            guard let data = self.viewModel.userInfoForIndexPath(indexPath) else { return }
+            cell.updateData(data)
+        }
+    }
+
+    private func updateContentOverlayLayout(fromScrollView scrollView: UIScrollView) {
+        guard scrollView == self.contentTableView else { return }
+        let contentSize = scrollView.contentSize.height - scrollView.frame.size.height - self.tableViewContentInsets.bottom
+        if scrollView.contentOffset.y >= contentSize {
+            UIView.animate(withDuration: 0.2) {
+                self.contentOverlayView.snp.updateConstraints {
+                    $0.bottom.equalToSuperview()
+                }
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+}
+
+// MARK: - TableView Delegate
+extension ContentViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        guard self.viewModel.canSelectForSection(indexPath.section) else { return }
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        self.viewModel.heightForRowInSection(indexPath.section)
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        self.viewModel.heightForHeaderInSection(section)
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        self.viewModel.heightForFooterInSection(section)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let viewType = self.viewModel.headerViewTypeForSection(section) else { return nil }
+        guard let view = tableView.dequeueReusableHeaderFooterView(viewType)  else { return nil }
+        self.configureHeaderView(view, inSection: section)
+        return view
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let viewType = self.viewModel.footerViewTypeForSection(section) else { return nil }
+        guard let view = tableView.dequeueReusableHeaderFooterView(viewType)  else { return nil }
+        self.configureFooterView(view, inSection: section)
+        return view
+    }
+
+    private func configureHeaderView(_ view: UITableViewHeaderFooterView, inSection section: Int) {
+        if let view = view as? ContentTableViewHeaderView {
+            let data = self.viewModel.contentHeaderData
+            view.updateData(data)
+        } else if let view = view as? ContentUserInfoTableViewHeaderView {
+            guard let title = self.viewModel.headerTitleForSection(section) else { return }
+            view.updateContent(title)
+        }
+    }
+
+    private func configureFooterView(_ view: UITableViewHeaderFooterView, inSection section: Int) {
+        if let view = view as? ContentUserInfoTableViewFooterView {
+            guard let iconImage = self.viewModel.footerIconImageForSection(section) else { return }
+            guard let title = self.viewModel.footerTitleForSection(section)         else { return }
+            let name = self.viewModel.footerNameForSection(section)
+            view.update(iconImage: iconImage, title: title, name: name)
+        }
+    }
+}
+
+// MARK: - SpeechSynthesizer Delegate
+extension ContentViewController: SpeechSynthesizerDelegate {
+
+    func speechSynthesizerDidStart(synthesizer: SpeechSynthesizer) {
+    }
+
+    func speechSynthesizerDidFinish(synthesizer: SpeechSynthesizer) {
+        if self.viewModel.contentCount > self.currentPlayIndex + 1 {
+            self.rewindButton.isEnabled = true
+            self.currentPlayIndex = self.currentPlayIndex + 1
+            self.startSpeech()
+        } else {
+            self.fastForwardButton.isEnabled = false
+            self.playPauseButton.isSelected = false
+        }
+    }
+
+    func speechSynthesizerDidContinue(synthesizer: SpeechSynthesizer) {
+    }
+
+    func speechSynthesizerDidPause(synthesizer: SpeechSynthesizer) {
+    }
+
+    func speechSynthesizerDidCancel(synthesizer: SpeechSynthesizer) {
+    }
+}
+
+// MARK: - Setup
+extension ContentViewController {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -668,239 +911,5 @@ final class ContentViewController: UIViewController {
             $0.setImage(UIImage(named: "Cursor_Right"), for: .normal)
             $0.layer.cornerRadius = size / 2.0
         }
-    }
-
-    private lazy var speechSynthesizer: SpeechSynthesizer = {
-        let synthesizer = SpeechSynthesizer()
-        synthesizer.delegate = self
-        return synthesizer
-    }()
-
-    private var tableViewContentInsets: UIEdgeInsets {
-        let safeAreaBottom = self.view.safeAreaInsets.bottom
-        let bottomInsets = self.playerContainerViewHeight + safeAreaBottom
-        return UIEdgeInsets(top: .zero, left: .zero, bottom: bottomInsets, right: .zero)
-    }
-
-    private var currentImageIndex: Int = .zero
-    private var currentPlayIndex: Int = .zero
-
-    private let playerContainerViewHeight: CGFloat = 65.0
-    private let viewModel: ContentViewModel
-
-    // TODO: Optional 로 변경
-    private let imageContainerView = UIView(frame: .zero)
-    private let imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    //
-    private let imageOverlayView = UIView(frame: .zero)
-    private let closeButton = UIButton(frame: .zero)
-    private let leftButton = UIButton(frame: .zero)
-    private let rightButton = UIButton(frame: .zero)
-    private let pageCountContainerView = UIView(frame: .zero)
-    private let pageCountLabel = UILabel(frame: .zero)
-
-    private let contentContainerView = UIView(frame: .zero)
-    private let contentTableView = UITableView(frame: .zero, style: .grouped)
-    private let contentBottomBackgroundView = UIView(frame: .zero)
-    //
-    private let contentOverlayView = UIView(frame: .zero)
-        //
-    // TODO: View 분리 시키기
-    private let playerContainerView = UIView(frame: .zero)
-    private let playPauseButton = UIButton(frame: .zero)
-    private let rewindButton = UIButton(frame: .zero)
-    private let fastForwardButton = UIButton(frame: .zero)
-        //
-    // TODO: View 분리 시키기
-    private let floatingButtonContainerView = UIView(frame: .zero)
-    private let floatingButtonSeperateView = UIView(frame: .zero)
-    private let bookmarkButton = UIButton(frame: .zero)
-    private let sendMessageButton = UIButton(frame: .zero)
-    private let contentOverlayBottomView = UIView(frame: .zero)
-}
-
-extension ContentViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.viewModel.imageCount
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(ContentCollectionViewCell.self, for: indexPath) else { return UICollectionViewCell(frame: .zero) }
-
-        if let imagePath = self.viewModel.imagePathForIndex(indexPath.item) {
-            cell.updateImage(path: imagePath)
-        }
-        return cell
-    }
-}
-
-extension ContentViewController: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        collectionView.bounds.size
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        .zero
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        .zero
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        .zero
-    }
-}
-
-extension ContentViewController: UITableViewDataSource {
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.updateContentOverlayLayout(fromScrollView: scrollView)
-    }
-
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        guard scrollView == self.contentTableView else { return }
-        UIView.animate(withDuration: 0.2) {
-            self.contentOverlayView.snp.updateConstraints {
-                let contentSize = scrollView.contentSize.height - scrollView.frame.size.height - self.tableViewContentInsets.bottom
-                if scrollView.contentOffset.y >= contentSize || velocity.y < .zero {
-                    $0.bottom.equalToSuperview()
-                } else {
-                    let height = self.contentOverlayView.bounds.height
-                    $0.bottom.equalToSuperview().offset(height)
-                }
-            }
-            self.view.layoutIfNeeded()
-        }
-    }
-
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.updateContentOverlayLayout(fromScrollView: scrollView)
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        self.viewModel.numberOfSections
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.numberOfRowsInSection(section)
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cellType = self.viewModel.cellTypeForSection(indexPath.section) else {
-            return UITableViewCell()
-        }
-
-        guard let cell = tableView.dequeueReusableCell(cellType, for: indexPath)  else {
-            return UITableViewCell()
-        }
-
-        self.configureCell(cell, atIndexPath: indexPath)
-        cell.selectionStyle = .none
-        return cell
-    }
-
-    private func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        if let cell = cell as? ContentTableViewCell {
-            guard let data = self.viewModel.contentForIndex(indexPath.row) else { return }
-            cell.updateContent(data)
-        } else if let cell = cell as? ContentUserInfoTableViewCell {
-            guard let data = self.viewModel.userInfoForIndexPath(indexPath) else { return }
-            cell.updateData(data)
-        }
-    }
-
-    private func updateContentOverlayLayout(fromScrollView scrollView: UIScrollView) {
-        guard scrollView == self.contentTableView else { return }
-        let contentSize = scrollView.contentSize.height - scrollView.frame.size.height - self.tableViewContentInsets.bottom
-        if scrollView.contentOffset.y >= contentSize {
-            UIView.animate(withDuration: 0.2) {
-                self.contentOverlayView.snp.updateConstraints {
-                    $0.bottom.equalToSuperview()
-                }
-                self.view.layoutIfNeeded()
-            }
-        }
-    }
-}
-
-extension ContentViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        guard self.viewModel.canSelectForSection(indexPath.section) else { return }
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        self.viewModel.heightForRowInSection(indexPath.section)
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        self.viewModel.heightForHeaderInSection(section)
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        self.viewModel.heightForFooterInSection(section)
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let viewType = self.viewModel.headerViewTypeForSection(section) else { return nil }
-        guard let view = tableView.dequeueReusableHeaderFooterView(viewType)  else { return nil }
-        self.configureHeaderView(view, inSection: section)
-        return view
-    }
-
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let viewType = self.viewModel.footerViewTypeForSection(section) else { return nil }
-        guard let view = tableView.dequeueReusableHeaderFooterView(viewType)  else { return nil }
-        self.configureFooterView(view, inSection: section)
-        return view
-    }
-
-    private func configureHeaderView(_ view: UITableViewHeaderFooterView, inSection section: Int) {
-        if let view = view as? ContentTableViewHeaderView {
-            let data = self.viewModel.contentHeaderData
-            view.updateData(data)
-        } else if let view = view as? ContentUserInfoTableViewHeaderView {
-            guard let title = self.viewModel.headerTitleForSection(section) else { return }
-            view.updateContent(title)
-        }
-    }
-
-    private func configureFooterView(_ view: UITableViewHeaderFooterView, inSection section: Int) {
-        if let view = view as? ContentUserInfoTableViewFooterView {
-            guard let iconImage = self.viewModel.footerIconImageForSection(section) else { return }
-            guard let title = self.viewModel.footerTitleForSection(section)         else { return }
-            let name = self.viewModel.footerNameForSection(section)
-            view.update(iconImage: iconImage, title: title, name: name)
-        }
-    }
-}
-
-extension ContentViewController: SpeechSynthesizerDelegate {
-
-    func speechSynthesizerDidStart(synthesizer: SpeechSynthesizer) {
-    }
-
-    func speechSynthesizerDidFinish(synthesizer: SpeechSynthesizer) {
-        if self.viewModel.contentCount > self.currentPlayIndex + 1 {
-            self.rewindButton.isEnabled = true
-            self.currentPlayIndex = self.currentPlayIndex + 1
-            self.startSpeech()
-        } else {
-            self.fastForwardButton.isEnabled = false
-            self.playPauseButton.isSelected = false
-        }
-    }
-
-    func speechSynthesizerDidContinue(synthesizer: SpeechSynthesizer) {
-    }
-
-    func speechSynthesizerDidPause(synthesizer: SpeechSynthesizer) {
-    }
-
-    func speechSynthesizerDidCancel(synthesizer: SpeechSynthesizer) {
     }
 }

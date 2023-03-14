@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AE44702F29B39D3D00DBF203 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AE44702E29B39D3D00DBF203 /* Kingfisher */; };
+		AE7D10DC29C06E7A007E6ED2 /* ExpertWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10DB29C06E7A007E6ED2 /* ExpertWriteViewController.swift */; };
+		AE7D10DE29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10DD29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift */; };
 		AEED157F29B378270058F927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AEED157E29B378270058F927 /* SnapKit */; };
 		AEED158229B378D00058F927 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AEED158129B378D00058F927 /* Then */; };
 		CE3F421729A647BF0085C436 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3F420329A647BF0085C436 /* Assets.xcassets */; };
@@ -100,6 +102,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE7D10DB29C06E7A007E6ED2 /* ExpertWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertWriteViewController.swift; sourceTree = "<group>"; };
+		AE7D10DD29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertRecommendButtonContainerView.swift; sourceTree = "<group>"; };
 		CE3F41EA29A6362B0085C436 /* PODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3F420329A647BF0085C436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE3F420529A647BF0085C436 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -205,6 +209,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE7D10DA29C06E71007E6ED2 /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				AE7D10DB29C06E7A007E6ED2 /* ExpertWriteViewController.swift */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
 		CE3F41E129A6362B0085C436 = {
 			isa = PBXGroup;
 			children = (
@@ -268,7 +280,6 @@
 				CEFEFACF29BF6B8400052DBA /* WebView */,
 				CEFEFA1A29BF698100052DBA /* Tab */,
 				CEFEFA9D29BF6A3400052DBA /* Content */,
-				CEFEFA9E29BF6A3400052DBA /* ContentViewController.swift */,
 				CEFEFAC329BF6AF500052DBA /* ExpertDetail */,
 				CEFEFAB929BF6A8800052DBA /* SignIn */,
 				CEFEFABC29BF6AC000052DBA /* SignUp */,
@@ -377,8 +388,8 @@
 		CEFEFA1C29BF698100052DBA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEFA1D29BF698100052DBA /* HomeViewModel.swift */,
 				CEFEFA1E29BF698100052DBA /* HomeDataModel.swift */,
+				CEFEFA1D29BF698100052DBA /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -550,19 +561,12 @@
 		CEFEFA4229BF698100052DBA /* Expert */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEFA4329BF698100052DBA /* Write */,
+				AE7D10DA29C06E71007E6ED2 /* Write */,
 				CEFEFA4829BF698100052DBA /* View */,
 				CEFEFA4429BF698100052DBA /* ViewModel */,
 				CEFEFA4729BF698100052DBA /* ExpertViewController.swift */,
 			);
 			path = Expert;
-			sourceTree = "<group>";
-		};
-		CEFEFA4329BF698100052DBA /* Write */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Write;
 			sourceTree = "<group>";
 		};
 		CEFEFA4429BF698100052DBA /* ViewModel */ = {
@@ -595,6 +599,7 @@
 		CEFEFA4A29BF698100052DBA /* Recommend */ = {
 			isa = PBXGroup;
 			children = (
+				AE7D10DD29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift */,
 				CEFEFA4B29BF698100052DBA /* ExpertRecommendTableViewCell.swift */,
 			);
 			path = Recommend;
@@ -803,6 +808,7 @@
 			children = (
 				CEFEFAA229BF6A3400052DBA /* View */,
 				CEFEFA9F29BF6A3400052DBA /* ViewModel */,
+				CEFEFA9E29BF6A3400052DBA /* ContentViewController.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -810,8 +816,8 @@
 		CEFEFA9F29BF6A3400052DBA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEFAA029BF6A3400052DBA /* ContentViewModel.swift */,
 				CEFEFAA129BF6A3400052DBA /* ContentDataModel.swift */,
+				CEFEFAA029BF6A3400052DBA /* ContentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -836,10 +842,10 @@
 		CEFEFAA429BF6A3400052DBA /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				CEFEFAAA29BF6A3400052DBA /* Header */,
 				CEFEFAA529BF6A3400052DBA /* Footer */,
 				CEFEFAA829BF6A3400052DBA /* ContentUserInfoTableViewCell.swift */,
 				CEFEFAA929BF6A3400052DBA /* ContentTableViewCell.swift */,
-				CEFEFAAA29BF6A3400052DBA /* Header */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -1040,6 +1046,7 @@
 				CEFEFAB229BF6A3400052DBA /* ContentTableViewFooterView.swift in Sources */,
 				CEFEFA1129BF692100052DBA /* CommonAccessoryView.swift in Sources */,
 				CEFEFAB329BF6A3400052DBA /* ContentUserInfoTableViewFooterView.swift in Sources */,
+				AE7D10DE29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift in Sources */,
 				CEFEFA7529BF698100052DBA /* HomeViewModel.swift in Sources */,
 				CEFEFA9929BF698100052DBA /* RevenueExpertTableViewHeaderView.swift in Sources */,
 				CEFEFA0D29BF692100052DBA /* CommonSelectionTableViewCell.swift in Sources */,
@@ -1053,6 +1060,7 @@
 				CE3F422029A647BF0085C436 /* SceneDelegate.swift in Sources */,
 				CEFEFA0B29BF692100052DBA /* CommonInputView.swift in Sources */,
 				CEFEFA8629BF698100052DBA /* SettingTableViewHeaderView.swift in Sources */,
+				AE7D10DC29C06E7A007E6ED2 /* ExpertWriteViewController.swift in Sources */,
 				CEFEFA7A29BF698100052DBA /* HomeHottestCollectionViewCell.swift in Sources */,
 				CEFEFA0829BF692100052DBA /* UITableView+.swift in Sources */,
 				CEFEFA9229BF698100052DBA /* RevenueMyAnswerListViewController.swift in Sources */,

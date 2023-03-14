@@ -66,6 +66,30 @@ final class RevenueListTableViewCell: UITableViewCell {
         }
     }
 
+    private var buttonViews: [ButtonView] = []
+
+    private let containerView = UIView(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+
+    private let monthStackView = UIStackView(frame: .zero)
+    private let preButton = UIButton(frame: .zero)
+    private let monthLabel = UILabel(frame: .zero)
+    private let nextButton = UIButton(frame: .zero)
+
+    private let doraLabel = UILabel(frame: .zero)
+    private let tonLabel = UILabel(frame: .zero)
+
+    private let chartStackView = UIStackView(frame: .zero)
+    private let chartWritingView = UIView(frame: .zero)
+    private let chartTranslateView = UIView(frame: .zero)
+    private let chartContributeView = UIView(frame: .zero)
+
+    private let buttonStackView = UIStackView(frame: .zero)
+}
+
+// MARK: - Setup
+extension RevenueListTableViewCell {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -255,28 +279,9 @@ final class RevenueListTableViewCell: UITableViewCell {
             $0.spacing = .zero
         }
     }
-
-    private var buttonViews: [ButtonView] = []
-
-    private let containerView = UIView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-
-    private let monthStackView = UIStackView(frame: .zero)
-    private let preButton = UIButton(frame: .zero)
-    private let monthLabel = UILabel(frame: .zero)
-    private let nextButton = UIButton(frame: .zero)
-
-    private let doraLabel = UILabel(frame: .zero)
-    private let tonLabel = UILabel(frame: .zero)
-
-    private let chartStackView = UIStackView(frame: .zero)
-    private let chartWritingView = UIView(frame: .zero)
-    private let chartTranslateView = UIView(frame: .zero)
-    private let chartContributeView = UIView(frame: .zero)
-
-    private let buttonStackView = UIStackView(frame: .zero)
 }
 
+// MARK: - ButtonView
 private extension RevenueListTableViewCell {
 
     enum ButtonType: Int, CaseIterable {
@@ -458,6 +463,7 @@ private extension RevenueListTableViewCell.ButtonType {
     }
 }
 
+// MARK: - ButtonView Delegate
 private protocol RevenueListTableViewCellButtonViewDelegate: AnyObject {
 
     func revenueListTableViewCellButtonView(_ view: RevenueListTableViewCell.ButtonView, didTapButtonTag tag: Int)

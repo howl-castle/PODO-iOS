@@ -76,56 +76,6 @@ final class HomeInsightTableViewHeaderView: UITableViewHeaderFooterView {
         self.categoryButtons = []
     }
 
-    private func setupUI() {
-        self.setupProperties()
-        self.setupViewHierarchy()
-        self.setupTitleLabel()
-        self.setupCategoryStackView()
-    }
-
-    private func setupProperties() {
-        self.do {
-            $0.backgroundColor = .clear
-            $0.contentView.backgroundColor = .clear
-        }
-    }
-
-    private func setupViewHierarchy() {
-        self.contentView.do {
-            $0.addSubview(self.titleLabel)
-            $0.addSubview(self.categoryStackView)
-        }
-    }
-
-    private func setupTitleLabel() {
-        self.titleLabel.snp.makeConstraints {
-            $0.height.equalTo(22.0)
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().inset(20.0)
-            $0.trailing.equalToSuperview().inset(20.0)
-        }
-
-        self.titleLabel.do {
-            $0.font = .systemFont(ofSize: 18.0, weight: .bold)
-            $0.textColor = .white2
-            $0.text = "Your insight"
-        }
-    }
-
-    private func setupCategoryStackView() {
-        self.categoryStackView.snp.makeConstraints {
-            $0.height.equalTo(28.0)
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(18.0)
-            $0.leading.equalToSuperview().inset(20.0)
-            $0.trailing.greaterThanOrEqualToSuperview().inset(20.0)
-        }
-
-        self.categoryStackView.do {
-            $0.axis = .horizontal
-            $0.spacing = 8.0
-        }
-    }
-
     private var selectedCategory: Int = .zero
     private var categories: [String] = []
     private var categoryButtons: [CatergoryButtonView] = []
@@ -134,6 +84,7 @@ final class HomeInsightTableViewHeaderView: UITableViewHeaderFooterView {
     private let categoryStackView = UIStackView(frame: .zero)
 }
 
+// MARK: CatergoryButtonView Delegate
 extension HomeInsightTableViewHeaderView: HomeInsightCatergoryButtonViewDelegate {
 
     fileprivate func catergoryButtonView(_ view: HomeInsightTableViewHeaderView.CatergoryButtonView, didTapCategory tag: Int) {
@@ -195,6 +146,8 @@ private extension HomeInsightTableViewHeaderView {
 }
 */
 
+
+// MARK: CatergoryButtonView
 private extension HomeInsightTableViewHeaderView {
 
     class CatergoryButtonView: UIView {
@@ -343,6 +296,60 @@ private extension HomeInsightTableViewHeaderView {
         private let titleLabel = UILabel(frame: .zero)
         private let checkIconImageView = UIImageView(image: UIImage(named: "Check_Big_Blue"))
         private let button = UIButton(frame: .zero)
+    }
+}
+
+// MARK: - Setup
+extension HomeInsightTableViewHeaderView {
+
+    private func setupUI() {
+        self.setupProperties()
+        self.setupViewHierarchy()
+        self.setupTitleLabel()
+        self.setupCategoryStackView()
+    }
+
+    private func setupProperties() {
+        self.do {
+            $0.backgroundColor = .clear
+            $0.contentView.backgroundColor = .clear
+        }
+    }
+
+    private func setupViewHierarchy() {
+        self.contentView.do {
+            $0.addSubview(self.titleLabel)
+            $0.addSubview(self.categoryStackView)
+        }
+    }
+
+    private func setupTitleLabel() {
+        self.titleLabel.snp.makeConstraints {
+            $0.height.equalTo(22.0)
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().inset(20.0)
+            $0.trailing.equalToSuperview().inset(20.0)
+        }
+
+        self.titleLabel.do {
+            $0.font = .systemFont(ofSize: 18.0, weight: .bold)
+            $0.textColor = .white2
+            $0.text = "Your insight"
+        }
+    }
+
+    private func setupCategoryStackView() {
+        self.categoryStackView.snp.makeConstraints {
+            $0.height.equalTo(28.0)
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(18.0)
+            $0.leading.equalToSuperview().inset(20.0)
+            $0.trailing.greaterThanOrEqualToSuperview().inset(20.0)
+        }
+
+        self.categoryStackView.do {
+            $0.axis = .horizontal
+            $0.spacing = 8.0
+        }
     }
 }
 

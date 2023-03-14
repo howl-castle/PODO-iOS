@@ -63,6 +63,10 @@ final class TabBarController: UITabBarController {
         navigationController.isNavigationBarHidden = true
         self.present(navigationController, animated: false)
     }
+}
+
+// MARK: - Setup
+extension TabBarController {
 
     private func setupUI() {
         self.setupProperties()
@@ -134,5 +138,7 @@ final class TabBarController: UITabBarController {
         return viewController
     }
 
-    private let tabBarItemImageInsets = UIEdgeInsets(top: .zero, left: .zero, bottom: -15.0, right: .zero)
+    private var tabBarItemImageInsets: UIEdgeInsets {
+        UIEdgeInsets(top: .zero, left: .zero, bottom: -15.0, right: .zero)
+    }
 }

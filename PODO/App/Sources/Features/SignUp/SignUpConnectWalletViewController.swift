@@ -32,6 +32,18 @@ final class SignUpConnectWalletViewController: UIViewController {
         //self.present(viewController, animated: true)
     }
 
+    private let titleLabel = UILabel(frame: .zero)
+    private let subtitleLabel = UILabel(frame: .zero)
+    private let stepStackView = UIStackView(frame: .zero)
+    private let firstStepView = UIView(frame: .zero)
+    private let secondStepView = UIView(frame: .zero)
+    private let imageView = UIImageView(image: UIImage(named: "SignUpConnect"))
+    private let connectButtonView = CommonBottomButtonView(frame: .zero)
+}
+
+// MARK: - Setup
+extension SignUpConnectWalletViewController {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -138,12 +150,4 @@ final class SignUpConnectWalletViewController: UIViewController {
             $0.updateUI(enable: true)
         }
     }
-
-    private let titleLabel = UILabel(frame: .zero)
-    private let subtitleLabel = UILabel(frame: .zero)
-    private let stepStackView = UIStackView(frame: .zero)
-    private let firstStepView = UIView(frame: .zero)
-    private let secondStepView = UIView(frame: .zero)
-    private let imageView = UIImageView(image: UIImage(named: "SignUpConnect"))
-    private let connectButtonView = CommonBottomButtonView(frame: .zero)
 }

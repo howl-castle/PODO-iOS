@@ -72,6 +72,61 @@ final class CommonInputView: UIView {
         self.textField.text = ""
     }
 
+    private var isLastInptView: Bool = true
+    private var placeholder: String = ""
+    private var selectedBorderColor: UIColor? = .mint
+    private let selectedLabelColor: UIColor? = .white1
+    private let selectedHolderColor: UIColor? = .gray1
+    private let disabledColor: UIColor? = .gray2Opacity40
+
+    private let accessoryView = CommonAccessoryView(frame: .zero)
+    private let containerView = UIView(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let textField = UITextField(frame: .zero)
+    private let closeButton = UIButton(frame: .zero)
+}
+
+// MARK: - TextField Delegate
+extension CommonInputView: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.delegate?.commonInputViewBeginEditing(view: self)
+        let isHiddenCloseButton = textField.text?.isEmpty == true || textField.text == nil
+        self.closeButton.isHidden = isHiddenCloseButton
+        self.backgroundColor = self.selectedBorderColor
+
+        if let color = self.selectedHolderColor {
+            textField.attributedPlaceholder = NSAttributedString(
+                string: self.placeholder,
+                attributes: [.foregroundColor: color,
+                             .font: UIFont.systemFont(ofSize: 14.0)]
+            )
+        }
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.delegate?.commonInputViewEndEditing(view: self)
+        self.closeButton.isHidden = true
+        self.backgroundColor = self.disabledColor
+
+        if let color = self.disabledColor {
+            textField.attributedPlaceholder = NSAttributedString(
+                string: self.placeholder,
+                attributes: [.foregroundColor: color,
+                             .font: UIFont.systemFont(ofSize: 14.0)]
+            )
+        }
+    }
+}
+
+// MARK: - Setup
+extension CommonInputView {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -175,56 +230,6 @@ final class CommonInputView: UIView {
         self.accessoryView.do {
             $0.leftButton.addTarget(self, action: #selector(self.didTapAccessoryLeftButton), for: .touchUpInside)
             $0.rightButton.addTarget(self, action: #selector(self.didTapAccessoryRightButton), for: .touchUpInside)
-        }
-    }
-
-    private var isLastInptView: Bool = true
-    private var placeholder: String = ""
-    private var selectedBorderColor: UIColor? = .mint
-    private let selectedLabelColor: UIColor? = .white1
-    private let selectedHolderColor: UIColor? = .gray1
-    private let disabledColor: UIColor? = .gray2Opacity40
-
-    private let accessoryView = CommonAccessoryView(frame: .zero)
-    private let containerView = UIView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-    private let textField = UITextField(frame: .zero)
-    private let closeButton = UIButton(frame: .zero)
-}
-
-extension CommonInputView: UITextFieldDelegate {
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.delegate?.commonInputViewBeginEditing(view: self)
-        let isHiddenCloseButton = textField.text?.isEmpty == true || textField.text == nil
-        self.closeButton.isHidden = isHiddenCloseButton
-        self.backgroundColor = self.selectedBorderColor
-
-        if let color = self.selectedHolderColor {
-            textField.attributedPlaceholder = NSAttributedString(
-                string: self.placeholder,
-                attributes: [.foregroundColor: color,
-                             .font: UIFont.systemFont(ofSize: 14.0)]
-            )
-        }
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.delegate?.commonInputViewEndEditing(view: self)
-        self.closeButton.isHidden = true
-        self.backgroundColor = self.disabledColor
-
-        if let color = self.disabledColor {
-            textField.attributedPlaceholder = NSAttributedString(
-                string: self.placeholder,
-                attributes: [.foregroundColor: color,
-                             .font: UIFont.systemFont(ofSize: 14.0)]
-            )
         }
     }
 }

@@ -25,6 +25,14 @@ final class CommonIconWithCountButtonView: UIView {
         self.titleLabel.text = title
     }
 
+    private let iconImageView = UIImageView(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let countLabel = UILabel(frame: .zero)
+}
+
+// MARK: - Setup
+extension CommonIconWithCountButtonView {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -94,7 +102,4 @@ final class CommonIconWithCountButtonView: UIView {
         }
     }
 
-    private let iconImageView = UIImageView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-    private let countLabel = UILabel(frame: .zero)
 }

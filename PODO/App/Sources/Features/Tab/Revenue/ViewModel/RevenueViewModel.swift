@@ -23,7 +23,11 @@ final class RevenueViewModel {
     private var model: RevenueDataModel?
 }
 
-// MARK: UI Setting Data
+// MARK: - API Request
+extension RevenueViewModel {
+}
+
+// MARK: - UI Setting Data
 extension RevenueViewModel {
 
     static var cellTypes: [UITableViewCell.Type] {
@@ -55,10 +59,7 @@ extension RevenueViewModel {
     }
 }
 
-// MARK: API Request
-extension RevenueViewModel {
-}
-
+// MARK: - RowType
 extension RevenueViewModel {
 
     enum RowType: Int, CaseIterable {

@@ -21,7 +21,11 @@ final class SettingViewModel {
     private var rows: [RowType] = RowType.allCases
 }
 
-// MARK: UI Setting Data
+// MARK: - API Request
+extension SettingViewModel {
+}
+
+// MARK: - UI Setting Data
 extension SettingViewModel {
 
     var headerType: SettingTableViewHeaderView.Type {
@@ -49,10 +53,7 @@ extension SettingViewModel {
 
 }
 
-// MARK: API Request
-extension SettingViewModel {
-}
-
+// MARK: - RowType
 extension SettingViewModel {
 
     enum RowType: Int, CaseIterable {

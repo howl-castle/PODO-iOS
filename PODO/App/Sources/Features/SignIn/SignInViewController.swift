@@ -34,6 +34,20 @@ final class SignInViewController: UIViewController {
         self.navigationController?.pushViewController(viewController, animated: false)
     }
 
+    private let titleLabel = UILabel(frame: .zero)
+    private let subtitleLabel = UILabel(frame: .zero)
+    private let imageView = UIImageView(image: UIImage(named: "LoginImage"))
+    private let idInputView = CommonInputView(frame: .zero)
+    private let passwordInputView = CommonInputView(frame: .zero)
+    private let loginButtonView = CommonBottomButtonView(frame: .zero)
+    private let signUpContainerView = UIView(frame: .zero)
+    private let signUpLabel = UILabel(frame: .zero)
+    private let signUpButton = UIButton(frame: .zero)
+}
+
+// MARK: - Setup
+extension SignInViewController {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -185,14 +199,4 @@ final class SignInViewController: UIViewController {
             $0.addTarget(self, action: #selector(self.didTapSignUpButton), for: .touchUpInside)
         }
     }
-
-    private let titleLabel = UILabel(frame: .zero)
-    private let subtitleLabel = UILabel(frame: .zero)
-    private let imageView = UIImageView(image: UIImage(named: "LoginImage"))
-    private let idInputView = CommonInputView(frame: .zero)
-    private let passwordInputView = CommonInputView(frame: .zero)
-    private let loginButtonView = CommonBottomButtonView(frame: .zero)
-    private let signUpContainerView = UIView(frame: .zero)
-    private let signUpLabel = UILabel(frame: .zero)
-    private let signUpButton = UIButton(frame: .zero)
 }

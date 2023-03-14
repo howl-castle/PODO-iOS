@@ -27,6 +27,17 @@ final class ContentUserInfoTableViewFooterView: UITableViewHeaderFooterView {
         self.nameLabel.text = name
     }
 
+    private let containerView = UIView(frame: .zero)
+    private let iconImageView = UIImageView(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let nameLabel = UILabel(frame: .zero)
+    private let rightIconImageView = UIImageView(image: UIImage(named: "RightArrow"))
+
+}
+
+// MARK: - Setup
+extension ContentUserInfoTableViewFooterView {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -120,11 +131,4 @@ final class ContentUserInfoTableViewFooterView: UITableViewHeaderFooterView {
             $0.trailing.equalToSuperview().inset(10.0)
         }
     }
-
-    private let containerView = UIView(frame: .zero)
-    private let iconImageView = UIImageView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-    private let nameLabel = UILabel(frame: .zero)
-    private let rightIconImageView = UIImageView(image: UIImage(named: "RightArrow"))
-
 }

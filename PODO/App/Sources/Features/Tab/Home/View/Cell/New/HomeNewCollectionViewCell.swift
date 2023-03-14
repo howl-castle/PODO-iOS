@@ -35,6 +35,18 @@ final class HomeNewCollectionViewCell: UICollectionViewCell {
         self.nameLabel.text = data.author?.name
     }
 
+    private let containerView = UIView(frame: .zero)
+    private let imageView = UIImageView(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let subtitleLabel = UILabel(frame: .zero)
+    private let profileImageView = UIImageView(frame: .zero)
+    private let nameLabel = UILabel(frame: .zero)
+    private let headSetIconImageVIew = UIImageView(image: UIImage(named: "headset"))
+}
+
+// MARK: - Setup
+extension HomeNewCollectionViewCell {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -163,12 +175,4 @@ final class HomeNewCollectionViewCell: UICollectionViewCell {
             $0.layer.cornerRadius = height / 2.0
         }
     }
-
-    private let containerView = UIView(frame: .zero)
-    private let imageView = UIImageView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-    private let subtitleLabel = UILabel(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
-    private let nameLabel = UILabel(frame: .zero)
-    private let headSetIconImageVIew = UIImageView(image: UIImage(named: "headset"))
 }

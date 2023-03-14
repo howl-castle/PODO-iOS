@@ -27,6 +27,29 @@ final class SettingTableViewHeaderView: UITableViewHeaderFooterView {
 
     }
 
+    private let containerView = UIView(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let profileImageView = UIImageView(frame: .zero)
+    private let nameLabel = UILabel(frame: .zero)
+    private let jobLabel = UILabel(frame: .zero)
+
+    private let contentButtonStackView = UIStackView(frame: .zero)
+    private let writingButton = CommonIconWithCountButtonView(frame: .zero)
+    private let firstSeparatorView = UIView(frame: .zero)
+    private let subscribeButton = CommonIconWithCountButtonView(frame: .zero)
+    private let secondSeparatorView = UIView(frame: .zero)
+    private let saveButton = CommonIconWithCountButtonView(frame: .zero)
+
+    private let walletContainerView = UIView(frame: .zero)
+    private let walletIconImageView = UIImageView(image: UIImage(named: "icon"))
+    private let walletAccountLabel = UILabel(frame: .zero)
+    private let walletCopyIcon = UIImageView(image: UIImage(named: "copy"))
+    private let walletCopyButton = UIButton(frame: .zero)
+}
+
+// MARK: - Setup
+extension SettingTableViewHeaderView {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -279,27 +302,9 @@ final class SettingTableViewHeaderView: UITableViewHeaderFooterView {
             $0.addTarget(self, action: #selector(self.didTapWalletCopyButton), for: .touchUpInside)
         }
     }
-
-    private let containerView = UIView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
-    private let nameLabel = UILabel(frame: .zero)
-    private let jobLabel = UILabel(frame: .zero)
-
-    private let contentButtonStackView = UIStackView(frame: .zero)
-    private let writingButton = CommonIconWithCountButtonView(frame: .zero)
-    private let firstSeparatorView = UIView(frame: .zero)
-    private let subscribeButton = CommonIconWithCountButtonView(frame: .zero)
-    private let secondSeparatorView = UIView(frame: .zero)
-    private let saveButton = CommonIconWithCountButtonView(frame: .zero)
-
-    private let walletContainerView = UIView(frame: .zero)
-    private let walletIconImageView = UIImageView(image: UIImage(named: "icon"))
-    private let walletAccountLabel = UILabel(frame: .zero)
-    private let walletCopyIcon = UIImageView(image: UIImage(named: "copy"))
-    private let walletCopyButton = UIButton(frame: .zero)
 }
 
+// MARK: - ContentType
 private extension SettingTableViewHeaderView {
 
     enum ContentType {

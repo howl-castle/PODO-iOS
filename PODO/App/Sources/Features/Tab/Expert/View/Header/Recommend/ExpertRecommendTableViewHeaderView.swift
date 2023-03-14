@@ -20,6 +20,13 @@ final class ExpertRecommendTableViewHeaderView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private let titleLabel = UILabel(frame: .zero)
+    private let subtitleLabel = UILabel(frame: .zero)
+}
+
+// MARK: - Setup
+extension ExpertRecommendTableViewHeaderView {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -70,8 +77,4 @@ final class ExpertRecommendTableViewHeaderView: UITableViewHeaderFooterView {
             $0.text = "Answer the Question to receive DORA"
         }
     }
-
-
-    private let titleLabel = UILabel(frame: .zero)
-    private let subtitleLabel = UILabel(frame: .zero)
 }

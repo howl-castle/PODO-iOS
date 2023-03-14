@@ -35,6 +35,17 @@ final class HomeInsightTableViewCell: UITableViewCell {
         self.nameLabel.text = data.author?.name
     }
 
+    private let containerView = UIView(frame: .zero)
+    private let thumbnailImageView = UIImageView(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let subtitleLabel = UILabel(frame: .zero)
+    private let profileImageView = UIImageView(frame: .zero)
+    private let nameLabel = UILabel(frame: .zero)
+}
+
+// MARK: - Setup
+extension HomeInsightTableViewCell {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -148,11 +159,4 @@ final class HomeInsightTableViewCell: UITableViewCell {
             $0.textColor = .white2
         }
     }
-
-    private let containerView = UIView(frame: .zero)
-    private let thumbnailImageView = UIImageView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-    private let subtitleLabel = UILabel(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
-    private let nameLabel = UILabel(frame: .zero)
 }

@@ -30,6 +30,15 @@ final class SignUpFinishViewController: UIViewController {
         self.dismiss(animated: true)
     }
 
+    private let titleLabel = UILabel(frame: .zero)
+    private let subtitleLabel = UILabel(frame: .zero)
+    private let imageView = UIImageView(image: UIImage(named: "SignUpFinish"))
+    private let finishButtonView = CommonBottomButtonView(frame: .zero)
+}
+
+// MARK: - Setup
+extension SignUpFinishViewController {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -107,9 +116,4 @@ final class SignUpFinishViewController: UIViewController {
             $0.updateUI(enable: true)
         }
     }
-
-    private let titleLabel = UILabel(frame: .zero)
-    private let subtitleLabel = UILabel(frame: .zero)
-    private let imageView = UIImageView(image: UIImage(named: "SignUpFinish"))
-    private let finishButtonView = CommonBottomButtonView(frame: .zero)
 }

@@ -26,6 +26,14 @@ final class SettingTableViewCell: UITableViewCell {
         self.titleLabel.text = title
     }
 
+    private let titleLabel = UILabel(frame: .zero)
+    private let rightIconImageView = UIImageView(image: UIImage(named: "Right"))
+    private let seperatorView = UIView(frame: .zero)
+}
+
+// MARK: - Setup
+extension SettingTableViewCell {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -86,8 +94,4 @@ final class SettingTableViewCell: UITableViewCell {
             $0.backgroundColor = .gray2Opacity40
         }
     }
-
-    private let titleLabel = UILabel(frame: .zero)
-    private let rightIconImageView = UIImageView(image: UIImage(named: "Right"))
-    private let seperatorView = UIView(frame: .zero)
 }

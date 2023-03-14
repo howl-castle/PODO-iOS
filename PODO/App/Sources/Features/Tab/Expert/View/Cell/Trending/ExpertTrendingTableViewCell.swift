@@ -30,6 +30,76 @@ final class ExpertTrendingTableViewCell: UITableViewCell {
 
     }
 
+    private var questions: [QuestionData] = []
+
+    private let titleLabel = UILabel(frame: .zero)
+    private let subtitleLabel = UILabel(frame: .zero)
+    private let writeButton = UIButton(frame: .zero)
+    private let collectionView = UICollectionView(frame: .zero,
+                                                  collectionViewLayout: UICollectionViewFlowLayout())
+}
+
+// MARK: - CollectionView DataSource
+extension ExpertTrendingTableViewCell: UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.questions.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(ExperTrendingCollectionViewCell.self, for: indexPath) else { return UICollectionViewCell(frame: .zero) }
+        if let data = self.questions[safe: indexPath.item] {
+            cell.updateData(data)
+        }
+        return cell
+    }
+}
+
+// MARK: - CollectionView DelegateFlowLayout
+extension ExpertTrendingTableViewCell: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = CollectionViewLayout.default.calculateItemWidth(fromWidth: collectionView.bounds.width)
+        return CGSize(width: width, height: collectionView.bounds.height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        CollectionViewLayout.default.insets
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        CollectionViewLayout.default.lineSpacing
+    }
+}
+
+// MARK: - CollectionView Layout
+private extension ExpertTrendingTableViewCell {
+
+    struct CollectionViewLayout {
+
+        static let `default` = CollectionViewLayout(insets: .init(top: .zero,
+                                                                  left: 20.0,
+                                                                  bottom: .zero,
+                                                                  right: 20.0),
+                                                    lineSpacing: 10.0)
+
+        let insets: UIEdgeInsets
+        let lineSpacing: CGFloat
+    }
+}
+
+private extension ExpertTrendingTableViewCell.CollectionViewLayout {
+
+    func calculateItemWidth(fromWidth width: CGFloat) -> CGFloat {
+        let margin = self.insets.left * 2
+        let width = width - margin
+        return width
+    }
+}
+
+// MARK: - Setup
+extension ExpertTrendingTableViewCell {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -119,68 +189,5 @@ final class ExpertTrendingTableViewCell: UITableViewCell {
             let flowLayout = $0.collectionViewLayout as? UICollectionViewFlowLayout
             flowLayout?.scrollDirection = .horizontal
         }
-    }
-
-    private var questions: [QuestionData] = []
-
-    private let titleLabel = UILabel(frame: .zero)
-    private let subtitleLabel = UILabel(frame: .zero)
-    private let writeButton = UIButton(frame: .zero)
-    private let collectionView = UICollectionView(frame: .zero,
-                                                  collectionViewLayout: UICollectionViewFlowLayout())
-}
-
-extension ExpertTrendingTableViewCell: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.questions.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(ExperTrendingCollectionViewCell.self, for: indexPath) else { return UICollectionViewCell(frame: .zero) }
-        if let data = self.questions[safe: indexPath.item] {
-            cell.updateData(data)
-        }
-        return cell
-    }
-}
-
-extension ExpertTrendingTableViewCell: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = CollectionViewLayout.default.calculateItemWidth(fromWidth: collectionView.bounds.width)
-        return CGSize(width: width, height: collectionView.bounds.height)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        CollectionViewLayout.default.insets
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        CollectionViewLayout.default.lineSpacing
-    }
-}
-
-private extension ExpertTrendingTableViewCell {
-
-    struct CollectionViewLayout {
-
-        static let `default` = CollectionViewLayout(insets: .init(top: .zero,
-                                                                  left: 20.0,
-                                                                  bottom: .zero,
-                                                                  right: 20.0),
-                                                    lineSpacing: 10.0)
-
-        let insets: UIEdgeInsets
-        let lineSpacing: CGFloat
-    }
-}
-
-private extension ExpertTrendingTableViewCell.CollectionViewLayout {
-
-    func calculateItemWidth(fromWidth width: CGFloat) -> CGFloat {
-        let margin = self.insets.left * 2
-        let width = width - margin
-        return width
     }
 }

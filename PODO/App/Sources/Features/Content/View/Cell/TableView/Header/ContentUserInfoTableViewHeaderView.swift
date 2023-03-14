@@ -25,6 +25,12 @@ final class ContentUserInfoTableViewHeaderView: UITableViewHeaderFooterView {
         self.contentLabel.text = content
     }
 
+    private let contentLabel = UILabel(frame: .zero)
+}
+
+// MARK: - Setup
+extension ContentUserInfoTableViewHeaderView {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -56,6 +62,4 @@ final class ContentUserInfoTableViewHeaderView: UITableViewHeaderFooterView {
             $0.textColor = .white2
         }
     }
-
-    private let contentLabel = UILabel(frame: .zero)
 }

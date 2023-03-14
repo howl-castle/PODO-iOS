@@ -32,6 +32,15 @@ final class CommonBottomButtonView: UIView {
         self.titleLabel.text = title
     }
 
+    private var enabledColor: UIColor? = .orange
+    private let disabledColor: UIColor? = .gray1
+
+    private let titleLabel = UILabel(frame: .zero)
+}
+
+// MARK: - Setup
+extension CommonBottomButtonView {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -79,9 +88,4 @@ final class CommonBottomButtonView: UIView {
             $0.isEnabled = false
         }
     }
-
-    private var enabledColor: UIColor? = .orange
-    private let disabledColor: UIColor? = .gray1
-
-    private let titleLabel = UILabel(frame: .zero)
 }

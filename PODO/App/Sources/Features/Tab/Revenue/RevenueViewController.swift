@@ -16,6 +16,61 @@ final class RevenueViewController: UIViewController {
         self.setupUI()
     }
 
+    private var tableView: UITableView?
+
+    private let viewModel = RevenueViewModel()
+}
+
+// MARK: - TableView DataSource
+extension RevenueViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.viewModel.numberOfRows
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cellType = self.viewModel.cellTypeForRow(indexPath.row) else {
+            return UITableViewCell()
+        }
+
+        guard let cell = tableView.dequeueReusableCell(cellType, for: indexPath)  else {
+            return UITableViewCell()
+        }
+
+        self.configureCell(cell, atIndexPath: indexPath)
+        cell.selectionStyle = .none
+        return cell
+    }
+
+    private func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        if let cell = cell as? RevenueHeaderTableViewCell {
+            guard let data = self.viewModel.totalBalance else { return }
+            cell.updateData(data)
+        } else if let cell = cell as? RevenueListTableViewCell {
+            guard let data = self.viewModel.articleData else { return }
+            cell.updateData(data)
+        } else if let cell = cell as? RevenueExpertTableViewCell {
+            guard let data = self.viewModel.answerData else { return }
+            cell.updateData(data)
+        }
+    }
+}
+
+// MARK: - TableView Delegate
+extension RevenueViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        self.viewModel.heightForRow(indexPath.row)
+    }
+}
+
+// MARK: - Setup
+extension RevenueViewController {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -53,54 +108,5 @@ final class RevenueViewController: UIViewController {
                 view.register(cell: $0)
             }
         }
-    }
-
-    private var tableView: UITableView?
-
-    private let viewModel = RevenueViewModel()
-}
-
-extension RevenueViewController: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.numberOfRows
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cellType = self.viewModel.cellTypeForRow(indexPath.row) else {
-            return UITableViewCell()
-        }
-
-        guard let cell = tableView.dequeueReusableCell(cellType, for: indexPath)  else {
-            return UITableViewCell()
-        }
-
-        self.configureCell(cell, atIndexPath: indexPath)
-        cell.selectionStyle = .none
-        return cell
-    }
-
-    private func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        if let cell = cell as? RevenueHeaderTableViewCell {
-            guard let data = self.viewModel.totalBalance else { return }
-            cell.updateData(data)
-        } else if let cell = cell as? RevenueListTableViewCell {
-            guard let data = self.viewModel.articleData else { return }
-            cell.updateData(data)
-        } else if let cell = cell as? RevenueExpertTableViewCell {
-            guard let data = self.viewModel.answerData else { return }
-            cell.updateData(data)
-        }
-    }
-}
-
-extension RevenueViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        self.viewModel.heightForRow(indexPath.row)
     }
 }

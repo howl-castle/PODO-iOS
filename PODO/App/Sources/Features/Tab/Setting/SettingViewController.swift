@@ -16,6 +16,50 @@ final class SettingViewController: UIViewController {
         self.setupUI()
     }
 
+    private let topBackgroundView = UIView(frame: .zero)
+    private let tableView = UITableView(frame: .zero, style: .grouped)
+
+    private let viewModel = SettingViewModel()
+}
+
+// MARK: - TableView DataSource
+extension SettingViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.viewModel.numberOfRows
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(self.viewModel.cellType, for: indexPath) else {
+            return UITableViewCell()
+        }
+
+        if let title = self.viewModel.titleForRow(indexPath.row) {
+            cell.updateTitle(title)
+        }
+
+        cell.selectionStyle = .none
+        return cell
+    }
+}
+
+// MARK: - TableView Delegate
+extension SettingViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        //
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let view = tableView.dequeueReusableHeaderFooterView(self.viewModel.headerType)  else { return nil }
+        return view
+    }
+}
+
+// MARK: - Setup
+extension SettingViewController {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -67,43 +111,5 @@ final class SettingViewController: UIViewController {
             $0.register(cell: self.viewModel.cellType)
             $0.register(headerFooterView: self.viewModel.headerType)
         }
-    }
-
-    private let topBackgroundView = UIView(frame: .zero)
-    private let tableView = UITableView(frame: .zero, style: .grouped)
-
-    private let viewModel = SettingViewModel()
-}
-
-extension SettingViewController: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.numberOfRows
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(self.viewModel.cellType, for: indexPath) else {
-            return UITableViewCell()
-        }
-
-        if let title = self.viewModel.titleForRow(indexPath.row) {
-            cell.updateTitle(title)
-        }
-
-        cell.selectionStyle = .none
-        return cell
-    }
-}
-
-extension SettingViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        //
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let view = tableView.dequeueReusableHeaderFooterView(self.viewModel.headerType)  else { return nil }
-        return view
     }
 }

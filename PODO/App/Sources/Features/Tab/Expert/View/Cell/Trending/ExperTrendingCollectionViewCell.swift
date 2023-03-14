@@ -35,6 +35,19 @@ final class ExperTrendingCollectionViewCell: UICollectionViewCell {
         self.dateLabel.text = data.createdAt
     }
 
+    private let containerView = UIView(frame: .zero)
+    private let myLabel = UILabel(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let profileImageView = UIImageView(frame: .zero)
+    private let nameLabel = UILabel(frame: .zero)
+    private let jobLabel = UILabel(frame: .zero)
+    private let answerLabel = UILabel(frame: .zero)
+    private let dateLabel = UILabel(frame: .zero)
+}
+
+// MARK: - Setup
+extension ExperTrendingCollectionViewCell {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -188,13 +201,4 @@ final class ExperTrendingCollectionViewCell: UICollectionViewCell {
             $0.textColor = .gray1
         }
     }
-
-    private let containerView = UIView(frame: .zero)
-    private let myLabel = UILabel(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
-    private let nameLabel = UILabel(frame: .zero)
-    private let jobLabel = UILabel(frame: .zero)
-    private let answerLabel = UILabel(frame: .zero)
-    private let dateLabel = UILabel(frame: .zero)
 }

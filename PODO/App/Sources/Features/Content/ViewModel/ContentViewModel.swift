@@ -18,7 +18,11 @@ final class ContentViewModel {
     private let model: ContentDataModel
 }
 
-// MARK: UI Setting Data
+// MARK: - API Request
+extension ContentViewModel {
+}
+
+// MARK: - UI Setting Data
 extension ContentViewModel {
 
     static var cellTypes: [UITableViewCell.Type] {
@@ -157,10 +161,7 @@ extension ContentViewModel {
     }
 }
 
-// MARK: API Request
-extension ContentViewModel {
-}
-
+// MARK: - SectionType
 extension ContentViewModel {
 
     enum SectionType: Int, CaseIterable {

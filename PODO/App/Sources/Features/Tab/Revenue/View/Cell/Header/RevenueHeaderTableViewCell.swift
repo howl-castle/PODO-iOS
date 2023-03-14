@@ -24,6 +24,18 @@ final class RevenueHeaderTableViewCell: UITableViewCell {
         self.balanceCountLabel.text = "\(data)"
     }
 
+    private let titleLabel = UILabel(frame: .zero)
+    private let balanceLabel = UILabel(frame: .zero)
+    private let balanceCountLabel = UILabel(frame: .zero)
+    private let doraLabel = UILabel(frame: .zero)
+    private let detailButtonContainerView = UIView(frame: .zero)
+    private let detailButton = UIButton(frame: .zero)
+    private let detailButtonLabel = UILabel(frame: .zero)
+}
+
+// MARK: - Setup
+extension RevenueHeaderTableViewCell {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -151,12 +163,4 @@ final class RevenueHeaderTableViewCell: UITableViewCell {
             $0.font = .systemFont(ofSize: 14.0, weight: .medium)
         }
     }
-
-    private let titleLabel = UILabel(frame: .zero)
-    private let balanceLabel = UILabel(frame: .zero)
-    private let balanceCountLabel = UILabel(frame: .zero)
-    private let doraLabel = UILabel(frame: .zero)
-    private let detailButtonContainerView = UIView(frame: .zero)
-    private let detailButton = UIButton(frame: .zero)
-    private let detailButtonLabel = UILabel(frame: .zero)
 }

@@ -35,6 +35,17 @@ final class HomeHottestCollectionViewCell: UICollectionViewCell {
         self.nameLabel.text = data.author?.name
     }
 
+    private let containerView = UIView(frame: .zero)
+    private let imageView = UIImageView(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let subtitleLabel = UILabel(frame: .zero)
+    private let profileImageView = UIImageView(frame: .zero)
+    private let nameLabel = UILabel(frame: .zero)
+}
+
+// MARK: - Setup
+extension HomeHottestCollectionViewCell {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -149,11 +160,4 @@ final class HomeHottestCollectionViewCell: UICollectionViewCell {
             $0.textColor = .gray1
         }
     }
-
-    private let containerView = UIView(frame: .zero)
-    private let imageView = UIImageView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-    private let subtitleLabel = UILabel(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
-    private let nameLabel = UILabel(frame: .zero)
 }

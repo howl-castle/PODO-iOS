@@ -23,7 +23,11 @@ final class ExpertViewModel {
     private var model: ExpertDataModel?
 }
 
-// MARK: UI Setting Data
+// MARK: - API Request
+extension ExpertViewModel {
+}
+
+// MARK: - UI Setting Data
 extension ExpertViewModel {
 
     static var cellTypes: [UITableViewCell.Type] {
@@ -89,10 +93,7 @@ extension ExpertViewModel {
     }
 }
 
-// MARK: API Request
-extension ExpertViewModel {
-}
-
+// MARK: - SectionType
 extension ExpertViewModel {
 
     enum SectionType: Int, CaseIterable {

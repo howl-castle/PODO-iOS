@@ -30,6 +30,27 @@ final class RevenueExpertTableViewCell: UITableViewCell {
         self.buttonViews[safe: 1]?.updateData("\(data.myAnswer ?? .zero)")
     }
 
+    private var buttonViews: [ButtonView] = []
+
+    private let containerView = UIView(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+
+    private let doraLabel = UILabel(frame: .zero)
+    private let tonLabel = UILabel(frame: .zero)
+
+    private let contentContainerView = UIView(frame: .zero)
+    private let seperatorLabel = UILabel(frame: .zero)
+    private let answerLabel = UILabel(frame: .zero)
+    private let answerCountLabel = UILabel(frame: .zero)
+    private let adoptLabel = UILabel(frame: .zero)
+    private let adoptCountLabel = UILabel(frame: .zero)
+
+    private let buttonStackView = UIStackView(frame: .zero)
+}
+
+// MARK: - Setup
+extension RevenueExpertTableViewCell {
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -235,25 +256,9 @@ final class RevenueExpertTableViewCell: UITableViewCell {
             $0.spacing = .zero
         }
     }
-
-    private var buttonViews: [ButtonView] = []
-
-    private let containerView = UIView(frame: .zero)
-    private let titleLabel = UILabel(frame: .zero)
-
-    private let doraLabel = UILabel(frame: .zero)
-    private let tonLabel = UILabel(frame: .zero)
-
-    private let contentContainerView = UIView(frame: .zero)
-    private let seperatorLabel = UILabel(frame: .zero)
-    private let answerLabel = UILabel(frame: .zero)
-    private let answerCountLabel = UILabel(frame: .zero)
-    private let adoptLabel = UILabel(frame: .zero)
-    private let adoptCountLabel = UILabel(frame: .zero)
-
-    private let buttonStackView = UIStackView(frame: .zero)
 }
 
+// MARK: - ButtonView
 private extension RevenueExpertTableViewCell {
 
     enum ButtonType: Int, CaseIterable {

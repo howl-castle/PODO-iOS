@@ -26,6 +26,19 @@ final class CommonOnOffButtonView: UIView {
         }
     }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupUI()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func updateEnabledColor(_ color: UIColor?) {
+        self.enabledColor = color
+    }
+
     private func updateLayout(isSelected: Bool) {
         if isSelected {
             self.iconImageView.snp.remakeConstraints {
@@ -52,18 +65,23 @@ final class CommonOnOffButtonView: UIView {
         }
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setupUI()
+    // TODO: 없애기
+    @objc private func didTapButton(_ sender: UIButton) {
+        self.isSelected.toggle()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private var enabledColor: UIColor? = .blue
+    private let disabledColor: UIColor? = .black2
 
-    func updateEnabledColor(_ color: UIColor?) {
-        self.enabledColor = color
-    }
+    private let iconImageViewInset: CGFloat = 7.0
+    private let titleLabelInset: CGFloat = 9.0
+
+    private let iconImageView = UIImageView(image: UIImage(named: "Octagon_Check"))
+    private let titleLabel = UILabel(frame: .zero)
+}
+
+// MARK: - Setup
+extension CommonOnOffButtonView {
 
     private func setupUI() {
         self.setupProperties()
@@ -129,18 +147,4 @@ final class CommonOnOffButtonView: UIView {
             $0.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
         }
     }
-
-    // TODO: 없애기
-    @objc private func didTapButton(_ sender: UIButton) {
-        self.isSelected.toggle()
-    }
-
-    private var enabledColor: UIColor? = .blue
-    private let disabledColor: UIColor? = .black2
-
-    private let iconImageViewInset: CGFloat = 7.0
-    private let titleLabelInset: CGFloat = 9.0
-
-    private let iconImageView = UIImageView(image: UIImage(named: "Octagon_Check"))
-    private let titleLabel = UILabel(frame: .zero)
 }
