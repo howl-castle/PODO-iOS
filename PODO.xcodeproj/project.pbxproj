@@ -10,6 +10,7 @@
 		AE44702F29B39D3D00DBF203 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AE44702E29B39D3D00DBF203 /* Kingfisher */; };
 		AE7D10DC29C06E7A007E6ED2 /* ExpertWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10DB29C06E7A007E6ED2 /* ExpertWriteViewController.swift */; };
 		AE7D10DE29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10DD29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift */; };
+		AE7D10E129C0E8ED007E6ED2 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10E029C0E8ED007E6ED2 /* API.swift */; };
 		AEED157F29B378270058F927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AEED157E29B378270058F927 /* SnapKit */; };
 		AEED158229B378D00058F927 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AEED158129B378D00058F927 /* Then */; };
 		CE3F421729A647BF0085C436 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3F420329A647BF0085C436 /* Assets.xcassets */; };
@@ -104,6 +105,7 @@
 /* Begin PBXFileReference section */
 		AE7D10DB29C06E7A007E6ED2 /* ExpertWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertWriteViewController.swift; sourceTree = "<group>"; };
 		AE7D10DD29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertRecommendButtonContainerView.swift; sourceTree = "<group>"; };
+		AE7D10E029C0E8ED007E6ED2 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		CE3F41EA29A6362B0085C436 /* PODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3F420329A647BF0085C436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE3F420529A647BF0085C436 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -215,6 +217,15 @@
 				AE7D10DB29C06E7A007E6ED2 /* ExpertWriteViewController.swift */,
 			);
 			path = Write;
+			sourceTree = "<group>";
+		};
+		AE7D10DF29C0E8DD007E6ED2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CE505C4029BF89F7007A9DC2 /* Network.swift */,
+				AE7D10E029C0E8ED007E6ED2 /* API.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		CE3F41E129A6362B0085C436 = {
@@ -350,7 +361,7 @@
 		CEFEF9FF29BF692100052DBA /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CE505C4029BF89F7007A9DC2 /* Network.swift */,
+				AE7D10DF29C0E8DD007E6ED2 /* Network */,
 				CEFEFA0029BF692100052DBA /* ArticleData.swift */,
 				CEFEFA0129BF692100052DBA /* QuestionData.swift */,
 				CEFEFA0229BF692100052DBA /* HomeData.swift */,
@@ -888,8 +899,8 @@
 			isa = PBXGroup;
 			children = (
 				CEFEFABD29BF6AC000052DBA /* SignUpInputViewController.swift */,
-				CEFEFABE29BF6AC000052DBA /* SignUpFinishViewController.swift */,
 				CEFEFABF29BF6AC000052DBA /* SignUpConnectWalletViewController.swift */,
+				CEFEFABE29BF6AC000052DBA /* SignUpFinishViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -1031,6 +1042,7 @@
 				CEFEFA1229BF692100052DBA /* PortraitNavigationController.swift in Sources */,
 				CEFEFAC229BF6AC000052DBA /* SignUpConnectWalletViewController.swift in Sources */,
 				CEFEFA7629BF698100052DBA /* HomeDataModel.swift in Sources */,
+				AE7D10E129C0E8ED007E6ED2 /* API.swift in Sources */,
 				CEFEFACB29BF6AF500052DBA /* ExpertDetailAnswerTableViewCell.swift in Sources */,
 				CEFEFA9029BF698100052DBA /* RevenueViewController.swift in Sources */,
 				CEFEFA8029BF698100052DBA /* SettingViewController.swift in Sources */,
