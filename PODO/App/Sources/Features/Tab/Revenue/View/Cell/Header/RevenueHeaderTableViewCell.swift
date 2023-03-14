@@ -20,6 +20,10 @@ final class RevenueHeaderTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func updateData(_ data: Double) {
+        self.balanceCountLabel.text = "\(data)"
+    }
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -94,7 +98,6 @@ final class RevenueHeaderTableViewCell: UITableViewCell {
         self.balanceCountLabel.do {
             $0.font = .systemFont(ofSize: 26.0, weight: .semibold)
             $0.textColor = .white1
-            $0.text = "123123"
         }
     }
 
@@ -106,7 +109,7 @@ final class RevenueHeaderTableViewCell: UITableViewCell {
         }
 
         self.doraLabel.do {
-            $0.font = .systemFont(ofSize: 26.0, weight: .semibold)
+            $0.font = .systemFont(ofSize: 15.0, weight: .medium)
             $0.textColor = .white1
             $0.text = "DORA"
         }

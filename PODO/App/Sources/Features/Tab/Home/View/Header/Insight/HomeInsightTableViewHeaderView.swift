@@ -341,7 +341,7 @@ private extension HomeInsightTableViewHeaderView {
         private let containerView = UIView(frame: .zero)
         private let stackView = UIStackView(frame: .zero)
         private let titleLabel = UILabel(frame: .zero)
-        private let checkIconImageView = UIImageView(image: UIImage(named: "Check_Big"))
+        private let checkIconImageView = UIImageView(image: UIImage(named: "Check_Big_Blue"))
         private let button = UIButton(frame: .zero)
     }
 }

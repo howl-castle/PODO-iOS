@@ -14,6 +14,8 @@
 		CE3F421829A647BF0085C436 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3F420429A647BF0085C436 /* LaunchScreen.storyboard */; };
 		CE3F421F29A647BF0085C436 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F421129A647BF0085C436 /* AppDelegate.swift */; };
 		CE3F422029A647BF0085C436 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F421429A647BF0085C436 /* SceneDelegate.swift */; };
+		CE505C4129BF89F7007A9DC2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE505C4029BF89F7007A9DC2 /* Network.swift */; };
+		CE505C4329BF8D6C007A9DC2 /* RevenueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE505C4229BF8D6C007A9DC2 /* RevenueData.swift */; };
 		CEC6538F29B45A680035FBBA /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = CEC6538E29B45A680035FBBA /* CombineMoya */; };
 		CEC6539129B45A680035FBBA /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = CEC6539029B45A680035FBBA /* Moya */; };
 		CEFEFA0629BF692100052DBA /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEF9EE29BF692100052DBA /* UIImageView+.swift */; };
@@ -104,6 +106,8 @@
 		CE3F421129A647BF0085C436 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE3F421429A647BF0085C436 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CE3F421629A647BF0085C436 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE505C4029BF89F7007A9DC2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		CE505C4229BF8D6C007A9DC2 /* RevenueData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueData.swift; sourceTree = "<group>"; };
 		CEFEF9EE29BF692100052DBA /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		CEFEF9EF29BF692100052DBA /* UICollectionView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		CEFEF9F029BF692100052DBA /* UITableView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
@@ -264,6 +268,7 @@
 				CEFEFACF29BF6B8400052DBA /* WebView */,
 				CEFEFA1A29BF698100052DBA /* Tab */,
 				CEFEFA9D29BF6A3400052DBA /* Content */,
+				CEFEFA9E29BF6A3400052DBA /* ContentViewController.swift */,
 				CEFEFAC329BF6AF500052DBA /* ExpertDetail */,
 				CEFEFAB929BF6A8800052DBA /* SignIn */,
 				CEFEFABC29BF6AC000052DBA /* SignUp */,
@@ -302,8 +307,8 @@
 		CEFEF9F329BF692100052DBA /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEF9F429BF692100052DBA /* CommonInputView.swift */,
 				CEFEF9F529BF692100052DBA /* Selection */,
+				CEFEF9F429BF692100052DBA /* CommonInputView.swift */,
 				CEFEF9FA29BF692100052DBA /* CommonOnOffButtonView.swift */,
 				CEFEF9FB29BF692100052DBA /* CommonIconWithCountButtonView.swift */,
 				CEFEF9FC29BF692100052DBA /* CommonAccessoryView.swift */,
@@ -334,12 +339,14 @@
 		CEFEF9FF29BF692100052DBA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CE505C4029BF89F7007A9DC2 /* Network.swift */,
 				CEFEFA0029BF692100052DBA /* ArticleData.swift */,
 				CEFEFA0129BF692100052DBA /* QuestionData.swift */,
 				CEFEFA0229BF692100052DBA /* HomeData.swift */,
 				CEFEFA0329BF692100052DBA /* UserData.swift */,
 				CEFEFA0429BF692100052DBA /* ExpertData.swift */,
 				CEFEFA0529BF692100052DBA /* InterestData.swift */,
+				CE505C4229BF8D6C007A9DC2 /* RevenueData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -348,9 +355,9 @@
 			isa = PBXGroup;
 			children = (
 				CEFEFA1B29BF698100052DBA /* Home */,
-				CEFEFA2F29BF698100052DBA /* Setting */,
 				CEFEFA4229BF698100052DBA /* Expert */,
 				CEFEFA5329BF698100052DBA /* Revenue */,
+				CEFEFA2F29BF698100052DBA /* Setting */,
 				CEFEFA7429BF698100052DBA /* TabBarController.swift */,
 			);
 			path = Tab;
@@ -359,10 +366,10 @@
 		CEFEFA1B29BF698100052DBA /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEFA1C29BF698100052DBA /* ViewModel */,
-				CEFEFA1F29BF698100052DBA /* HomeViewController.swift */,
 				CEFEFA2029BF698100052DBA /* Notice */,
 				CEFEFA2229BF698100052DBA /* View */,
+				CEFEFA1C29BF698100052DBA /* ViewModel */,
+				CEFEFA1F29BF698100052DBA /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -448,11 +455,11 @@
 		CEFEFA2F29BF698100052DBA /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEFA3029BF698100052DBA /* ViewModel */,
-				CEFEFA3229BF698100052DBA /* SettingViewController.swift */,
 				CEFEFA3329BF698100052DBA /* MyContentList */,
 				CEFEFA3829BF698100052DBA /* MySubscriptionList */,
 				CEFEFA3D29BF698100052DBA /* View */,
+				CEFEFA3029BF698100052DBA /* ViewModel */,
+				CEFEFA3229BF698100052DBA /* SettingViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -544,9 +551,9 @@
 			isa = PBXGroup;
 			children = (
 				CEFEFA4329BF698100052DBA /* Write */,
+				CEFEFA4829BF698100052DBA /* View */,
 				CEFEFA4429BF698100052DBA /* ViewModel */,
 				CEFEFA4729BF698100052DBA /* ExpertViewController.swift */,
-				CEFEFA4829BF698100052DBA /* View */,
 			);
 			path = Expert;
 			sourceTree = "<group>";
@@ -570,8 +577,8 @@
 		CEFEFA4829BF698100052DBA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEFA4929BF698100052DBA /* Cell */,
 				CEFEFA5029BF698100052DBA /* Header */,
+				CEFEFA4929BF698100052DBA /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -622,11 +629,11 @@
 		CEFEFA5329BF698100052DBA /* Revenue */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEFA5429BF698100052DBA /* ViewModel */,
-				CEFEFA5629BF698100052DBA /* RevenueViewController.swift */,
+				CEFEFA6F29BF698100052DBA /* DoraList */,
 				CEFEFA5729BF698100052DBA /* ExpertList */,
 				CEFEFA6229BF698100052DBA /* View */,
-				CEFEFA6F29BF698100052DBA /* DoraList */,
+				CEFEFA5429BF698100052DBA /* ViewModel */,
+				CEFEFA5629BF698100052DBA /* RevenueViewController.swift */,
 			);
 			path = Revenue;
 			sourceTree = "<group>";
@@ -701,8 +708,8 @@
 		CEFEFA6229BF698100052DBA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEFA6329BF698100052DBA /* Cell */,
 				CEFEFA6A29BF698100052DBA /* Header */,
+				CEFEFA6329BF698100052DBA /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -710,9 +717,9 @@
 		CEFEFA6329BF698100052DBA /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				CEFEFA6829BF698100052DBA /* Header */,
 				CEFEFA6429BF698100052DBA /* List */,
 				CEFEFA6629BF698100052DBA /* Expert */,
-				CEFEFA6829BF698100052DBA /* Header */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -794,9 +801,8 @@
 		CEFEFA9D29BF6A3400052DBA /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEFA9E29BF6A3400052DBA /* ContentViewController.swift */,
-				CEFEFA9F29BF6A3400052DBA /* ViewModel */,
 				CEFEFAA229BF6A3400052DBA /* View */,
+				CEFEFA9F29BF6A3400052DBA /* ViewModel */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -885,8 +891,8 @@
 		CEFEFAC329BF6AF500052DBA /* ExpertDetail */ = {
 			isa = PBXGroup;
 			children = (
-				CEFEFAC429BF6AF500052DBA /* ExpertDetailViewController.swift */,
 				CEFEFAC529BF6AF500052DBA /* View */,
+				CEFEFAC429BF6AF500052DBA /* ExpertDetailViewController.swift */,
 			);
 			path = ExpertDetail;
 			sourceTree = "<group>";
@@ -1077,11 +1083,13 @@
 				CEFEFA0729BF692100052DBA /* UICollectionView+.swift in Sources */,
 				CEFEFA8129BF698100052DBA /* MyContentListViewController.swift in Sources */,
 				CEFEFA0629BF692100052DBA /* UIImageView+.swift in Sources */,
+				CE505C4129BF89F7007A9DC2 /* Network.swift in Sources */,
 				CEFEFA8429BF698100052DBA /* MySubscriptionListViewController.swift in Sources */,
 				CE3F421F29A647BF0085C436 /* AppDelegate.swift in Sources */,
 				CEFEFA7829BF698100052DBA /* NoticeViewController.swift in Sources */,
 				CEFEFACA29BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift in Sources */,
 				CEFEFA0F29BF692100052DBA /* CommonOnOffButtonView.swift in Sources */,
+				CE505C4329BF8D6C007A9DC2 /* RevenueData.swift in Sources */,
 				CEFEFA0E29BF692100052DBA /* CommonSelectionViewController.swift in Sources */,
 				CEFEFA1629BF692100052DBA /* HomeData.swift in Sources */,
 				CEFEFA8329BF698100052DBA /* MySubscriptionListTableViewCell.swift in Sources */,

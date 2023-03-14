@@ -20,6 +20,52 @@ final class RevenueListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func updateData(_ data: RevenueArticleData) {
+        let total = [data.writing, data.translate, data.contribute]
+            .compactMap { $0 }
+            .reduce(0, +)
+        self.doraLabel.text = "\(total) DORA"
+        self.tonLabel.text = "\(total / 10.0) TON"
+
+        self.buttonViews[safe: 0]?.updateData(data.writing ?? .zero)
+        self.buttonViews[safe: 1]?.updateData(data.translate ?? .zero)
+        self.buttonViews[safe: 2]?.updateData(data.contribute ?? .zero)
+
+        self.updateChartView(data: data)
+    }
+
+    private func updateChartView(data: RevenueArticleData) {
+        let writing = data.writing ?? .zero
+        let translate = data.translate ?? .zero
+        let contribute = data.contribute ?? .zero
+        let total = writing + translate + contribute
+
+        self.chartWritingView.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(writing/total).inset(4.0 / 3.0)
+            $0.width.equalTo(writing)
+        }
+
+        self.chartWritingView.do {
+            $0.backgroundColor = ButtonType.writing.color
+        }
+
+        self.chartTranslateView.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(translate/total).inset(4.0 / 3.0)
+        }
+
+        self.chartTranslateView.do {
+            $0.backgroundColor = ButtonType.translate.color
+        }
+
+        self.chartContributeView.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(contribute/total).inset(4.0 / 3.0)
+        }
+
+        self.chartContributeView.do {
+            $0.backgroundColor = ButtonType.contribute.color
+        }
+    }
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -32,7 +78,6 @@ final class RevenueListTableViewCell: UITableViewCell {
         self.setupDoraLabel()
         self.setupTonLabel()
         self.setupChartStackView()
-        self.setupChartView()
         self.setupButtonStackView()
     }
 
@@ -69,12 +114,16 @@ final class RevenueListTableViewCell: UITableViewCell {
             $0.addArrangedSubview(self.chartContributeView)
         }
 
-        self.buttonStackView.do { view in
-            ButtonType.allCases.forEach {
-                let button = ButtonView(frame: .zero)
-                button.setupType($0)
-                view.addArrangedSubview(button)
-            }
+        let buttonViews = ButtonType.allCases.map {
+            let button = ButtonView(frame: .zero)
+            button.setupType($0)
+            return button
+        }
+
+        self.buttonViews = buttonViews
+
+        buttonViews.forEach {
+            self.buttonStackView.addArrangedSubview($0)
         }
     }
 
@@ -139,7 +188,7 @@ final class RevenueListTableViewCell: UITableViewCell {
             $0.textColor = .white1
 
             // test
-            $0.text = "2월"
+            $0.text = "3월"
         }
     }
 
@@ -163,9 +212,6 @@ final class RevenueListTableViewCell: UITableViewCell {
         self.doraLabel.do {
             $0.font = .systemFont(ofSize: 18.0, weight: .semibold)
             $0.textColor = .white1
-
-            // test
-            $0.text = "123 DORA"
         }
     }
 
@@ -179,9 +225,6 @@ final class RevenueListTableViewCell: UITableViewCell {
         self.tonLabel.do {
             $0.font = .systemFont(ofSize: 14.0)
             $0.textColor = .gray1
-
-            // test
-            $0.text = "(2.1TON)"
         }
     }
 
@@ -201,35 +244,6 @@ final class RevenueListTableViewCell: UITableViewCell {
         }
     }
 
-    private func setupChartView() {
-        let total = ButtonType.writing.price + ButtonType.translate.price + ButtonType.contribute.price
-
-        self.chartWritingView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(ButtonType.writing.price/total).inset(4.0 / 3.0)
-            $0.width.equalTo(ButtonType.writing.price)
-        }
-
-        self.chartWritingView.do {
-            $0.backgroundColor = ButtonType.writing.color
-        }
-
-        self.chartTranslateView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(ButtonType.translate.price/total).inset(4.0 / 3.0)
-        }
-
-        self.chartTranslateView.do {
-            $0.backgroundColor = ButtonType.translate.color
-        }
-
-        self.chartContributeView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(ButtonType.contribute.price/total).inset(4.0 / 3.0)
-        }
-
-        self.chartContributeView.do {
-            $0.backgroundColor = ButtonType.contribute.color
-        }
-    }
-
     private func setupButtonStackView() {
         self.buttonStackView.snp.makeConstraints {
             $0.top.equalTo(self.chartStackView.snp.bottom).offset(22.0)
@@ -241,6 +255,8 @@ final class RevenueListTableViewCell: UITableViewCell {
             $0.spacing = .zero
         }
     }
+
+    private var buttonViews: [ButtonView] = []
 
     private let containerView = UIView(frame: .zero)
     private let titleLabel = UILabel(frame: .zero)
@@ -287,14 +303,11 @@ private extension RevenueListTableViewCell {
             self.titleLabel.text = type.title
             self.iconImageView.backgroundColor = type.color
             self.iconImageView.image = type.iconImage
-
-            // test
-            self.doraLabel.text = "\(type.price) DORA"
-            self.tonLabel.text = "(\(type.price / 10.0) TON)"
         }
 
-        func updateData(_ data: String) {
-
+        func updateData(_ data: Double) {
+            self.doraLabel.text = "\(data) DORA"
+            self.tonLabel.text = "(\(data / 10.0) TON)"
         }
 
         @objc private func didTapButton(_ sender: UIButton) {
@@ -441,15 +454,6 @@ private extension RevenueListTableViewCell.ButtonType {
         case .writing:      return .red
         case .translate:    return .purple
         case .contribute:   return .brown
-        }
-    }
-
-    // test
-    var price: Double {
-        switch self {
-        case .writing:      return 30.0
-        case .translate:    return 20.0
-        case .contribute:   return 40.0
         }
     }
 }

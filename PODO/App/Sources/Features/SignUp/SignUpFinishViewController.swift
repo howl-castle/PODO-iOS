@@ -84,6 +84,7 @@ final class SignUpFinishViewController: UIViewController {
 
     private func setupImageView() {
         self.imageView.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(0.3)
             $0.centerY.equalToSuperview().offset(40.0)
             $0.leading.equalToSuperview().inset(40.0)
             $0.trailing.equalToSuperview().inset(60.0)

@@ -20,6 +20,16 @@ final class RevenueExpertTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func updateData(_ data: RevenueAnswerData) {
+        self.doraLabel.text = "\(data.dora ?? .zero) DORA"
+        self.tonLabel.text = "\((data.dora ?? .zero) / 10.0) TON"
+        self.answerCountLabel.text = "\(data.myAnswer ?? .zero)"
+        self.adoptCountLabel.text = "\(data.adoptedAnswer ?? .zero)"
+
+        self.buttonViews[safe: 0]?.updateData("\(data.myQuestion ?? .zero)")
+        self.buttonViews[safe: 1]?.updateData("\(data.myAnswer ?? .zero)")
+    }
+
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
@@ -64,12 +74,17 @@ final class RevenueExpertTableViewCell: UITableViewCell {
             $0.addSubview(self.adoptCountLabel)
         }
 
-        self.buttonStackView.do { view in
-            ButtonType.allCases.forEach {
+        let buttonViews = ButtonType.allCases
+            .map {
                 let button = ButtonView(frame: .zero)
                 button.setupType($0)
-                view.addArrangedSubview(button)
+                return button
             }
+
+        self.buttonViews = buttonViews
+
+        buttonViews.forEach {
+            self.buttonStackView.addArrangedSubview($0)
         }
     }
 
@@ -110,9 +125,6 @@ final class RevenueExpertTableViewCell: UITableViewCell {
         self.doraLabel.do {
             $0.font = .systemFont(ofSize: 18.0, weight: .semibold)
             $0.textColor = .white1
-
-            // test
-            $0.text = "12 DORA"
         }
     }
 
@@ -126,9 +138,6 @@ final class RevenueExpertTableViewCell: UITableViewCell {
         self.tonLabel.do {
             $0.font = .systemFont(ofSize: 14.0)
             $0.textColor = .gray1
-
-            // test
-            $0.text = "(2.1TON)"
         }
     }
 
@@ -183,9 +192,6 @@ final class RevenueExpertTableViewCell: UITableViewCell {
         self.answerCountLabel.do {
             $0.font = .systemFont(ofSize: 14.0, weight: .semibold)
             $0.textColor = .brown
-
-            // test
-            $0.text = "123"
         }
     }
 
@@ -215,9 +221,6 @@ final class RevenueExpertTableViewCell: UITableViewCell {
         self.adoptCountLabel.do {
             $0.font = .systemFont(ofSize: 14.0, weight: .semibold)
             $0.textColor = .orange
-
-            // test
-            $0.text = "12"
         }
     }
 
@@ -232,6 +235,8 @@ final class RevenueExpertTableViewCell: UITableViewCell {
             $0.spacing = .zero
         }
     }
+
+    private var buttonViews: [ButtonView] = []
 
     private let containerView = UIView(frame: .zero)
     private let titleLabel = UILabel(frame: .zero)
@@ -273,12 +278,10 @@ private extension RevenueExpertTableViewCell {
             self.tag = type.rawValue
             self.titleLabel.text = type.title
 
-            // test
-            self.countLabel.text = "10 개"
         }
 
         func updateData(_ data: String) {
-
+            self.countLabel.text = "\(data) 개"
         }
 
         @objc private func didTapButton(_ sender: UIButton) {

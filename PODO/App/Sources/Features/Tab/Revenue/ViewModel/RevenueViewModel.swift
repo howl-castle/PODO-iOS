@@ -30,6 +30,18 @@ extension RevenueViewModel {
         RowType.allCases.map { $0.cellType }
     }
 
+    var totalBalance: Double? {
+        self.model?.data?.totalBalance
+    }
+
+    var articleData: RevenueArticleData? {
+        self.model?.data?.article
+    }
+
+    var answerData: RevenueAnswerData? {
+        self.model?.data?.answer
+    }
+
     var numberOfRows: Int {  self.rows.count }
 
     func heightForRow(_ row: Int) -> CGFloat {
@@ -40,11 +52,6 @@ extension RevenueViewModel {
     func cellTypeForRow(_ row: Int) -> UITableViewCell.Type? {
         guard let type = self.rows[safe: row] else { return nil }
         return type.cellType
-    }
-
-    func dataForRow(_ row: Int) -> Any? {
-        guard let type = self.rows[safe: row] else { return nil }
-        return nil
     }
 }
 
@@ -85,8 +92,7 @@ struct RevenueDataModel {
     private(set) var data: RevenueData?
 
     init() {
+        //
+        self.data = .mock
     }
-}
-
-struct RevenueData: Decodable {
 }

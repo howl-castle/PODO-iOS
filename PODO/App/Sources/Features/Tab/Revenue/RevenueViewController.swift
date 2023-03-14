@@ -81,8 +81,15 @@ extension RevenueViewController: UITableViewDataSource {
     }
 
     private func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        if let cell = cell as? RevenueListTableViewCell {
+        if let cell = cell as? RevenueHeaderTableViewCell {
+            guard let data = self.viewModel.totalBalance else { return }
+            cell.updateData(data)
+        } else if let cell = cell as? RevenueListTableViewCell {
+            guard let data = self.viewModel.articleData else { return }
+            cell.updateData(data)
         } else if let cell = cell as? RevenueExpertTableViewCell {
+            guard let data = self.viewModel.answerData else { return }
+            cell.updateData(data)
         }
     }
 }

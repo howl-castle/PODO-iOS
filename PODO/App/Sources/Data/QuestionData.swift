@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias QuestionAnswerData = QuestionData.AnswerData
+
 struct QuestionData: Decodable {
     let title: String?
     let content: String?
@@ -72,10 +74,10 @@ extension QuestionData {
     static let myMocks: [QuestionData] = [.mock1, .mock1, .mock2]
 }
 
-extension QuestionData.AnswerData {
-
-    static let mock1 = QuestionData.AnswerData(content: "냉무",
-                                               createdAt: "11 hours ago",
-                                               isAdopted: false,
-                                               user: .mock1)
+extension QuestionAnswerData {
+    
+    static let mock1 = QuestionAnswerData(content: "냉무",
+                                          createdAt: "11 hours ago",
+                                          isAdopted: false,
+                                          user: .mock1)
 }
