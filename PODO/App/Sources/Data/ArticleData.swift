@@ -150,5 +150,48 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
 Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
 """
     ]
+}
 
+extension ArticleData {
+
+    static let hottestMocks: [ArticleData] = [.hottestMock1, .hottestMock2]
+
+    static let hottestMock1 = ArticleData(
+        imagePaths: ["HottestImage1", "hot2"],
+        title: "Playkey users will receive cashback in TON tokens",
+        summary: "Playkey is now officially supporting blockchain platform Free TON, which uses Telegram Open Network (TON) protocol.",
+        contents: Self.hotContentMock1,
+        thumbnailPath: "hot1",
+        category: "TON",
+        isBookmarked: false,
+        createdAt: "Mar 23. 2023",
+        author: .hottestMock1,
+        translator: .userMock1,
+        contributors: [.qMock1, .userMock2])
+
+    static let hottestMock2 = ArticleData(
+        imagePaths: ["hot2", "HottestImage1"],
+        title: "Advanced Web3 Tokenomics Design ...",
+        summary: "It is critical to decouple speculators from ...",
+        contents: Self.contents,
+        thumbnailPath: "hot2",
+        category: "TON",
+        isBookmarked: false,
+        createdAt: "1 hours ago",
+        author: .hottestMock2,
+        translator: .userMock3,
+        contributors: nil)
+
+
+    private static let hotContentMock1: [String] = [
+    """
+    Playkey is now officially supporting blockchain platform Free TON, which uses Telegram Open Network (TON) protocol. Players will be able to receive TON tokens and transfer them to their TON-wallets.
+    """,
+    """
+    Players will receive 20% cashback for their game time purchases. The exchange rate is 1 TON = $0,5. Tokens will be added to the account automatically, afterwards users will be able to request a payout in their personal account page. These will be monthly payments.
+    """,
+    """
+    The initiative aims to encourage user loyalty, while also popularizing TON Crystal cryptocurrency.
+    """
+    ]
 }

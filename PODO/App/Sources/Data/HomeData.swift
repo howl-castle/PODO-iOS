@@ -16,7 +16,7 @@ struct HomeData: Decodable {
 // MARK: - Mock
 extension HomeData {
 
-    static let mock = HomeData(newArticles: ArticleData.mocks,
-                               hottestArticles: ArticleData.mocks,
+    static let mock = HomeData(newArticles: ArticleData.hottestMocks,
+                               hottestArticles: ArticleData.hottestMocks,
                                insightArticles: ArticleData.mocks)
 }

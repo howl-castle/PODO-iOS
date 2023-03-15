@@ -16,6 +16,7 @@ struct QuestionData: Decodable {
     let createdAt: String?
     let commentCount: Int?
     let viewCount: Int?
+    let cost: Double?
     let user: UserData?
     let interests: [InterestData]?
     let answers: [AnswerData]?
@@ -39,7 +40,8 @@ extension QuestionData {
                                     createdAt: "1 minute ago",
                                     commentCount: 5,
                                     viewCount: 23,
-                                    user: .myMock,
+                                    cost: 100.0,
+                                    user: .qMock1,
                                     interests: InterestData.mocks,
                                     answers: [.mock1])
 
@@ -48,7 +50,8 @@ extension QuestionData {
                                     createdAt: "1 days ago",
                                     commentCount: 21,
                                     viewCount: 100,
-                                    user: .myMock,
+                                    cost: 100.0,
+                                    user: .qMock2,
                                     interests: InterestData.mocks,
                                     answers: [.mock1])
 
@@ -57,7 +60,8 @@ extension QuestionData {
                                     createdAt: "1 hours ago",
                                     commentCount: 1,
                                     viewCount: 13,
-                                    user: .mock1,
+                                    cost: 100.0,
+                                    user: .qMock3,
                                     interests: InterestData.mocks,
                                     answers: [.mock1])
 
@@ -66,6 +70,7 @@ extension QuestionData {
                                     createdAt: "11 hours ago",
                                     commentCount: 11,
                                     viewCount: 130,
+                                    cost: 100.0,
                                     user: .mock1,
                                     interests: InterestData.mocks,
                                     answers: [.mock1])
@@ -80,4 +85,62 @@ extension QuestionAnswerData {
                                           createdAt: "11 hours ago",
                                           isAdopted: false,
                                           user: .mock1)
+
+    static let trendingMock1 = QuestionAnswerData(content: "I would like to introduce two NFT projects that are slightly different from Opensea. Unlike...",
+                                                  createdAt: "1 hours ago",
+                                                  isAdopted: false,
+                                                  user: .userMock1)
+
+    static let interestMock1 = QuestionAnswerData(content: "What will the much-hyped technology mean for developers, creatives, and UX designers? Answer...",
+                                                  createdAt: "1 hours ago",
+                                                  isAdopted: false,
+                                                  user: .userMock2)
+
+    static let interestMock2 = QuestionAnswerData(content: "The classifier I used was a built-in model of OpenCV located within the HaarCascades. These...",
+                                                  createdAt: "1 hours ago",
+                                                  isAdopted: false,
+                                                  user: .userMock3)
+}
+
+extension QuestionData {
+
+    static let trendingMocks: [QuestionData] = [.trendingMock1, .trendingMock1]
+    static let interestMocks: [QuestionData] = [.interestMock1, .interestMock2]
+
+    static let trendingMock1 = QuestionData(
+        title: " Can ART NFT Overcome the Crypto Winter?",
+        content: "I would like to introduce two NFT projects that are slightly different from Opensea. Unlike...",
+        createdAt: "11 hours ago",
+        commentCount: 11,
+        viewCount: 130,
+        cost: 15.0,
+        user: .qMock1,
+        interests: InterestData.mocks,
+        answers: [.trendingMock1]
+    )
+
+    static let interestMock1 = QuestionData(
+        title: "What are some real-world blockchain use cases?",
+        content: "What are some real-world blockchain use cases?",
+        createdAt: "1 hours ago",
+        commentCount: 11,
+        viewCount: 130,
+        cost: 10.0,
+        user: .qMock2,
+        interests: InterestData.mocks,
+        answers: [.interestMock1]
+    )
+
+    static let interestMock2 = QuestionData(
+        title: "Explaining the Real-Time Facial Recognition with Python",
+        content: "Explaining the Real-Time Facial Recognition with Python",
+        createdAt: "1 hours ago",
+        commentCount: 11,
+        viewCount: 130,
+        cost: 20.0,
+        user: .qMock2,
+        interests: InterestData.mocks,
+        answers: [.interestMock2]
+    )
+
 }
