@@ -150,9 +150,6 @@ extension SettingTableViewHeaderView {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = size / 2.0
-
-            //test
-            $0.kf.setImage(with: URL(string: "https://img.hankyung.com/photo/201912/01.21183801.1.jpg"))
         }
     }
 

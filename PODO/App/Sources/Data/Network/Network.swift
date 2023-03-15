@@ -14,12 +14,19 @@ final class Network {
             let result = try await URLSession.shared.data(for: self.makeRequest(api: api))
             let decoder = JSONDecoder()
 
+            let str = String(decoding: result.0, as: UTF8.self)
+            print("@@@@@@ str: \(str)")
+
+            let json = try JSONSerialization.jsonObject(with: result.0, options: []) as? [String: Any]
+            print("@@@@@@ json: \(json)")
+
             if let decoded = try? decoder.decode(T.self, from: result.0) {
                 return .success(decoded)
             } else {
                 throw NSError(domain: "Network", code: 0)
             }
         } catch {
+            print("@@@@@@ failure: \(error)")
             return .failure(error)
         }
     }
