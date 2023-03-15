@@ -28,7 +28,8 @@ final class HomeHottestCollectionViewCell: UICollectionViewCell {
     }
 
     func updateData(_ data: ArticleData) {
-        self.imageView.kf.setImage(with: URL(string: data.thumbnailPath ?? ""))
+        //self.imageView.kf.setImage(with: URL(string: data.thumbnailPath ?? ""))
+        self.imageView.image = UIImage(named: "\(data.thumbnailPath ?? "")")
         self.profileImageView.update(imagePath: data.author?.profileImagePath, name: data.author?.name)
         self.titleLabel.text = data.title
         self.subtitleLabel.text = data.summary
@@ -109,7 +110,7 @@ extension HomeHottestCollectionViewCell {
         }
 
         self.titleLabel.do {
-            $0.font = .systemFont(ofSize: 14.0, weight: .bold)
+            $0.font = .systemFont(ofSize: 13.0, weight: .semibold)
             $0.textColor = .white1
             $0.numberOfLines = 2
         }
@@ -118,14 +119,14 @@ extension HomeHottestCollectionViewCell {
     private func setupSubtitleLabel() {
         self.subtitleLabel.snp.makeConstraints {
             let margin: CGFloat = 8.0
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(margin)
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(6.0)
             $0.leading.equalToSuperview().inset(margin)
             $0.trailing.equalToSuperview().inset(margin)
         }
 
         self.subtitleLabel.do {
             $0.font = .systemFont(ofSize: 12.0)
-            $0.textColor = .white2
+            $0.textColor = .gray1
             $0.numberOfLines = 2
         }
     }

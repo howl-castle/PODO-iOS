@@ -35,6 +35,7 @@ final class HomeNewTableViewCell: UITableViewCell {
     private var articles: [ArticleData] = []
 
     private let titleLabel = UILabel(frame: .zero)
+    private let titleBadgeView = UIView(frame: .zero)
     private let subtitleLabel = UILabel(frame: .zero)
     private let badgeView = UIView(frame: .zero)
     private let badgeCountLabel = UILabel(frame: .zero)
@@ -47,16 +48,38 @@ final class HomeNewTableViewCell: UITableViewCell {
 // MARK: - CollectionView DataSource
 extension HomeNewTableViewCell: UICollectionViewDataSource {
 
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        2
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.articles.count
+        if section == .zero {
+            return 1
+        } else if section == 1 {
+            return self.articles.count
+        } else {
+            return .zero
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(HomeNewCollectionViewCell.self, for: indexPath) else { return UICollectionViewCell(frame: .zero) }
-        if let data = self.articles[safe: indexPath.item] {
-            cell.updateData(data)
-        }
+        guard let cell = self.makeCollectionViewCell(collectionView: collectionView, cellForItemAt: indexPath) else { return UICollectionViewCell(frame: .zero) }
         return cell
+    }
+
+    private func makeCollectionViewCell(collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
+        if indexPath.section == .zero {
+            let cell = collectionView.dequeueReusableCell(HomeNewNoticeCollectionViewCell.self, for: indexPath)
+            return cell
+        } else if indexPath.section == 1 {
+            let cell = collectionView.dequeueReusableCell(HomeNewCollectionViewCell.self, for: indexPath)
+            if let data = self.articles[safe: indexPath.item] {
+                cell?.updateData(data)
+            }
+            return cell
+        } else {
+            return UICollectionViewCell(frame: .zero)
+        }
     }
 }
 
@@ -69,7 +92,7 @@ extension HomeNewTableViewCell: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        CollectionViewLayout.default.insets
+        UIEdgeInsets(top: .zero, left: 4.0, bottom: .zero, right: 4.0)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -80,6 +103,24 @@ extension HomeNewTableViewCell: UICollectionViewDelegateFlowLayout {
         guard let item = self.articles[safe: indexPath.item] else { return }
         self.delegate?.homeTableViewCell(self, didTapItem: item, atIndex: indexPath.item)
     }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let width = CollectionViewLayout.default.calculateItemWidth(fromWidth: self.collectionView.bounds.width) + CollectionViewLayout.default.lineSpacing
+
+        let estimatedIndex = scrollView.contentOffset.x / width
+        let index: Int
+
+        if velocity.x > 0 {
+            index = Int(ceil(estimatedIndex))
+        } else if velocity.x < 0 {
+            index = Int(floor(estimatedIndex))
+        } else {
+            index = Int(round(estimatedIndex))
+        }
+
+        let x = CGFloat(index) * width - CollectionViewLayout.default.insets.left
+        targetContentOffset.pointee = CGPoint(x: x, y: 0)
+    }
 }
 
 // MARK: - CollectionView Layout
@@ -88,9 +129,9 @@ private extension HomeNewTableViewCell {
     struct CollectionViewLayout {
 
         static let `default` = CollectionViewLayout(insets: .init(top: .zero,
-                                                                  left: 28.0,
+                                                                  left: 20.0,
                                                                   bottom: .zero,
-                                                                  right: 28.0),
+                                                                  right: 20.0),
                                                     lineSpacing: 8.0)
 
         let insets: UIEdgeInsets
@@ -114,9 +155,10 @@ extension HomeNewTableViewCell {
         self.setupProperties()
         self.setupViewHierarchy()
         self.setupTitleLabel()
+        self.setupTitleBadgeView()
         self.setupSubtitleLabel()
-        self.setupAlarmButton()
-        self.setupAlarmBadgeView()
+        //self.setupAlarmButton()
+        //self.setupAlarmBadgeView()
         self.setupCollectionView()
     }
 
@@ -130,6 +172,7 @@ extension HomeNewTableViewCell {
     private func setupViewHierarchy() {
         self.contentView.do {
             $0.addSubview(self.titleLabel)
+            $0.addSubview(self.titleBadgeView)
             $0.addSubview(self.subtitleLabel)
             $0.addSubview(self.collectionView)
             $0.addSubview(self.alarmButton)
@@ -142,30 +185,44 @@ extension HomeNewTableViewCell {
     private func setupTitleLabel() {
         self.titleLabel.snp.makeConstraints {
             $0.height.equalTo(22.0)
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(20.0)
             $0.leading.equalToSuperview().inset(20.0)
-            $0.trailing.equalTo(self.alarmButton.snp.leading).offset(34.0)
         }
 
         self.titleLabel.do {
-            $0.font = .systemFont(ofSize: 18.0, weight: .bold)
+            $0.font = .systemFont(ofSize: 20.0, weight: .bold)
             $0.textColor = .white2
             $0.text = "NOW"
+        }
+    }
+
+    private func setupTitleBadgeView() {
+        let height: CGFloat = 6.0
+        self.titleBadgeView.snp.makeConstraints {
+            $0.size.equalTo(height)
+            $0.top.equalTo(self.titleLabel.snp.top).offset(1.0)
+            $0.leading.equalTo(self.titleLabel.snp.trailing).offset(6.0)
+        }
+
+        self.titleBadgeView.do {
+            $0.clipsToBounds = true
+            $0.backgroundColor = .red
+            $0.layer.cornerRadius = height / 2.0
         }
     }
 
     private func setupSubtitleLabel() {
         self.subtitleLabel.snp.makeConstraints {
             $0.height.equalTo(17.0)
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(4.0)
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(8.0)
             $0.leading.equalToSuperview().inset(20.0)
-            $0.trailing.equalTo(self.alarmButton.snp.leading).offset(34.0)
+            $0.trailing.equalToSuperview().inset(20.0)
         }
 
         self.subtitleLabel.do {
-            $0.font = .systemFont(ofSize: 14.0, weight: .medium)
-            $0.textColor = .white2
-            $0.text = "New Articles Here!"
+            $0.font = .systemFont(ofSize: 14.0)
+            $0.textColor = .gray1
+            $0.text = "Here are new articles by your Author!"
         }
     }
 
@@ -198,17 +255,21 @@ extension HomeNewTableViewCell {
 
     private func setupCollectionView() {
         self.collectionView.snp.makeConstraints {
-            $0.top.equalTo(self.subtitleLabel.snp.bottom).offset(18.0)
-            $0.bottom.equalToSuperview().inset(38.0)
+            $0.top.equalTo(self.subtitleLabel.snp.bottom).offset(24.0)
+            $0.bottom.equalToSuperview().inset(28.0)
             $0.leading.trailing.equalToSuperview()
         }
 
         self.collectionView.do {
             $0.backgroundColor = .clear
+            $0.contentInset = CollectionViewLayout.default.insets
             $0.showsHorizontalScrollIndicator = false
+            $0.decelerationRate = .fast
+            $0.isPagingEnabled = false
             $0.dataSource = self
             $0.delegate = self
             $0.register(cell: HomeNewCollectionViewCell.self)
+            $0.register(cell: HomeNewNoticeCollectionViewCell.self)
 
             let flowLayout = $0.collectionViewLayout as? UICollectionViewFlowLayout
             flowLayout?.scrollDirection = .horizontal

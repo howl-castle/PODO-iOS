@@ -81,7 +81,7 @@ private extension RevenueViewModel.RowType {
 
     var heightForRow: CGFloat {
         switch self {
-        case .header:   return 185.0
+        case .header:   return 155.0
         case .article:  return 342.0
         case .answer:   return 286.0
         }

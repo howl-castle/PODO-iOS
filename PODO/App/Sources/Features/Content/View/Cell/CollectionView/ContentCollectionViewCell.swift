@@ -27,7 +27,8 @@ final class ContentCollectionViewCell: UICollectionViewCell {
     }
 
     func updateImage(path: String) {
-        self.imageView.kf.setImage(with: URL(string: path))
+        self.imageView.image = UIImage(named: path)
+        //self.imageView.kf.setImage(with: URL(string: path))
     }
 
     private func setupUI() {

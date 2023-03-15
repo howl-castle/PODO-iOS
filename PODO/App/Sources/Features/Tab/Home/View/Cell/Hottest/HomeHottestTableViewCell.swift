@@ -39,6 +39,7 @@ final class HomeHottestTableViewCell: UITableViewCell {
     private var articles: [ArticleData] = []
 
     private let titleLabel = UILabel(frame: .zero)
+    private let subtitleLabel = UILabel(frame: .zero)
     private let collectionView = UICollectionView(frame: .zero,
                                                   collectionViewLayout: UICollectionViewFlowLayout())
 }
@@ -113,6 +114,7 @@ extension HomeHottestTableViewCell {
         self.setupProperties()
         self.setupViewHierarchy()
         self.setupTitleLabel()
+        self.setupSubtitleLabel()
         self.setupCollectionView()
     }
 
@@ -126,6 +128,7 @@ extension HomeHottestTableViewCell {
     private func setupViewHierarchy() {
         self.contentView.do {
             $0.addSubview(self.titleLabel)
+            $0.addSubview(self.subtitleLabel)
             $0.addSubview(self.collectionView)
         }
     }
@@ -145,9 +148,24 @@ extension HomeHottestTableViewCell {
         }
     }
 
+    private func setupSubtitleLabel() {
+        self.subtitleLabel.snp.makeConstraints {
+            $0.height.equalTo(17.0)
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(6.0)
+            $0.leading.equalTo(self.titleLabel.snp.leading)
+            $0.trailing.equalTo(self.titleLabel.snp.trailing)
+        }
+
+        self.subtitleLabel.do {
+            $0.font = .systemFont(ofSize: 14.0)
+            $0.textColor = .gray1
+            $0.text = "Read the most popular article in PODO!"
+        }
+    }
+
     private func setupCollectionView() {
         self.collectionView.snp.makeConstraints {
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(18.0)
+            $0.top.equalTo(self.subtitleLabel.snp.bottom).offset(18.0)
             $0.bottom.equalToSuperview().inset(32.0)
             $0.leading.trailing.equalToSuperview()
         }

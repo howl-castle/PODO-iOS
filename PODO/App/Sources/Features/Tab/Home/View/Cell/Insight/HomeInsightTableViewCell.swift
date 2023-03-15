@@ -61,7 +61,7 @@ extension HomeInsightTableViewCell {
     private func setupProperties() {
         self.do {
             $0.backgroundColor = .clear
-            $0.contentView.backgroundColor = .clear
+            $0.contentView.backgroundColor = .black2
         }
     }
 

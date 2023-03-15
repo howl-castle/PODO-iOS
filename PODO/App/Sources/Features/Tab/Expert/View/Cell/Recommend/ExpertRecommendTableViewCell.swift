@@ -27,10 +27,11 @@ final class ExpertRecommendTableViewCell: UITableViewCell {
 
     func updateData(_ data: QuestionData) {
         self.profileImageView.update(imagePath: data.user?.profileImagePath, name: data.user?.name)
-        self.titleLabel.text = data.title
+        self.titleLabel.text = "Q. \(data.title ?? "")"
         self.nameLabel.text = data.user?.name
         self.jobLabel.text = data.user?.job
         self.answerLabel.text = data.answers?.first?.content
+        self.doraLabel.text = "\(data.cost ?? 0)"
     }
 
     private let containerView = UIView(frame: .zero)
@@ -106,7 +107,7 @@ extension ExpertRecommendTableViewCell {
     }
 
     private func setupProfileImageView() {
-        let size: CGFloat = 36.0
+        let size: CGFloat = 26.0
         self.profileImageView.snp.makeConstraints {
             $0.size.equalTo(size)
             $0.top.equalToSuperview().inset(10.0)
@@ -123,13 +124,13 @@ extension ExpertRecommendTableViewCell {
     private func setupNameLabel() {
         self.nameLabel.snp.makeConstraints {
             $0.height.equalTo(14.0)
-            $0.top.equalTo(self.profileImageView.snp.top)
+            $0.top.equalTo(self.profileImageView.snp.top).offset(1.0)
             $0.leading.equalTo(self.profileImageView.snp.trailing).offset(8.0)
         }
 
         self.nameLabel.do {
             $0.numberOfLines = 1
-            $0.font = .systemFont(ofSize: 14.0, weight: .semibold)
+            $0.font = .systemFont(ofSize: 12.0, weight: .semibold)
             $0.textColor = .white1
         }
     }
@@ -137,15 +138,15 @@ extension ExpertRecommendTableViewCell {
     private func setupJobLabel() {
         self.jobLabel.snp.makeConstraints {
             $0.height.equalTo(12.0)
-            $0.bottom.equalTo(self.profileImageView.snp.bottom)
+            $0.top.equalTo(self.nameLabel.snp.bottom).offset(3.0)
             $0.leading.equalTo(self.nameLabel.snp.leading)
             $0.trailing.equalTo(self.nameLabel.snp.trailing)
         }
 
         self.jobLabel.do {
             $0.numberOfLines = 1
-            $0.font = .systemFont(ofSize: 12.0, weight: .medium)
-            $0.textColor = .white2
+            $0.font = .systemFont(ofSize: 10.0, weight: .medium)
+            $0.textColor = .gray1
         }
     }
 
@@ -202,7 +203,7 @@ extension ExpertRecommendTableViewCell {
         self.titleLabel.do {
             $0.numberOfLines = 1
             $0.font = .systemFont(ofSize: 16.0, weight: .semibold)
-            $0.textColor = .gray1
+            $0.textColor = .white1
         }
     }
 

@@ -149,7 +149,7 @@ extension ExpertViewController {
         }
 
         self.tableViewTopBackgroundView?.do {
-            $0.backgroundColor = .blue
+            $0.backgroundColor = .black2
         }
 
         self.tableViewBottomBackgroundView?.snp.makeConstraints {

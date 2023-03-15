@@ -72,14 +72,14 @@ extension RevenueHeaderTableViewCell {
 
     private func setupTitleLabel() {
         self.titleLabel.snp.makeConstraints {
-            $0.height.equalTo(24.0)
-            $0.top.equalToSuperview().inset(44.0)
-            $0.leading.equalToSuperview().inset(23.0)
-            $0.trailing.equalToSuperview().inset(-23.0)
+            $0.height.equalTo(22.0)
+            $0.top.equalToSuperview().inset(35.0)
+            $0.leading.equalToSuperview().inset(20.0)
+            $0.trailing.equalToSuperview().inset(-20.0)
         }
 
         self.titleLabel.do {
-            $0.font = .systemFont(ofSize: 20.0, weight: .semibold)
+            $0.font = .systemFont(ofSize: 20.0, weight: .bold)
             $0.textColor = .white1
             $0.text = "My Revenue"
         }
@@ -88,13 +88,13 @@ extension RevenueHeaderTableViewCell {
     private func setupBalanceLabel() {
         self.balanceLabel.snp.makeConstraints {
             $0.height.equalTo(17.0)
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(32.0)
-            $0.leading.equalToSuperview().inset(23.0)
-            $0.trailing.equalToSuperview().inset(-23.0)
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(8.0)
+            $0.leading.equalToSuperview().inset(20.0)
+            $0.trailing.equalToSuperview().inset(-20.0)
         }
 
         self.balanceLabel.do {
-            $0.font = .systemFont(ofSize: 14.0, weight: .medium)
+            $0.font = .systemFont(ofSize: 14.0)
             $0.textColor = .gray1
             $0.text = "Total Balance"
         }
@@ -104,7 +104,7 @@ extension RevenueHeaderTableViewCell {
         self.balanceCountLabel.snp.makeConstraints {
             $0.height.equalTo(31.0)
             $0.top.equalTo(self.balanceLabel.snp.bottom).offset(13.0)
-            $0.leading.equalToSuperview().inset(23.0)
+            $0.leading.equalToSuperview().inset(20.0)
         }
 
         self.balanceCountLabel.do {
@@ -131,7 +131,7 @@ extension RevenueHeaderTableViewCell {
         self.detailButtonContainerView.snp.makeConstraints {
             $0.height.equalTo(30.0)
             $0.centerY.equalTo(self.doraLabel.snp.centerY)
-            $0.trailing.equalToSuperview().inset(23.0)
+            $0.trailing.equalToSuperview().inset(20.0)
         }
 
         self.detailButtonContainerView.do {

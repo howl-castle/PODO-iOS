@@ -22,6 +22,7 @@
 		CE3F422029A647BF0085C436 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F421429A647BF0085C436 /* SceneDelegate.swift */; };
 		CE505C4129BF89F7007A9DC2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE505C4029BF89F7007A9DC2 /* Network.swift */; };
 		CE505C4329BF8D6C007A9DC2 /* RevenueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE505C4229BF8D6C007A9DC2 /* RevenueData.swift */; };
+		CE505C4529C1EB70007A9DC2 /* HomeNewNoticeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE505C4429C1EB70007A9DC2 /* HomeNewNoticeCollectionViewCell.swift */; };
 		CEC6538F29B45A680035FBBA /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = CEC6538E29B45A680035FBBA /* CombineMoya */; };
 		CEC6539129B45A680035FBBA /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = CEC6539029B45A680035FBBA /* Moya */; };
 		CEFEFA0629BF692100052DBA /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEF9EE29BF692100052DBA /* UIImageView+.swift */; };
@@ -119,6 +120,7 @@
 		CE3F421629A647BF0085C436 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE505C4029BF89F7007A9DC2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		CE505C4229BF8D6C007A9DC2 /* RevenueData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueData.swift; sourceTree = "<group>"; };
+		CE505C4429C1EB70007A9DC2 /* HomeNewNoticeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewNoticeCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEFEF9EE29BF692100052DBA /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		CEFEF9EF29BF692100052DBA /* UICollectionView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		CEFEF9F029BF692100052DBA /* UITableView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 			children = (
 				CEFEFA2A29BF698100052DBA /* HomeNewTableViewCell.swift */,
 				CEFEFA2B29BF698100052DBA /* HomeNewCollectionViewCell.swift */,
+				CE505C4429C1EB70007A9DC2 /* HomeNewNoticeCollectionViewCell.swift */,
 			);
 			path = New;
 			sourceTree = "<group>";
@@ -1075,6 +1078,7 @@
 				CEFEFA8929BF698100052DBA /* ExpertViewController.swift in Sources */,
 				CEFEFAC929BF6AF500052DBA /* ExpertDetailViewController.swift in Sources */,
 				AEE2585729C1B72A00607E92 /* CommonUserProfileView.swift in Sources */,
+				CE505C4529C1EB70007A9DC2 /* HomeNewNoticeCollectionViewCell.swift in Sources */,
 				CEFEFAB029BF6A3400052DBA /* ContentViewModel.swift in Sources */,
 				CEFEFABB29BF6A8800052DBA /* SignInViewController.swift in Sources */,
 				CEFEFACE29BF6B3200052DBA /* SpeechSynthesizer.swift in Sources */,
@@ -1282,6 +1286,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hw-castle.PODO";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1311,6 +1318,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hw-castle.PODO";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

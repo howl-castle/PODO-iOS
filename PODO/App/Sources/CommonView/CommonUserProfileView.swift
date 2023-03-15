@@ -26,6 +26,8 @@ final class CommonUserProfileView: UIView {
     }
 
     func update(imagePath: String?, name: String?, backgroundColor: UIColor? = .orange) {
+        self.imageView.image = UIImage(named: "\(imagePath ?? "")")
+        return
         if let imagePath = imagePath {
             self.imageView.kf.setImage(with: URL(string: imagePath))
         } else {

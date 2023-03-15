@@ -11,36 +11,15 @@ import Then
 
 final class HomeViewController: UIViewController {
 
-    private let testView = UIView(frame: .zero)
-    private let testLabel = UILabel(frame: .zero)
-
-    private func setupTestView() {
-        self.view.addSubview(self.testView)
-        self.testView.addSubview(self.testLabel)
-
-        self.testView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-
-        self.testView.do {
-            $0.backgroundColor = .red
-        }
-
-        self.testLabel.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
-        self.setupTestView()
     }
 
     private var navigationView: UIView?
     private var titleLabel: UILabel?
     private var notificationButton: UIButton?
-    private var tableViewBackgroundView: UIView?
+    //private var tableViewBackgroundView: UIView?
     private var tableView: UITableView?
 
     private let viewModel = HomeViewModel()
@@ -193,11 +172,11 @@ extension HomeViewController {
         let notificationButton = UIButton(frame: .zero)
         self.notificationButton = notificationButton
         self.view.addSubview(notificationButton)
-         */
 
         let tableViewBackgroundView = UIView(frame: .zero)
         self.tableViewBackgroundView = tableViewBackgroundView
         self.view.addSubview(tableViewBackgroundView)
+         */
 
         let tableView = UITableView(frame: .zero, style: .grouped)
         self.tableView = tableView
@@ -214,6 +193,7 @@ extension HomeViewController {
     }
 
     private func setupTableViewBackgroundView() {
+        /*
         self.tableViewBackgroundView?.snp.makeConstraints {
             $0.height.equalTo(254.0)
             $0.top.equalToSuperview()
@@ -224,6 +204,7 @@ extension HomeViewController {
         self.tableViewBackgroundView?.do {
             $0.backgroundColor = .orange
         }
+         */
     }
 
     private func setupTableView() {

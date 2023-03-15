@@ -70,6 +70,24 @@ extension ExpertTrendingTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         CollectionViewLayout.default.lineSpacing
     }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let width = CollectionViewLayout.default.calculateItemWidth(fromWidth: self.collectionView.bounds.width) + CollectionViewLayout.default.lineSpacing
+
+        let estimatedIndex = scrollView.contentOffset.x / width
+        let index: Int
+
+        if velocity.x > 0 {
+            index = Int(ceil(estimatedIndex))
+        } else if velocity.x < 0 {
+            index = Int(floor(estimatedIndex))
+        } else {
+            index = Int(round(estimatedIndex))
+        }
+
+        let x = CGFloat(index) * width
+        targetContentOffset.pointee = CGPoint(x: x, y: 0)
+    }
 }
 
 // MARK: - CollectionView Layout
@@ -112,7 +130,7 @@ extension ExpertTrendingTableViewCell {
     private func setupProperties() {
         self.do {
             $0.backgroundColor = .clear
-            $0.contentView.backgroundColor = .blue
+            $0.contentView.backgroundColor = .black2
         }
     }
 
@@ -143,14 +161,14 @@ extension ExpertTrendingTableViewCell {
     private func setupSubtitleLabel() {
         self.subtitleLabel.snp.makeConstraints {
             $0.height.equalTo(17.0)
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(4.0)
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(8.0)
             $0.leading.equalToSuperview().inset(20.0)
             $0.trailing.equalTo(self.writeButton.snp.leading).offset(34.0)
         }
 
         self.subtitleLabel.do {
-            $0.font = .systemFont(ofSize: 14.0, weight: .medium)
-            $0.textColor = .white2
+            $0.font = .systemFont(ofSize: 14.0)
+            $0.textColor = .gray1
             $0.text = "Check out the new answer!"
         }
     }
@@ -175,13 +193,15 @@ extension ExpertTrendingTableViewCell {
     private func setupCollectionView() {
         self.collectionView.snp.makeConstraints {
             $0.height.equalTo(158.0)
-            $0.top.equalTo(self.subtitleLabel.snp.bottom).offset(18.0)
+            $0.top.equalTo(self.subtitleLabel.snp.bottom).offset(24.0)
             $0.leading.trailing.equalToSuperview()
         }
 
         self.collectionView.do {
             $0.backgroundColor = .clear
             $0.showsHorizontalScrollIndicator = false
+            $0.isPagingEnabled = false
+            $0.decelerationRate = .fast
             $0.dataSource = self
             $0.delegate = self
             $0.register(cell: ExperTrendingCollectionViewCell.self)

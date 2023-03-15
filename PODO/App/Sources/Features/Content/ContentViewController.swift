@@ -237,6 +237,7 @@ final class ContentViewController: UIViewController {
         self.speechSynthesizer.stop()
         self.speechSynthesizer.start(script: script)
         self.playPauseButton.isSelected = true
+        self.contentTableView.scrollToRow(at: IndexPath(row: self.currentPlayIndex, section: .zero), at: .top, animated: true)
     }
 
     private func updateImageIndex() {
@@ -255,13 +256,14 @@ final class ContentViewController: UIViewController {
 
     private var tableViewContentInsets: UIEdgeInsets {
         let safeAreaBottom = self.view.safeAreaInsets.bottom
-        let bottomInsets = self.playerContainerViewHeight + safeAreaBottom
+        let bottomInsets = self.playerContainerViewHeight + self.floatingButtonHeight + safeAreaBottom
         return UIEdgeInsets(top: .zero, left: .zero, bottom: bottomInsets, right: .zero)
     }
 
     private var currentImageIndex: Int = .zero
     private var currentPlayIndex: Int = .zero
 
+    private let floatingButtonHeight: CGFloat = 50.0
     private let playerContainerViewHeight: CGFloat = 65.0
     private let viewModel: ContentViewModel
 
@@ -294,6 +296,12 @@ final class ContentViewController: UIViewController {
     private let bookmarkButton = UIButton(frame: .zero)
     private let sendMessageButton = UIButton(frame: .zero)
     private let contentOverlayBottomView = UIView(frame: .zero)
+
+    private let lockContainerView = UIView(frame: .zero)
+    private let lockImageView = UIImageView(image: UIImage(named: "lockIcon"))
+    private let lockDimView = UIImageView(image: UIImage(named: "dimImage"))
+    private let lockLabel = UILabel(frame: .zero)
+    private let lockButton = UIButton(frame: .zero)
 }
 
 // MARK: - CollectionView DataSource
@@ -516,6 +524,11 @@ extension ContentViewController {
         self.setupFloatingButtonSeperateView()
         self.setupBookmarkButton()
         self.setupSendMessageButton()
+        self.setupLockContainerView()
+        self.setupLockDimView()
+        self.setupLockImageView()
+        self.setupLockLabel()
+        self.setupLockButton()
     }
 
     private func setupProperties() {
@@ -557,6 +570,7 @@ extension ContentViewController {
             $0.addSubview(self.contentBottomBackgroundView)
             $0.addSubview(self.contentTableView)
             $0.addSubview(self.contentOverlayView)
+            $0.addSubview(self.lockContainerView)
         }
 
         self.contentOverlayView.do {
@@ -575,6 +589,13 @@ extension ContentViewController {
             $0.addSubview(self.floatingButtonSeperateView)
             $0.addSubview(self.bookmarkButton)
             $0.addSubview(self.sendMessageButton)
+        }
+
+        self.lockContainerView.do {
+            $0.addSubview(self.lockDimView)
+            $0.addSubview(self.lockImageView)
+            $0.addSubview(self.lockLabel)
+            $0.addSubview(self.lockButton)
         }
     }
 
@@ -850,7 +871,7 @@ extension ContentViewController {
     }
 
     private func setupFloatingButtonContainerView() {
-        let size: CGFloat = 50.0
+        let size: CGFloat = self.floatingButtonHeight
         self.floatingButtonContainerView.snp.makeConstraints {
             $0.height.equalTo(size)
             $0.centerX.equalToSuperview()
@@ -911,5 +932,53 @@ extension ContentViewController {
             $0.setImage(UIImage(named: "Cursor_Right"), for: .normal)
             $0.layer.cornerRadius = size / 2.0
         }
+    }
+
+    private func setupLockContainerView() {
+        self.lockContainerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+
+    private func setupLockDimView() {
+        self.lockDimView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        self.lockDimView.do {
+            $0.contentMode = .scaleAspectFit
+        }
+    }
+
+    private func setupLockImageView() {
+        self.lockImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(self.lockLabel.snp.top).offset(-12.0)
+        }
+    }
+
+    private func setupLockLabel() {
+        self.lockLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(self.lockContainerView.safeAreaLayoutGuide.snp.bottom).offset(-60.0)
+        }
+
+        self.lockLabel.do {
+            $0.text = "View all articles after payment"
+        }
+    }
+
+    private func setupLockButton() {
+        self.lockButton.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        self.lockButton.do {
+            $0.addTarget(self, action: #selector(self.didTapLockButton), for: .touchUpInside)
+        }
+    }
+
+    @objc private func didTapLockButton(_ sender: UIButton) {
+
     }
 }

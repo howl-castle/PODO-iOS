@@ -59,14 +59,14 @@ extension ExpertRecommendTableViewHeaderView {
         self.titleLabel.do {
             $0.font = .systemFont(ofSize: 20.0, weight: .semibold)
             $0.textColor = .white1
-            $0.text = "I think you can answer!"
+            $0.text = "Questions of interest"
         }
     }
 
     private func setupSubtitleLabel() {
         self.subtitleLabel.snp.makeConstraints {
             $0.height.equalTo(17.0)
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(4.0)
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(5.0)
             $0.leading.equalTo(self.titleLabel.snp.leading)
             $0.trailing.equalTo(self.titleLabel.snp.trailing)
         }

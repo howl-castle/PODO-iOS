@@ -157,8 +157,8 @@ private extension HomeViewModel.SectionType {
 
     var heightForRow: CGFloat {
         switch self {
-        case .new:      return 342.0
-        case .hottest:  return 288.0
+        case .new:      return 358.0
+        case .hottest:  return 310.0
         case .insight:  return 128.0
         }
     }
@@ -166,7 +166,7 @@ private extension HomeViewModel.SectionType {
     var heightForHeader: CGFloat {
         switch self {
         case .new:      return .leastNonzeroMagnitude
-        case .hottest:  return 0.01//.leastNonzeroMagnitude
+        case .hottest:  return .leastNonzeroMagnitude
         case .insight:  return 86.0
         }
     }
