@@ -26,6 +26,7 @@ final class SignInViewController: UIViewController {
     }
     
     @objc private func didTapLoginButton(_ sender: UIButton) {
+        NotificationCenter.default.post(name: NotificationName.didFinishLogin, object: nil)
         self.dismiss(animated: true)
     }
 

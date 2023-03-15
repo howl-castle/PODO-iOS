@@ -6,7 +6,12 @@
 //
 
 import UIKit
+import SnapKit
 import Then
+
+struct NotificationName {
+    static let didFinishLogin = NSNotification.Name("didFinishLogin")
+}
 
 final class TabBarController: UITabBarController {
 
@@ -32,6 +37,7 @@ final class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addObserver()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,26 +57,70 @@ final class TabBarController: UITabBarController {
         self.tabBar.frame.origin.y = self.view.frame.height - height
     }
 
-    //
-    var didShow = false
+    @objc private func didFinishLogin(notification: Notification) {
+        self.splashContainerView.isHidden = true
+        self.didLoginFinished = true
+    }
+
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didFinishLogin), name: NotificationName.didFinishLogin, object: nil)
+    }
 
     private func showLoginViewIfNeeded() {
-        guard self.didShow == false else { return }
-        self.didShow = true
+        guard self.didLoginFinished == false else { return }
         let viewController = SignInViewController()
         let navigationController = PortraitNavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .overFullScreen
         navigationController.isNavigationBarHidden = true
         self.present(navigationController, animated: false)
     }
+
+    private var didLoginFinished = false
+
+    private let splashContainerView = UIView(frame: .zero)
+    private let splashImageView = UIImageView(image: UIImage(named: "Splash"))
 }
 
 // MARK: - Setup
 extension TabBarController {
 
     private func setupUI() {
+        self.setupViewHierarchy()
         self.setupProperties()
         self.setupTabs()
+        self.setupSplashContainerView()
+        self.setupSplashImageView()
+    }
+
+    private func setupViewHierarchy() {
+        self.view.do {
+            $0.addSubview(self.splashContainerView)
+        }
+
+        self.splashContainerView.do {
+            $0.addSubview(self.splashImageView)
+        }
+    }
+
+    private func setupSplashContainerView() {
+        self.splashContainerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        self.splashContainerView.do {
+            $0.backgroundColor = .black1
+        }
+    }
+
+    private func setupSplashImageView() {
+        self.splashImageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.leading.equalToSuperview().inset(8.0)
+        }
+
+        self.splashImageView.do {
+            $0.contentMode = .scaleAspectFit
+        }
     }
 
     private func setupProperties() {

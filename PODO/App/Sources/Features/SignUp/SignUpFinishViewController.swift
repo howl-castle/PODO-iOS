@@ -26,7 +26,7 @@ final class SignUpFinishViewController: UIViewController {
     }
 
     @objc private func didTapConnectButton(_ sender: UIButton) {
-        // API
+        NotificationCenter.default.post(name: NotificationName.didFinishLogin, object: nil)
         self.dismiss(animated: true)
     }
 
