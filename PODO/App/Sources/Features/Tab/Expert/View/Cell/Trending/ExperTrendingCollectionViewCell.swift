@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 import SnapKit
 import Then
 
@@ -23,11 +22,11 @@ final class ExperTrendingCollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.profileImageView.kf.cancelDownloadTask()
+        self.profileImageView.prepareForReuse()
     }
 
     func updateData(_ data: QuestionData) {
-        self.profileImageView.kf.setImage(with: URL(string: data.user?.profileImagePath ?? ""))
+        self.profileImageView.update(imagePath: data.user?.profileImagePath, name: data.user?.name)
         self.titleLabel.text = data.title
         self.nameLabel.text = data.user?.name
         self.jobLabel.text = data.user?.job
@@ -38,7 +37,7 @@ final class ExperTrendingCollectionViewCell: UICollectionViewCell {
     private let containerView = UIView(frame: .zero)
     private let myLabel = UILabel(frame: .zero)
     private let titleLabel = UILabel(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
+    private let profileImageView = CommonUserProfileView(frame: .zero)
     private let nameLabel = UILabel(frame: .zero)
     private let jobLabel = UILabel(frame: .zero)
     private let answerLabel = UILabel(frame: .zero)

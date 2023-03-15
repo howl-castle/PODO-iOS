@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE1C45E929C168CF0025E7CA /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = AE1C45E829C168CF0025E7CA /* MarkdownView */; };
 		AE44702F29B39D3D00DBF203 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AE44702E29B39D3D00DBF203 /* Kingfisher */; };
 		AE7D10DC29C06E7A007E6ED2 /* ExpertWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10DB29C06E7A007E6ED2 /* ExpertWriteViewController.swift */; };
 		AE7D10DE29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10DD29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift */; };
 		AE7D10E129C0E8ED007E6ED2 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10E029C0E8ED007E6ED2 /* API.swift */; };
+		AEE2585729C1B72A00607E92 /* CommonUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2585629C1B72A00607E92 /* CommonUserProfileView.swift */; };
 		AEED157F29B378270058F927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AEED157E29B378270058F927 /* SnapKit */; };
 		AEED158229B378D00058F927 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AEED158129B378D00058F927 /* Then */; };
 		CE3F421729A647BF0085C436 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3F420329A647BF0085C436 /* Assets.xcassets */; };
@@ -106,6 +108,7 @@
 		AE7D10DB29C06E7A007E6ED2 /* ExpertWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertWriteViewController.swift; sourceTree = "<group>"; };
 		AE7D10DD29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertRecommendButtonContainerView.swift; sourceTree = "<group>"; };
 		AE7D10E029C0E8ED007E6ED2 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		AEE2585629C1B72A00607E92 /* CommonUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUserProfileView.swift; sourceTree = "<group>"; };
 		CE3F41EA29A6362B0085C436 /* PODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3F420329A647BF0085C436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE3F420529A647BF0085C436 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -202,6 +205,7 @@
 			files = (
 				AE44702F29B39D3D00DBF203 /* Kingfisher in Frameworks */,
 				AEED157F29B378270058F927 /* SnapKit in Frameworks */,
+				AE1C45E929C168CF0025E7CA /* MarkdownView in Frameworks */,
 				CEC6538F29B45A680035FBBA /* CombineMoya in Frameworks */,
 				CEC6539129B45A680035FBBA /* Moya in Frameworks */,
 				AEED158229B378D00058F927 /* Then in Frameworks */,
@@ -336,6 +340,7 @@
 				CEFEF9FC29BF692100052DBA /* CommonAccessoryView.swift */,
 				CEFEF9FD29BF692100052DBA /* PortraitNavigationController.swift */,
 				CEFEF9FE29BF692100052DBA /* CommonBottomButtonView.swift */,
+				AEE2585629C1B72A00607E92 /* CommonUserProfileView.swift */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -969,6 +974,7 @@
 				AE44702E29B39D3D00DBF203 /* Kingfisher */,
 				CEC6538E29B45A680035FBBA /* CombineMoya */,
 				CEC6539029B45A680035FBBA /* Moya */,
+				AE1C45E829C168CF0025E7CA /* MarkdownView */,
 			);
 			productName = PODO;
 			productReference = CE3F41EA29A6362B0085C436 /* PODO.app */;
@@ -1003,6 +1009,7 @@
 				AEED158029B378D00058F927 /* XCRemoteSwiftPackageReference "Then" */,
 				AE44702D29B39D3D00DBF203 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CEC6538D29B45A680035FBBA /* XCRemoteSwiftPackageReference "Moya" */,
+				AE1C45E729C168CF0025E7CA /* XCRemoteSwiftPackageReference "MarkdownView" */,
 			);
 			productRefGroup = CE3F41EB29A6362B0085C436 /* Products */;
 			projectDirPath = "";
@@ -1064,6 +1071,7 @@
 				CEFEFA0D29BF692100052DBA /* CommonSelectionTableViewCell.swift in Sources */,
 				CEFEFA8929BF698100052DBA /* ExpertViewController.swift in Sources */,
 				CEFEFAC929BF6AF500052DBA /* ExpertDetailViewController.swift in Sources */,
+				AEE2585729C1B72A00607E92 /* CommonUserProfileView.swift in Sources */,
 				CEFEFAB029BF6A3400052DBA /* ContentViewModel.swift in Sources */,
 				CEFEFABB29BF6A8800052DBA /* SignInViewController.swift in Sources */,
 				CEFEFACE29BF6B3200052DBA /* SpeechSynthesizer.swift in Sources */,
@@ -1329,6 +1337,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AE1C45E729C168CF0025E7CA /* XCRemoteSwiftPackageReference "MarkdownView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/keitaoouchi/MarkdownView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.1;
+			};
+		};
 		AE44702D29B39D3D00DBF203 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -1364,6 +1380,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AE1C45E829C168CF0025E7CA /* MarkdownView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE1C45E729C168CF0025E7CA /* XCRemoteSwiftPackageReference "MarkdownView" */;
+			productName = MarkdownView;
+		};
 		AE44702E29B39D3D00DBF203 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AE44702D29B39D3D00DBF203 /* XCRemoteSwiftPackageReference "Kingfisher" */;

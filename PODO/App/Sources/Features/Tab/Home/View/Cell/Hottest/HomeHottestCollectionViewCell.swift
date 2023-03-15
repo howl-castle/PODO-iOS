@@ -24,12 +24,12 @@ final class HomeHottestCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.imageView.kf.cancelDownloadTask()
-        self.profileImageView.kf.cancelDownloadTask()
+        self.profileImageView.prepareForReuse()
     }
 
     func updateData(_ data: ArticleData) {
         self.imageView.kf.setImage(with: URL(string: data.thumbnailPath ?? ""))
-        self.profileImageView.kf.setImage(with: URL(string: data.author?.profileImagePath ?? ""))
+        self.profileImageView.update(imagePath: data.author?.profileImagePath, name: data.author?.name)
         self.titleLabel.text = data.title
         self.subtitleLabel.text = data.summary
         self.nameLabel.text = data.author?.name
@@ -39,7 +39,7 @@ final class HomeHottestCollectionViewCell: UICollectionViewCell {
     private let imageView = UIImageView(frame: .zero)
     private let titleLabel = UILabel(frame: .zero)
     private let subtitleLabel = UILabel(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
+    private let profileImageView = CommonUserProfileView(frame: .zero)
     private let nameLabel = UILabel(frame: .zero)
 }
 

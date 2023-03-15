@@ -22,11 +22,11 @@ final class ExpertRecommendTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.profileImageView.kf.cancelDownloadTask()
+        self.profileImageView.prepareForReuse()
     }
 
     func updateData(_ data: QuestionData) {
-        self.profileImageView.kf.setImage(with: URL(string: data.user?.profileImagePath ?? ""))
+        self.profileImageView.update(imagePath: data.user?.profileImagePath, name: data.user?.name)
         self.titleLabel.text = data.title
         self.nameLabel.text = data.user?.name
         self.jobLabel.text = data.user?.job
@@ -38,7 +38,7 @@ final class ExpertRecommendTableViewCell: UITableViewCell {
     private let doraContainerView = UIView(frame: .zero)
     private let doraLabel = UILabel(frame: .zero)
     private let titleLabel = UILabel(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
+    private let profileImageView = CommonUserProfileView(frame: .zero)
     private let nameLabel = UILabel(frame: .zero)
     private let jobLabel = UILabel(frame: .zero)
     private let answerLabel = UILabel(frame: .zero)

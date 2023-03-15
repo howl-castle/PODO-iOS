@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 import SnapKit
 import Then
 
@@ -23,13 +22,22 @@ final class SettingTableViewHeaderView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.profileImageView.prepareForReuse()
+    }
+
+    func update() {
+        self.profileImageView.update(imagePath: nil, name: "Lee")
+    }
+
     @objc private func didTapWalletCopyButton(_ sender: UIButton) {
 
     }
 
     private let containerView = UIView(frame: .zero)
     private let titleLabel = UILabel(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
+    private let profileImageView = CommonUserProfileView(frame: .zero)
     private let nameLabel = UILabel(frame: .zero)
     private let jobLabel = UILabel(frame: .zero)
 

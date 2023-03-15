@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 import SnapKit
 import Then
 
@@ -23,14 +22,24 @@ final class ContentUserInfoTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.profileImageView.kf.cancelDownloadTask()
+        self.profileImageView.prepareForReuse()
     }
 
     func updateData(_ data: UserData) {
-        self.profileImageView.kf.setImage(with: URL(string: data.profileImagePath ?? ""))
+        self.profileImageView.update(imagePath: data.profileImagePath, name: data.name)
         self.nameLabel.text = data.name
         self.jobLabel.text = data.job
     }
+
+    private let containerView = UIView(frame: .zero)
+    private let profileImageView = CommonUserProfileView(frame: .zero)
+    private let nameLabel = UILabel(frame: .zero)
+    private let jobLabel = UILabel(frame: .zero)
+    private let iconImageContainerView = UIView(frame: .zero)
+    private let iconImageView = UIImageView(image: UIImage(named: "Cursor_Right"))
+}
+
+extension ContentUserInfoTableViewCell {
 
     private func setupUI() {
         self.setupProperties()
@@ -89,9 +98,6 @@ final class ContentUserInfoTableViewCell: UITableViewCell {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = size / 2.0
-
-            // test
-            $0.kf.setImage(with: URL(string: "https://img.hankyung.com/photo/201912/01.21183801.1.jpg"))
         }
     }
 
@@ -156,11 +162,4 @@ final class ContentUserInfoTableViewCell: UITableViewCell {
             $0.contentMode = .scaleAspectFit
         }
     }
-
-    private let containerView = UIView(frame: .zero)
-    private let profileImageView = UIImageView(frame: .zero)
-    private let nameLabel = UILabel(frame: .zero)
-    private let jobLabel = UILabel(frame: .zero)
-    private let iconImageContainerView = UIView(frame: .zero)
-    private let iconImageView = UIImageView(image: UIImage(named: "Cursor_Right"))
 }

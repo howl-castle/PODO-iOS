@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "markdownview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/keitaoouchi/MarkdownView.git",
+      "state" : {
+        "revision" : "5e62a27f1002cd63c350ef1a4c640ddcd1f1ed48",
+        "version" : "1.9.1"
+      }
+    },
+    {
       "identity" : "moya",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Moya/Moya.git",
