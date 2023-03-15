@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE1C45E629C1642F0025E7CA /* ArticleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1C45E529C1642F0025E7CA /* ArticleAPI.swift */; };
 		AE1C45E929C168CF0025E7CA /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = AE1C45E829C168CF0025E7CA /* MarkdownView */; };
 		AE44702F29B39D3D00DBF203 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AE44702E29B39D3D00DBF203 /* Kingfisher */; };
 		AE7D10DC29C06E7A007E6ED2 /* ExpertWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10DB29C06E7A007E6ED2 /* ExpertWriteViewController.swift */; };
@@ -105,6 +106,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE1C45E529C1642F0025E7CA /* ArticleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleAPI.swift; sourceTree = "<group>"; };
 		AE7D10DB29C06E7A007E6ED2 /* ExpertWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertWriteViewController.swift; sourceTree = "<group>"; };
 		AE7D10DD29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertRecommendButtonContainerView.swift; sourceTree = "<group>"; };
 		AE7D10E029C0E8ED007E6ED2 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			children = (
 				CE505C4029BF89F7007A9DC2 /* Network.swift */,
 				AE7D10E029C0E8ED007E6ED2 /* API.swift */,
+				AE1C45E529C1642F0025E7CA /* ArticleAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1118,6 +1121,7 @@
 				CEFEFACA29BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift in Sources */,
 				CEFEFA0F29BF692100052DBA /* CommonOnOffButtonView.swift in Sources */,
 				CE505C4329BF8D6C007A9DC2 /* RevenueData.swift in Sources */,
+				AE1C45E629C1642F0025E7CA /* ArticleAPI.swift in Sources */,
 				CEFEFA0E29BF692100052DBA /* CommonSelectionViewController.swift in Sources */,
 				CEFEFA1629BF692100052DBA /* HomeData.swift in Sources */,
 				CEFEFA8329BF698100052DBA /* MySubscriptionListTableViewCell.swift in Sources */,

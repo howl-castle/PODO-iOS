@@ -15,6 +15,18 @@ protocol API {
     var task: APITask { get }
 }
 
+extension API {
+
+    var baseURL: URL {
+        let path = "https://gleaming-cove-378613.ue.r.appspot.com/"
+        if let url = URL(string: path) {
+            return url
+        } else {
+            fatalError("API Base URL Not Founded")
+        }
+    }
+}
+
 enum APIMethod: String {
     case `get` = "GET"
     case post = "POST"
