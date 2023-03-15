@@ -53,6 +53,7 @@ extension SettingViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let view = tableView.dequeueReusableHeaderFooterView(self.viewModel.headerType)  else { return nil }
+        view.update()
         return view
     }
 }

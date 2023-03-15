@@ -11,11 +11,19 @@ final class HomeViewModel {
 
     init() {
         // api call
+
+        Task {
+            await self.requestAPI()
+        }
         self.model = HomeDataModel()
     }
 
     func updateSelectedCategory(_ category: Int) {
         self.model?.updateSelectedCategory(category)
+    }
+
+    private func requestAPI() async {
+        let data: Result<String, Error> = await self.network.request(api: ArticleAPI.list)
     }
 
     private func setupSections() {
@@ -25,6 +33,8 @@ final class HomeViewModel {
 
     private var sections: [SectionType] = SectionType.allCases
     private var model: HomeDataModel?
+
+    private let network = Network()
 }
 
 // MARK: - API Request

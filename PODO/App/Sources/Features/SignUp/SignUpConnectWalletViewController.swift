@@ -26,10 +26,25 @@ final class SignUpConnectWalletViewController: UIViewController {
     }
 
     @objc private func didTapConnectButton(_ sender: UIButton) {
-        let viewController = SignUpFinishViewController()
-        self.navigationController?.pushViewController(viewController, animated: false)
-        //let viewController = WebViewViewController(nibName: nil, bundle: nil)
-        //self.present(viewController, animated: true)
+        //let viewController = SignUpFinishViewController()
+        //self.navigationController?.pushViewController(viewController, animated: false)
+        if let url = URL(string: "ton://?name=podo&url=https://naver.com") {
+
+            UIApplication.shared.open(url) { [weak self] isSucceed in
+                if isSucceed == false {
+                    self?.openAppstore()
+                }
+            }
+        }
+        return
+        let viewController = WebViewViewController()
+        self.present(viewController, animated: true)
+    }
+
+    private func openAppstore() {
+        guard let url = URL(string: "itms-apps://itunes.apple.com/app/1607656232") else { return }
+        guard UIApplication.shared.canOpenURL(url)                                 else { return }
+        UIApplication.shared.open(url)
     }
 
     private let titleLabel = UILabel(frame: .zero)

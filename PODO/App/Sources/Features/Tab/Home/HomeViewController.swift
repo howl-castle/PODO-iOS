@@ -11,9 +11,30 @@ import Then
 
 final class HomeViewController: UIViewController {
 
+    private let testView = UIView(frame: .zero)
+    private let testLabel = UILabel(frame: .zero)
+
+    private func setupTestView() {
+        self.view.addSubview(self.testView)
+        self.testView.addSubview(self.testLabel)
+
+        self.testView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        self.testView.do {
+            $0.backgroundColor = .red
+        }
+
+        self.testLabel.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        self.setupTestView()
     }
 
     private var navigationView: UIView?
