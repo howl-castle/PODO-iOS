@@ -16,7 +16,7 @@ struct ExpertData: Decodable {
 // MARK: - Mock
 extension ExpertData {
 
-    static let mock = ExpertData(myQuestion: QuestionData.myMocks,
-                                 trendingQuestion: QuestionData.mocks,
-                                 recommendQuestion: QuestionData.mocks)
+    static let mock = ExpertData(myQuestion: [],
+                                 trendingQuestion: QuestionData.trendingMocks,
+                                 recommendQuestion: QuestionData.interestMocks)
 }

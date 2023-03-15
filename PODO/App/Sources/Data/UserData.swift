@@ -30,3 +30,50 @@ extension UserData {
                                  job: "Designer",
                                  isBookmark: true)
 }
+
+extension UserData {
+
+    static let hottestMock1 = UserData(id: 3,
+                                       name: "Playkey Team",
+                                       profileImagePath: "hotUser1",
+                                       job: "Developer",
+                                       isBookmark: true)
+    static let hottestMock2 = UserData(id: 4,
+                                       name: "Krull R",
+                                       profileImagePath: "hotUser2",
+                                       job: "Designer",
+                                       isBookmark: false)
+
+    static let qMock1 = UserData(id: 5,
+                                 name: "Arthur Hayes",
+                                 profileImagePath: "QUser1",
+                                 job: "Developer",
+                                 isBookmark: false)
+    static let qMock2 = UserData(id: 6,
+                                 name: "Triny Lee",
+                                 profileImagePath: "QUser2",
+                                 job: "Designer",
+                                 isBookmark: false)
+    static let qMock3 = UserData(id: 7,
+                                 name: "Vitalik Buterin",
+                                 profileImagePath: "QUser3",
+                                 job: "Developer",
+                                 isBookmark: false)
+
+    static let userMock1 = UserData(id: 8,
+                                    name: "Damin Lee",
+                                    profileImagePath: "User1",
+                                    job: "Developer",
+                                    isBookmark: false)
+    static let userMock2 = UserData(id: 9,
+                                    name: "Marthin Choi",
+                                    profileImagePath: "User2",
+                                    job: "Developer",
+                                    isBookmark: false)
+    static let userMock3 = UserData(id: 9,
+                                    name: "Yarik",
+                                    profileImagePath: "User3",
+                                    job: "Developer",
+                                    isBookmark: false)
+    
+}
