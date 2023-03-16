@@ -100,6 +100,7 @@ extension HomeNewTableViewCell: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.section != .zero                     else { return }
         guard let item = self.articles[safe: indexPath.item] else { return }
         self.delegate?.homeTableViewCell(self, didTapItem: item, atIndex: indexPath.item)
     }
