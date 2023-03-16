@@ -32,9 +32,6 @@ final class ExpertTrendingTableViewCell: UITableViewCell {
 
     private var questions: [QuestionData] = []
 
-    private let titleLabel = UILabel(frame: .zero)
-    private let subtitleLabel = UILabel(frame: .zero)
-    private let writeButton = UIButton(frame: .zero)
     private let collectionView = UICollectionView(frame: .zero,
                                                   collectionViewLayout: UICollectionViewFlowLayout())
 }
@@ -121,9 +118,6 @@ extension ExpertTrendingTableViewCell {
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
-        self.setupTitleLabel()
-        self.setupSubtitleLabel()
-        self.setupWriteButton()
         self.setupCollectionView()
     }
 
@@ -136,64 +130,14 @@ extension ExpertTrendingTableViewCell {
 
     private func setupViewHierarchy() {
         self.contentView.do {
-            $0.addSubview(self.titleLabel)
-            $0.addSubview(self.subtitleLabel)
-            $0.addSubview(self.writeButton)
             $0.addSubview(self.collectionView)
-        }
-    }
-
-    private func setupTitleLabel() {
-        self.titleLabel.snp.makeConstraints {
-            $0.height.equalTo(22.0)
-            $0.top.equalToSuperview().inset(20.0)
-            $0.leading.equalToSuperview().inset(20.0)
-            $0.trailing.equalTo(self.writeButton.snp.leading).offset(34.0)
-        }
-
-        self.titleLabel.do {
-            $0.font = .systemFont(ofSize: 20.0, weight: .bold)
-            $0.textColor = .white1
-            $0.text = "Expert"
-        }
-    }
-
-    private func setupSubtitleLabel() {
-        self.subtitleLabel.snp.makeConstraints {
-            $0.height.equalTo(17.0)
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(8.0)
-            $0.leading.equalToSuperview().inset(20.0)
-            $0.trailing.equalTo(self.writeButton.snp.leading).offset(34.0)
-        }
-
-        self.subtitleLabel.do {
-            $0.font = .systemFont(ofSize: 14.0)
-            $0.textColor = .gray1
-            $0.text = "Check out the new answer!"
-        }
-    }
-
-    private func setupWriteButton() {
-        let size: CGFloat = 36.0
-        self.writeButton.snp.makeConstraints {
-            $0.size.equalTo(size)
-            $0.top.equalToSuperview().inset(20.0)
-            $0.trailing.equalToSuperview().inset(20.0)
-        }
-
-        self.writeButton.do {
-            $0.clipsToBounds = true
-            $0.backgroundColor = .orange
-            $0.layer.cornerRadius = size / 2.0
-            $0.setImage(UIImage(named: "Edit_Line"), for: .normal)
-            $0.addTarget(self, action: #selector(self.didTapWriteButton), for: .touchUpInside)
         }
     }
 
     private func setupCollectionView() {
         self.collectionView.snp.makeConstraints {
             $0.height.equalTo(158.0)
-            $0.top.equalTo(self.subtitleLabel.snp.bottom).offset(24.0)
+            $0.top.equalToSuperview().inset(18.0)
             $0.leading.trailing.equalToSuperview()
         }
 

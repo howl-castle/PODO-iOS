@@ -135,7 +135,7 @@ private extension ExpertViewModel.SectionType {
 
     var heightForRow: CGFloat {
         switch self {
-        case .trending:     return 280.0
+        case .trending:     return 206.0
         case .recommend:    return 184.0
         }
     }

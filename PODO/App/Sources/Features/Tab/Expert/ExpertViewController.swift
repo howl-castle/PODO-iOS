@@ -16,9 +16,15 @@ final class ExpertViewController: UIViewController {
         self.setupUI()
     }
 
+    @objc private func didTapWriteButton(_ sneder: UIButton) {
+        let viewController = ExpertWriteViewController()
+        self.present(viewController, animated: true)
+    }
+
     private var navigationView: UIView?
     private var titleLabel: UILabel?
-    private var notificationButton: UIButton?
+    private var subtitleLabel: UILabel?
+    private var writeButton: UIButton?
     private var tableViewTopBackgroundView: UIView?
     private var tableViewBottomBackgroundView: UIView?
     private var tableView: UITableView?
@@ -94,11 +100,12 @@ extension ExpertViewController {
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
+        self.setupTableViewBackgroundView()
+        self.setupTableView()
         self.setupNavigationView()
         self.setupTitleLabel()
-        self.setupNotificationButton()
-        self.setupTableView()
-        self.setupTableViewBackgroundView()
+        self.setupSubtitleLabel()
+        self.setupWriteButton()
     }
 
     private func setupProperties() {
@@ -108,20 +115,6 @@ extension ExpertViewController {
     }
 
     private func setupViewHierarchy() {
-        /*
-        let navigationView = UIView(frame: .zero)
-        self.navigationView = navigationView
-        self.view.addSubview(navigationView)
-
-        let titleLabel = UILabel(frame: .zero)
-        self.titleLabel = titleLabel
-        self.view.addSubview(titleLabel)
-
-        let notificationButton = UIButton(frame: .zero)
-        self.notificationButton = notificationButton
-        self.view.addSubview(notificationButton)
-         */
-
         let tableViewTopBackgroundView = UIView(frame: .zero)
         self.tableViewTopBackgroundView = tableViewTopBackgroundView
         self.view.addSubview(tableViewTopBackgroundView)
@@ -133,15 +126,22 @@ extension ExpertViewController {
         let tableView = UITableView(frame: .zero, style: .grouped)
         self.tableView = tableView
         self.view.addSubview(tableView)
-    }
 
-    private func setupNavigationView() {
-    }
+        let navigationView = UIView(frame: .zero)
+        self.navigationView = navigationView
+        self.view.addSubview(navigationView)
 
-    private func setupTitleLabel() {
-    }
+        let titleLabel = UILabel(frame: .zero)
+        self.titleLabel = titleLabel
+        self.navigationView?.addSubview(titleLabel)
 
-    private func setupNotificationButton() {
+        let subtitleLabel = UILabel(frame: .zero)
+        self.subtitleLabel = subtitleLabel
+        self.navigationView?.addSubview(subtitleLabel)
+
+        let writeButton = UIButton(frame: .zero)
+        self.writeButton = writeButton
+        self.navigationView?.addSubview(writeButton)
     }
 
     private func setupTableViewBackgroundView() {
@@ -169,8 +169,11 @@ extension ExpertViewController {
     }
 
     private func setupTableView() {
+        guard let navigationView = self.navigationView else { return }
+
         self.tableView?.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(navigationView.snp.bottom)
+            $0.bottom.leading.trailing.equalToSuperview()
         }
 
         self.tableView?.do { view in
@@ -184,6 +187,65 @@ extension ExpertViewController {
 
             ExpertViewModel.cellTypes.forEach   { view.register(cell: $0)             }
             ExpertViewModel.headerTypes.forEach { view.register(headerFooterView: $0) }
+        }
+    }
+
+    private func setupNavigationView() {
+        self.navigationView?.snp.makeConstraints {
+            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.equalToSuperview()
+        }
+    }
+
+    private func setupTitleLabel() {
+        guard let writeButton = self.writeButton else { return }
+
+        self.titleLabel?.snp.makeConstraints {
+            $0.height.equalTo(22.0)
+            $0.top.equalToSuperview().inset(20.0)
+            $0.leading.equalToSuperview().inset(20.0)
+            $0.trailing.equalTo(writeButton.snp.leading).offset(34.0)
+        }
+
+        self.titleLabel?.do {
+            $0.font = .systemFont(ofSize: 20.0, weight: .bold)
+            $0.textColor = .white1
+            $0.text = "Expert"
+        }
+    }
+
+    private func setupSubtitleLabel() {
+        guard let titleLabel = self.titleLabel   else { return }
+
+        self.subtitleLabel?.snp.makeConstraints {
+            $0.height.equalTo(17.0)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(8.0)
+            $0.bottom.equalToSuperview().inset(11.0)
+            $0.leading.equalToSuperview().inset(20.0)
+            $0.trailing.equalTo(titleLabel.snp.trailing).offset(34.0)
+        }
+
+        self.subtitleLabel?.do {
+            $0.font = .systemFont(ofSize: 14.0)
+            $0.textColor = .gray1
+            $0.text = "Check out the new answer!"
+        }
+    }
+
+    private func setupWriteButton() {
+        let size: CGFloat = 36.0
+        self.writeButton?.snp.makeConstraints {
+            $0.size.equalTo(size)
+            $0.top.equalToSuperview().inset(20.0)
+            $0.trailing.equalToSuperview().inset(20.0)
+        }
+
+        self.writeButton?.do {
+            $0.clipsToBounds = true
+            $0.backgroundColor = .orange
+            $0.layer.cornerRadius = size / 2.0
+            $0.setImage(UIImage(named: "Edit_Line"), for: .normal)
+            $0.addTarget(self, action: #selector(self.didTapWriteButton), for: .touchUpInside)
         }
     }
 }
