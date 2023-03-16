@@ -14,6 +14,8 @@
 		AE7D10DE29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10DD29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift */; };
 		AE7D10E129C0E8ED007E6ED2 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D10E029C0E8ED007E6ED2 /* API.swift */; };
 		AEE1A87929C37233008F9A49 /* CommonPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A87829C37233008F9A49 /* CommonPopupViewController.swift */; };
+		AEE1A87D29C3898F008F9A49 /* ExpertDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A87C29C3898F008F9A49 /* ExpertDetailViewModel.swift */; };
+		AEE1A87F29C389E6008F9A49 /* ExpertDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A87E29C389E6008F9A49 /* ExpertDetailDataModel.swift */; };
 		AEE2585729C1B72A00607E92 /* CommonUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2585629C1B72A00607E92 /* CommonUserProfileView.swift */; };
 		AEED157F29B378270058F927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AEED157E29B378270058F927 /* SnapKit */; };
 		AEED158229B378D00058F927 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AEED158129B378D00058F927 /* Then */; };
@@ -111,6 +113,8 @@
 		AE7D10DD29C07257007E6ED2 /* ExpertRecommendButtonContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertRecommendButtonContainerView.swift; sourceTree = "<group>"; };
 		AE7D10E029C0E8ED007E6ED2 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		AEE1A87829C37233008F9A49 /* CommonPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPopupViewController.swift; sourceTree = "<group>"; };
+		AEE1A87C29C3898F008F9A49 /* ExpertDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertDetailViewModel.swift; sourceTree = "<group>"; };
+		AEE1A87E29C389E6008F9A49 /* ExpertDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertDetailDataModel.swift; sourceTree = "<group>"; };
 		AEE2585629C1B72A00607E92 /* CommonUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUserProfileView.swift; sourceTree = "<group>"; };
 		CE3F41EA29A6362B0085C436 /* PODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3F420329A647BF0085C436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -242,6 +246,15 @@
 				AE1C45E529C1642F0025E7CA /* ArticleAPI.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		AEE1A87B29C3897E008F9A49 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AEE1A87E29C389E6008F9A49 /* ExpertDetailDataModel.swift */,
+				AEE1A87C29C3898F008F9A49 /* ExpertDetailViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		CE3F41E129A6362B0085C436 = {
@@ -927,6 +940,7 @@
 			isa = PBXGroup;
 			children = (
 				CEFEFAC529BF6AF500052DBA /* View */,
+				AEE1A87B29C3897E008F9A49 /* ViewModel */,
 				CEFEFAC429BF6AF500052DBA /* ExpertDetailViewController.swift */,
 			);
 			path = ExpertDetail;
@@ -1051,6 +1065,7 @@
 				CEFEFA9629BF698100052DBA /* RevenueExpertTableViewCell.swift in Sources */,
 				CEFEFAB729BF6A3400052DBA /* ContentTableViewHeaderView.swift in Sources */,
 				CEFEFA8729BF698100052DBA /* ExpertDataModel.swift in Sources */,
+				AEE1A87F29C389E6008F9A49 /* ExpertDetailDataModel.swift in Sources */,
 				CEFEFA9B29BF698100052DBA /* RevenueDoraListViewController.swift in Sources */,
 				CEFEFA7B29BF698100052DBA /* HomeHottestTableViewCell.swift in Sources */,
 				CEFEFA7729BF698100052DBA /* HomeViewController.swift in Sources */,
@@ -1108,6 +1123,7 @@
 				CEFEFAC029BF6AC000052DBA /* SignUpInputViewController.swift in Sources */,
 				CEFEFA8529BF698100052DBA /* SettingTableViewCell.swift in Sources */,
 				CEFEFA9329BF698100052DBA /* RevenueMyQuestionListTableViewCell.swift in Sources */,
+				AEE1A87D29C3898F008F9A49 /* ExpertDetailViewModel.swift in Sources */,
 				CEFEFA8C29BF698100052DBA /* ExperTrendingCollectionViewCell.swift in Sources */,
 				CEFEFA8E29BF698100052DBA /* ExpertRecommendTableViewHeaderView.swift in Sources */,
 				CEFEFA9529BF698100052DBA /* RevenueListTableViewCell.swift in Sources */,

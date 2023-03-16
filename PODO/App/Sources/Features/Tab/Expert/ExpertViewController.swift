@@ -67,6 +67,10 @@ extension ExpertViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+
+        guard let data = self.viewModel.dataForIndexPath(indexPath) else { return }
+        let viewController = ExpertDetailViewController(data: data)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -155,7 +155,9 @@ extension TabBarController {
                                       selectedImage: UIImage(named: "home on"))
         tabBarItem.imageInsets = self.tabBarItemImageInsets
         viewController.tabBarItem = tabBarItem
-        return viewController
+
+        let navigationController = PortraitNavigationController(rootViewController: viewController)
+        return navigationController
     }
 
     private func makeExpertTabViewController() -> UIViewController {
@@ -165,7 +167,9 @@ extension TabBarController {
                                       selectedImage: UIImage(named: "coffee on"))
         tabBarItem.imageInsets = self.tabBarItemImageInsets
         viewController.tabBarItem = tabBarItem
-        return viewController
+
+        let navigationController = PortraitNavigationController(rootViewController: viewController)
+        return navigationController
     }
 
     private func makeRevenueTabViewController() -> UIViewController {
@@ -175,7 +179,9 @@ extension TabBarController {
                                       selectedImage: UIImage(named: "revenue on"))
         tabBarItem.imageInsets = self.tabBarItemImageInsets
         viewController.tabBarItem = tabBarItem
-        return viewController
+
+        let navigationController = PortraitNavigationController(rootViewController: viewController)
+        return navigationController
     }
 
     private func makeSettingTabViewController() -> UIViewController {
@@ -185,7 +191,9 @@ extension TabBarController {
                                       selectedImage: UIImage(named: "setting on"))
         tabBarItem.imageInsets = self.tabBarItemImageInsets
         viewController.tabBarItem = tabBarItem
-        return viewController
+
+        let navigationController = PortraitNavigationController(rootViewController: viewController)
+        return navigationController
     }
 
     private var tabBarItemImageInsets: UIEdgeInsets {
