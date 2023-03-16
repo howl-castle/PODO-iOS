@@ -224,6 +224,12 @@ final class ContentViewController: UIViewController {
         self.startSpeech()
     }
 
+    @objc private func didTapLockButton(_ sender: UIButton) {
+        let popup = CommonPopupViewController()
+        popup.delegate = self
+        self.present(popup, animated: false)
+    }
+
     private func updatePlayerButtonEnableState() {
         let count = self.viewModel.contentCount
 
@@ -500,6 +506,13 @@ extension ContentViewController: SpeechSynthesizerDelegate {
     }
 
     func speechSynthesizerDidCancel(synthesizer: SpeechSynthesizer) {
+    }
+}
+
+// MARK: - PopupView Delegate
+extension ContentViewController: CommonPopupViewControllerDelegate {
+
+    func commonPopupViewControllerDidTapConfirm(viewController: CommonPopupViewController) {
     }
 }
 
@@ -984,9 +997,5 @@ extension ContentViewController {
         self.lockButton.do {
             $0.addTarget(self, action: #selector(self.didTapLockButton), for: .touchUpInside)
         }
-    }
-
-    @objc private func didTapLockButton(_ sender: UIButton) {
-
     }
 }
