@@ -1,7 +1,7 @@
 # PODO-iOS
 ------
 
-## Projects hierarchy
+## Projects Hierarchy
 
 ```
  App
