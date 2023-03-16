@@ -27,8 +27,8 @@
         │       │    │     │── DoraList
         │       │    │     └── ExpertList
         │       │    └── Setting
-        │       │    │     │── MyContentList
-        │       │    │     └── MySubscriptionList
+        │       │          │── MyContentList
+        │       │          └── MySubscriptionList
         │       │── Content
         │       │── ExpertDetail
         │       │── SignIn
