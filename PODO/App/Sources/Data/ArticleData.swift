@@ -19,6 +19,10 @@ struct ArticleData: Decodable {
     let author: UserData?
     let translator: UserData?
     let contributors: [UserData]?
+
+    //
+    var images: [String]?
+    var thumbail: String?
 }
 
 // MARK: - Mock
@@ -152,36 +156,92 @@ Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are 
     ]
 }
 
+// Now
 extension ArticleData {
 
-    static let hottestMocks: [ArticleData] = [.hottestMock1, .hottestMock2]
+    static let nowMocks: [ArticleData] = [.nowMock1, .nowMock2]
+
+    static let nowMock1 = ArticleData(
+        imagePaths: nil,
+        title: "UI/UX Design Trends 2023",
+        summary: "Highlighting some of the trends weAr think will persist and perhaps gain even more traction in the next year.",
+        contents: Self.hotContentMock1,
+        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*jOYBHA_PnToXKbupkBdI1w.png",
+        category: "TON",
+        isBookmarked: false,
+        createdAt: "Mar 23. 2023",
+        author: .nowMock1,
+        translator: .userMock1,
+        contributors: [.qMock1, .userMock2],
+        images: ["HottestImage1", "hot2"]
+    )
+
+    static let nowMock2 = ArticleData(
+        imagePaths: nil,
+        title: "3 ChatGPT Extensions to Automate Your Life",
+        summary: "ChatGPT on WhatsApp, Gmail, Google Sheets, your code editor, and more!",
+        contents: Self.hotContentMock1,
+        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*jBqAOsjmedJVHwGbyP5PTw.jpeg",
+        category: "TON",
+        isBookmarked: false,
+        createdAt: "Mar 23. 2023",
+        author: .nowMock2,
+        translator: .userMock1,
+        contributors: [.qMock1, .userMock2],
+        images: ["HottestImage1", "hot2"]
+    )
+}
+
+
+// Hottest
+extension ArticleData {
+
+    static let hottestMocks: [ArticleData] = [.hottestMock1, .hottestMock2, .hottestMock3]
 
     static let hottestMock1 = ArticleData(
-        imagePaths: ["HottestImage1", "hot2"],
+        imagePaths: nil,
         title: "Playkey users will receive cashback in TON tokens",
         summary: "Playkey is now officially supporting blockchain platform Free TON, which uses Telegram Open Network (TON) protocol.",
         contents: Self.hotContentMock1,
-        thumbnailPath: "hot1",
+        thumbnailPath: nil,
         category: "TON",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",
         author: .hottestMock1,
         translator: .userMock1,
-        contributors: [.qMock1, .userMock2])
+        contributors: [.qMock1, .userMock2],
+        images: ["HottestImage1", "hot2"],
+        thumbail: "hot1")
 
     static let hottestMock2 = ArticleData(
-        imagePaths: ["hot2", "HottestImage1"],
+        imagePaths: nil,
         title: "Advanced Web3 Tokenomics Design ...",
         summary: "It is critical to decouple speculators from ...",
         contents: Self.contents,
-        thumbnailPath: "hot2",
+        thumbnailPath: nil,
         category: "TON",
         isBookmarked: false,
         createdAt: "1 hours ago",
         author: .hottestMock2,
         translator: .userMock3,
-        contributors: nil)
+        contributors: nil,
+        images: ["hot2", "HottestImage1"],
+        thumbail: "hot2")
 
+    static let hottestMock3 = ArticleData(
+        imagePaths: nil,
+        title: "10 Predictions for Web3 and the Cryptoeconomy for 2022",
+        summary: "There will be significant usability improvements in L1-L2 bridges",
+        contents: Self.hotContentMock1,
+        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*xTDqHEzLmlE7uyV9HuB64w.jpeg",
+        category: "Web3.0",
+        isBookmarked: false,
+        createdAt: "Mar 23. 2023",
+        author: .qMock3,
+        translator: .userMock1,
+        contributors: [.qMock1, .userMock2],
+        images: ["HottestImage1", "hot2"]
+    )
 
     private static let hotContentMock1: [String] = [
     """
@@ -194,4 +254,101 @@ extension ArticleData {
     The initiative aims to encourage user loyalty, while also popularizing TON Crystal cryptocurrency.
     """
     ]
+}
+
+// insight
+extension ArticleData {
+
+    static let insightMocks: [ArticleData] = [.insightMock1, .insightMock2, .insightMock3,
+                                              .insightMock4, .insightMock5, .insightMock6]
+
+    static let insightMock1 = ArticleData(
+        imagePaths: nil,
+        title: "How To Wake Up at 5 A.M. Every Day",
+        summary: "An unconventional and compassionate guide to becoming an early bird",
+        contents: Self.hotContentMock1,
+        thumbnailPath:  "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*-Y9ozbNWSViiCmal1TT32w.jpeg",
+        category: "Self-Improvement",
+        isBookmarked: false,
+        createdAt: "Mar 23. 2023",
+        author: .userMock3,
+        translator: .userMock1,
+        contributors: [.qMock1, .userMock2],
+        images: ["HottestImage1", "hot2"]
+    )
+
+    static let insightMock2 = ArticleData(
+        imagePaths: nil,
+        title: "How to use chatGPT for UI/UX design: 25 examples", 
+        summary: "The practical guide to include AI in your daily workflow",
+        contents: Self.hotContentMock1,
+        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*HYotfqluDW7xCqogV7ZGwQ.png",
+        category: "Design",
+        isBookmarked: false,
+        createdAt: "Mar 23. 2023",
+        author: .userMock1,
+        translator: .userMock3,
+        contributors: [.qMock1, .userMock2],
+        images: ["HottestImage1", "hot2"]
+    )
+
+    static let insightMock3 = ArticleData(
+        imagePaths: nil,
+        title: "How to Instantly Improve Your Memory by Arousing Your Brain",
+        summary: "No repetition required, nudity highly encouraged.",
+        contents: Self.hotContentMock1,
+        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*iEfh1p_quzPDy8Za2IrVRg.jpeg",
+        category: "Self-Improvement",
+        isBookmarked: false,
+        createdAt: "Mar 23. 2023",
+        author: .qMock2,
+        translator: .userMock1,
+        contributors: [.qMock1, .userMock2],
+        images: ["HottestImage1", "hot2"]
+    )
+
+    static let insightMock4 = ArticleData(
+        imagePaths: nil,
+        title: "Why We Need Web 3.0",
+        summary: "Ethereum co-founder Gavin Wood on why today’s internet is broken — and how we can do better next time around",
+        contents: Self.hotContentMock1,
+        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*nxFBxOzzJD6fjj7mp5plPg.jpeg",
+        category: "Web3.0",
+        isBookmarked: false,
+        createdAt: "Mar 23. 2023",
+        author: .nowMock2,
+        translator: .userMock1,
+        contributors: [.qMock1, .userMock2],
+        images: ["HottestImage1", "hot2"]
+    )
+
+    static let insightMock5 = ArticleData(
+        imagePaths: nil,
+        title: "10 Predictions for Web3 and the Cryptoeconomy for 2022",
+        summary: "There will be significant usability improvements in L1-L2 bridges",
+        contents: Self.hotContentMock1,
+        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*xTDqHEzLmlE7uyV9HuB64w.jpeg",
+        category: "Web3.0",
+        isBookmarked: false,
+        createdAt: "Mar 23. 2023",
+        author: .qMock3,
+        translator: .userMock1,
+        contributors: [.qMock1, .userMock2],
+        images: ["HottestImage1", "hot2"]
+    )
+
+    static let insightMock6 = ArticleData(
+        imagePaths: nil,
+        title: "Zero to Hero: Web3.0 and Solidity Development Roadmap 2023",
+        summary: "Learning Web3.0 and blockchain development today is like buying a Bitcoin at $10 yesterday.",
+        contents: Self.hotContentMock1,
+        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*K9bpGKr0zj3aEGvvXAR6Ng.jpeg",
+        category: "Web3.0",
+        isBookmarked: false,
+        createdAt: "Mar 23. 2023",
+        author: .contentMock1,
+        translator: .userMock1,
+        contributors: [.qMock1, .userMock2],
+        images: ["HottestImage1", "hot2"]
+    )
 }

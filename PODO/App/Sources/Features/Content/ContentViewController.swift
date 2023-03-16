@@ -32,13 +32,20 @@ final class ContentViewController: UIViewController {
         coordinator.animate(alongsideTransition: { context in
             self.updateLayoutForTransition(isPortrait: size.height > size.width)
         }, completion: { _ in
-            self.imageCollectionView.reloadData()
         })
     }
 
     private func updateLayoutForTransition(isPortrait: Bool) {
         self.updateContentLayoutForTransition(isPortrait: isPortrait)
         self.updateContentOverlayLayoutForTransition(isPortrait: isPortrait)
+        self.updateCollecionViewLayoutForTransition()
+    }
+
+    private func updateCollecionViewLayoutForTransition() {
+        let contentOffset = self.imageCollectionView.contentOffset
+        if contentOffset.x < self.imageCollectionView.bounds.width / 2.0 {
+            self.imageCollectionView.contentOffset = .zero
+        }
     }
 
     private func updateContentLayoutForTransition(isPortrait: Bool) {
@@ -314,9 +321,10 @@ extension ContentViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(ContentCollectionViewCell.self, for: indexPath) else { return UICollectionViewCell(frame: .zero) }
 
-        if let imagePath = self.viewModel.imagePathForIndex(indexPath.item) {
-            cell.updateImage(path: imagePath)
-        }
+        let imagePath = self.viewModel.imagePathForIndex(indexPath.item)
+        let icon = self.viewModel.imagePathForIcon(indexPath.item)
+        cell.updateImage(path: imagePath, icon: icon)
+
         return cell
     }
 }
@@ -946,7 +954,7 @@ extension ContentViewController {
         }
 
         self.lockDimView.do {
-            $0.contentMode = .scaleAspectFit
+            $0.contentMode = .scaleToFill
         }
     }
 

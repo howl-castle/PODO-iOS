@@ -249,7 +249,9 @@ extension SignInViewController {
         self.loginButtonView.do {
             $0.setup(title: "Log in")
             $0.button.addTarget(self, action: #selector(self.didTapLoginButton), for: .touchUpInside)
-            $0.updateUI(enable: false)
+
+            //
+            $0.updateUI(enable: true)
         }
     }
 

@@ -40,6 +40,14 @@ final class RevenueListTableViewCell: UITableViewCell {
         let contribute = data.contribute ?? .zero
         let total = writing + translate + contribute
 
+        if total == .zero {
+            let view = UIView.init(frame: .zero)
+            view.backgroundColor = .gray3
+            self.chartStackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
+            self.chartStackView.addArrangedSubview(view)
+            return
+        }
+
         self.chartWritingView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(writing/total).inset(4.0 / 3.0)
             $0.width.equalTo(writing)

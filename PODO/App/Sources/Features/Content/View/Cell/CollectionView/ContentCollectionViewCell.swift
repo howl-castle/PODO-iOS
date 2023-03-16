@@ -26,9 +26,12 @@ final class ContentCollectionViewCell: UICollectionViewCell {
         self.imageView.kf.cancelDownloadTask()
     }
 
-    func updateImage(path: String) {
-        self.imageView.image = UIImage(named: path)
-        //self.imageView.kf.setImage(with: URL(string: path))
+    func updateImage(path: String?, icon: String?) {
+        if let path = path {
+            self.imageView.kf.setImage(with: URL(string: path))
+        } else if let icon = icon {
+            self.imageView.image = UIImage(named: icon)
+        }
     }
 
     private func setupUI() {

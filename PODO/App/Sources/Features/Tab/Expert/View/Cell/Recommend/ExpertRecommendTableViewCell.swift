@@ -26,7 +26,7 @@ final class ExpertRecommendTableViewCell: UITableViewCell {
     }
 
     func updateData(_ data: QuestionData) {
-        self.profileImageView.update(imagePath: data.user?.profileImagePath, name: data.user?.name)
+        self.profileImageView.update(imagePath: data.user?.profileImagePath, name: data.user?.name, imageIcon: data.user?.profileImage)
         self.titleLabel.text = "Q. \(data.title ?? "")"
         self.nameLabel.text = data.user?.name
         self.jobLabel.text = data.user?.job

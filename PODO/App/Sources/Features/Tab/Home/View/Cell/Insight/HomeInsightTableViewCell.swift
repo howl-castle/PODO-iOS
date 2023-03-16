@@ -28,9 +28,13 @@ final class HomeInsightTableViewCell: UITableViewCell {
     }
 
     func updateData(_ data: ArticleData) {
-        self.thumbnailImageView.kf.setImage(with: URL(string: data.thumbnailPath ?? ""))
+        if let thumbnailPath = data.thumbnailPath {
+            self.thumbnailImageView.kf.setImage(with: URL(string: thumbnailPath))
+        } else if let thumbail = data.thumbail {
+            self.thumbnailImageView.image = UIImage(named: thumbail)
+        }
 
-        self.profileImageView.update(imagePath: data.author?.profileImagePath, name: data.author?.name)
+        self.profileImageView.update(imagePath: data.author?.profileImagePath, name: data.author?.name, imageIcon: data.author?.profileImage)
         self.titleLabel.text = data.title
         self.subtitleLabel.text = data.summary
         self.nameLabel.text = data.author?.name

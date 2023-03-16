@@ -2,7 +2,18 @@
   "images" : [
     {
       "filename" : "dimImage.pdf",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "resizing" : {
+        "cap-insets" : {
+          "left" : 187,
+          "right" : 187
+        },
+        "center" : {
+          "mode" : "tile",
+          "width" : 1
+        },
+        "mode" : "3-part-horizontal"
+      }
     }
   ],
   "info" : {

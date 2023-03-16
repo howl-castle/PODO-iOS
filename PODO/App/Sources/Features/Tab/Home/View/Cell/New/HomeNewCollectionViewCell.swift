@@ -28,8 +28,13 @@ final class HomeNewCollectionViewCell: UICollectionViewCell {
     }
 
     func updateData(_ data: ArticleData) {
-        self.imageView.kf.setImage(with: URL(string: data.thumbnailPath ?? ""))
-        self.profileImageView.update(imagePath: data.author?.profileImagePath, name: data.author?.name)
+        //
+        if let thumbnailPath = data.thumbnailPath {
+            self.imageView.kf.setImage(with: URL(string: thumbnailPath))
+        } else if let thumbail = data.thumbail {
+            self.imageView.image = UIImage(named: thumbail)
+        }
+        self.profileImageView.update(imagePath: data.author?.profileImagePath, name: data.author?.name, imageIcon: data.author?.profileImage)
         self.titleLabel.text = data.title
         self.subtitleLabel.text = data.summary
         self.nameLabel.text = data.author?.name

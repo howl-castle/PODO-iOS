@@ -7,18 +7,20 @@
 
 import Foundation
 
-struct InterestData: Decodable {
-    let title: String?
+enum InterestData: String, Decodable, CaseIterable {
+    case all = "All"
+    case web = "Web3.0"
+    case ton = "TON"
+    case design = "Design"
+    case ai = "Artificial Intelligence"
+    case si = "Self-Improvement"
 }
 
-// MARK: - Mock
+// mock
 extension InterestData {
 
-    static let mocks: [InterestData] = [
-        .init(title: "Web3.0"),
-        .init(title: "Artificial Intelligence"),
-        .init(title: "Design"),
-        .init(title: "Investment"),
-        .init(title: "Self-Improvement")
-    ]
+    static let mock1: [InterestData] = [.web, .ton]
+    static let mock2: [InterestData] = [.web]
+    static let mock3: [InterestData] = [.ton]
+    static let mock4: [InterestData] = [.design]
 }

@@ -25,9 +25,14 @@ final class CommonUserProfileView: UIView {
         self.imageView.kf.cancelDownloadTask()
     }
 
-    func update(imagePath: String?, name: String?, backgroundColor: UIColor? = .orange) {
-        self.imageView.image = UIImage(named: "\(imagePath ?? "")")
+    func update(imagePath: String?, name: String?, backgroundColor: UIColor? = .orange, imageIcon: String?) {
+        if let imagePath = imagePath {
+            self.imageView.kf.setImage(with: URL(string: imagePath))
+        } else if let imageIcon = imageIcon {
+            self.imageView.image = UIImage(named: imageIcon)
+        }
         return
+
         if let imagePath = imagePath {
             self.imageView.kf.setImage(with: URL(string: imagePath))
         } else {

@@ -46,7 +46,8 @@ extension ContentViewModel {
     }
 
     var contentCount: Int { self.model.data.contents?.count ?? .zero }
-    var imageCount: Int { self.model.data.imagePaths?.count ?? .zero }
+    //var imageCount: Int { self.model.data.imagePaths?.count ?? .zero }
+    var imageCount: Int { self.model.data.imagePaths?.count ?? self.model.data.images?.count ?? .zero }
     var numberOfSections: Int { self.sections.count }
 
     func numberOfRowsInSection(_ section: Int) -> Int {
@@ -149,6 +150,10 @@ extension ContentViewModel {
 
     func imagePathForIndex(_ index: Int) -> String? {
         self.model.data.imagePaths?[safe: index]
+    }
+
+    func imagePathForIcon(_ index: Int) -> String? {
+        self.model.data.images?[safe: index]
     }
 
     func canSelectForSection(_ section: Int) -> Bool {

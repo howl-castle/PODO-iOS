@@ -10,7 +10,7 @@ import Foundation
 struct HomeDataModel {
     // 엔티티를 그냥 들고 있을 지, 아니면 한번 감싸서 들고 있을 지..
     private(set) var data: HomeData?
-    private(set) var categories: [String] = InterestData.mocks.compactMap({ $0.title })
+    private(set) var categories: [String] = InterestData.allCases.compactMap({ $0.rawValue })
     private(set) var selectedCategory: Int = .zero
 
     var insightArticles: [ArticleData] {

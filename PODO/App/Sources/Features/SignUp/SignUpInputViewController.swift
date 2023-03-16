@@ -86,7 +86,7 @@ final class SignUpInputViewController: UIViewController {
     }
 
     private func showInterestSelectView() {
-        let viewController = CommonSelectionViewController(items: InterestData.mocks.compactMap({ $0.title }),
+        let viewController = CommonSelectionViewController(items: InterestData.allCases.compactMap({ $0.rawValue }),
                                                            title: "Interest",
                                                            subtitle: "Choose your preferred field of interest.")
         viewController.delegate = self

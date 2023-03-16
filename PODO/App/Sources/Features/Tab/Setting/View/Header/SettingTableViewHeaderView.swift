@@ -28,7 +28,7 @@ final class SettingTableViewHeaderView: UITableViewHeaderFooterView {
     }
 
     func update() {
-        self.profileImageView.update(imagePath: nil, name: "Lee")
+        self.profileImageView.update(imagePath: nil, name: "Lee", imageIcon: "User2")
     }
 
     @objc private func didTapWalletCopyButton(_ sender: UIButton) {

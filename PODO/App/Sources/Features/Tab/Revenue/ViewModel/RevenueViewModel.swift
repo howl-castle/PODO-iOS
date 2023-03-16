@@ -94,6 +94,6 @@ struct RevenueDataModel {
 
     init() {
         //
-        self.data = .mock
+        self.data = .newMock
     }
 }
