@@ -109,6 +109,8 @@ extension SignInViewController: CommonInputViewDelegate {
     }
 
     func commonInputViewEndEditing(view: CommonInputView) {
+        let enable = self.idInputView.text.isEmpty == false && self.passwordInputView.text.isEmpty == false
+        self.loginButtonView.updateUI(enable: enable)
     }
 
     func commonInputViewDidTapNextButton(view: CommonInputView) {
@@ -247,9 +249,7 @@ extension SignInViewController {
         self.loginButtonView.do {
             $0.setup(title: "Log in")
             $0.button.addTarget(self, action: #selector(self.didTapLoginButton), for: .touchUpInside)
-
-            //
-            $0.updateUI(enable: true)
+            $0.updateUI(enable: false)
         }
     }
 

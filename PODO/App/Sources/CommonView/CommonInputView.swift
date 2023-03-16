@@ -20,7 +20,7 @@ final class CommonInputView: UIView {
 
     weak var delegate: CommonInputViewDelegate?
 
-    var text: String? { self.textField.text }
+    var text: String { self.textField.text ?? "" }
 
     var isTextFieldFirstResponder: Bool {
         self.textField.isFirstResponder

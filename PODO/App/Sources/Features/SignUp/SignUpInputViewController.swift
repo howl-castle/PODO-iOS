@@ -122,6 +122,7 @@ extension SignUpInputViewController: CommonInputViewDelegate {
     }
 
     func commonInputViewEndEditing(view: CommonInputView) {
+        self.updateConfirmButtonUI()
     }
 
     func commonInputViewDidTapNextButton(view: CommonInputView) {
@@ -134,12 +135,21 @@ extension SignUpInputViewController: CommonInputViewDelegate {
             nextView?.becomeTextFieldFirstResponder()
         }
     }
+
+    private func updateConfirmButtonUI() {
+        let emptyInputView = self.inputViews.first(where: { $0.text.isEmpty })
+        let hasEmptyInput = emptyInputView != nil
+        let nonSelected = self.interestSelectView.text == nil
+        let enable = hasEmptyInput == false && nonSelected == false
+        self.confirmButtonView.updateUI(enable: enable)
+    }
 }
 
 extension SignUpInputViewController: CommonSelectionViewControllerDelegate {
 
     func commonSelectionViewController(_ viewController: CommonSelectionViewController, didSelectItem item: String) {
         self.interestSelectView.updateSelected(text: item)
+        self.updateConfirmButtonUI()
     }
 
     func commonSelectionViewControllerWillDisappear(viewController: CommonSelectionViewController) {
@@ -305,9 +315,7 @@ extension SignUpInputViewController {
         self.confirmButtonView.do {
             $0.setup(title: "Confirm")
             $0.button.addTarget(self, action: #selector(self.didTapConfirmButton), for: .touchUpInside)
-
-            //
-            $0.updateUI(enable: true)
+            $0.updateUI(enable: false)
         }
     }
 }
