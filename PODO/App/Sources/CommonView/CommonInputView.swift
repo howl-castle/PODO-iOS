@@ -22,6 +22,10 @@ final class CommonInputView: UIView {
 
     var text: String? { self.textField.text }
 
+    var isTextFieldFirstResponder: Bool {
+        self.textField.isFirstResponder
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupUI()
@@ -31,12 +35,19 @@ final class CommonInputView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func becomeTextFieldFirstResponder() {
+        self.textField.becomeFirstResponder()
+    }
+
+    func resignTextFieldFirstResponder() {
+        self.textField.resignFirstResponder()
+    }
+
     func setup(title: String, placeholder: String, borderColor: UIColor? = .mint, isSecureTextEntry: Bool = false, isLastInptView: Bool = false, needAccessoryView: Bool = true) {
         self.placeholder = placeholder
         self.selectedBorderColor = borderColor
         self.isLastInptView = isLastInptView
 
-        self.accessoryView.rightButton.isEnabled = isLastInptView == false
         self.titleLabel.text = title
         self.textField.tintColor = borderColor
         self.textField.placeholder = placeholder
@@ -56,11 +67,15 @@ final class CommonInputView: UIView {
     }
 
     @objc private func didTapAccessoryLeftButton(_ sender: UIButton) {
-        self.textField.resignFirstResponder()
+        self.resignTextFieldFirstResponder()
     }
 
     @objc private func didTapAccessoryRightButton(_ sender: UIButton) {
         self.delegate?.commonInputViewDidTapNextButton(view: self)
+    }
+
+    @objc private func didTapButton(_ sender: UIButton) {
+        self.becomeTextFieldFirstResponder()
     }
 
     @objc private func didChangeTextField(_ textField: UITextField) {
@@ -72,6 +87,65 @@ final class CommonInputView: UIView {
         self.textField.text = ""
     }
 
+    @objc private func didTabKeyboardCancelButton(_ sender: UIButton) {
+        self.resignTextFieldFirstResponder()
+    }
+
+    @objc private func didTabKeyboardNextButton(_ sender: UIButton) {
+        self.delegate?.commonInputViewDidTapNextButton(view: self)
+    }
+
+    private lazy var accessoryView: UIView = {
+        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 55.0))
+
+        view.do {
+            $0.backgroundColor = .gray3
+            $0.addSubview(self.cancelButton)
+            $0.addSubview(self.nextButton)
+        }
+
+        let inset: CGFloat = 20.0
+        self.cancelButton.snp.makeConstraints {
+            $0.height.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(inset)
+        }
+
+        self.nextButton.snp.makeConstraints {
+            $0.height.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(inset)
+        }
+
+        return view
+    }()
+
+    private lazy var cancelButton: UIButton = {
+        let button = UIButton(frame: .zero)
+
+        button.do {
+            $0.setTitle("Cancel", for: .normal)
+            $0.setTitleColor(.gray1, for: .normal)
+            $0.titleLabel?.font = .systemFont(ofSize: 14.0, weight: .medium)
+            $0.addTarget(self, action: #selector(self.didTabKeyboardCancelButton), for: .touchUpInside)
+        }
+
+        return button
+    }()
+
+    private lazy var nextButton: UIButton = {
+        let button = UIButton(frame: .zero)
+
+        button.do {
+            $0.setTitle("Next", for: .normal)
+            $0.setTitleColor(.mint, for: .normal)
+            $0.titleLabel?.font = .systemFont(ofSize: 14.0, weight: .medium)
+            $0.addTarget(self, action: #selector(self.didTabKeyboardNextButton), for: .touchUpInside)
+        }
+
+        return button
+    }()
+
     private var isLastInptView: Bool = true
     private var placeholder: String = ""
     private var selectedBorderColor: UIColor? = .mint
@@ -79,9 +153,9 @@ final class CommonInputView: UIView {
     private let selectedHolderColor: UIColor? = .gray1
     private let disabledColor: UIColor? = .gray2Opacity40
 
-    private let accessoryView = CommonAccessoryView(frame: .zero)
     private let containerView = UIView(frame: .zero)
     private let titleLabel = UILabel(frame: .zero)
+    private let button = UIButton(frame: .zero)
     private let textField = UITextField(frame: .zero)
     private let closeButton = UIButton(frame: .zero)
 }
@@ -90,7 +164,7 @@ final class CommonInputView: UIView {
 extension CommonInputView: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        self.resignTextFieldFirstResponder()
         return true
     }
 
@@ -132,9 +206,9 @@ extension CommonInputView {
         self.setupViewHierarchy()
         self.setupContainerView()
         self.setupTitleLabel()
+        self.setupButton()
         self.setupCloseButton()
         self.setupTextField()
-        self.setupAccessoryView()
     }
 
     private func setupProperties() {
@@ -156,6 +230,7 @@ extension CommonInputView {
 
         self.containerView.do {
             $0.addSubview(self.titleLabel)
+            $0.addSubview(self.button)
             $0.addSubview(self.closeButton)
             $0.addSubview(self.textField)
         }
@@ -184,6 +259,16 @@ extension CommonInputView {
             $0.font = .systemFont(ofSize: 10.0)
             $0.textColor = .gray1
             $0.textAlignment = .left
+        }
+    }
+
+    private func setupButton() {
+        self.button.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        self.button.do {
+            $0.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
         }
     }
 
@@ -218,18 +303,6 @@ extension CommonInputView {
             $0.textColor = self.selectedLabelColor
             $0.tintColor = self.selectedBorderColor
             $0.addTarget(self, action: #selector(self.didChangeTextField), for: .editingChanged)
-        }
-    }
-
-    private func setupAccessoryView() {
-        self.accessoryView.snp.makeConstraints {
-            $0.height.equalTo(55.0)
-            $0.width.equalTo(self.bounds.width)
-        }
-
-        self.accessoryView.do {
-            $0.leftButton.addTarget(self, action: #selector(self.didTapAccessoryLeftButton), for: .touchUpInside)
-            $0.rightButton.addTarget(self, action: #selector(self.didTapAccessoryRightButton), for: .touchUpInside)
         }
     }
 }
