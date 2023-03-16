@@ -114,8 +114,9 @@ extension CommonPopupViewController {
 
     private func setupContainerView() {
         self.containerView.snp.makeConstraints {
+            $0.width.lessThanOrEqualTo(375.0).priority(.required)
             $0.center.equalToSuperview()
-            $0.leading.equalToSuperview().inset(20.0)
+            $0.leading.equalToSuperview().inset(20.0).priority(.low)
         }
 
         self.containerView.do {
@@ -140,7 +141,7 @@ extension CommonPopupViewController {
     private func setupTitleLabel() {
         self.titleLabel.snp.makeConstraints {
             $0.top.equalTo(self.iconImageView.snp.bottom).offset(14.0)
-            $0.leading.trailing.equalToSuperview().inset(14.0)
+            $0.leading.trailing.equalToSuperview().inset(22.0)
         }
 
         self.titleLabel.do {
