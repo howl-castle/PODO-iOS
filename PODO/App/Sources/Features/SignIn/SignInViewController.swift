@@ -22,6 +22,7 @@ final class SignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addObserver()
         self.setupUI()
     }
     
@@ -35,6 +36,61 @@ final class SignInViewController: UIViewController {
         self.navigationController?.pushViewController(viewController, animated: false)
     }
 
+    @objc private func keyboardWillShowNotification(_ notification: Notification) {
+        guard let userInfo = notification.userInfo                                      else { return }
+        guard let value = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardFrame = value.cgRectValue
+        self.keyboardHeight = keyboardFrame.size.height
+
+        if let view = self.findFirstResponderView() {
+            self.changLayoutIfNeeded(view: view)
+        }
+    }
+
+    @objc private func keyboardWillHideNotification(_ notification: Notification) {
+        self.containerView.snp.updateConstraints {
+            $0.bottom.equalToSuperview()
+        }
+    }
+
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillShowNotification),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillHideNotification),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    private func findFirstResponderView() -> UIView? {
+        self.inputViews.first(where: { $0.isTextFieldFirstResponder })
+    }
+
+    private func changLayoutIfNeeded(view: UIView) {
+        let position = view.convert(view.bounds.origin, to: self.containerView)
+        let height = view.bounds.height
+        let margin = self.containerView.bounds.height - position.y - height
+
+        guard let keyboardHeight = self.keyboardHeight else { return }
+
+        let diff: CGFloat
+        if margin < keyboardHeight {
+            diff = keyboardHeight - margin
+        } else {
+            diff = .zero
+        }
+        self.containerView.snp.updateConstraints {
+            $0.bottom.equalToSuperview().inset(diff)
+        }
+
+    }
+
+    private var keyboardHeight: CGFloat?
+
+    private lazy var inputViews: [CommonInputView] = { [self.idInputView, self.passwordInputView] }()
+
+    private let containerView = UIView(frame: .zero)
     private let titleLabel = UILabel(frame: .zero)
     private let subtitleLabel = UILabel(frame: .zero)
     private let imageView = UIImageView(image: UIImage(named: "LoginImage"))
@@ -46,12 +102,33 @@ final class SignInViewController: UIViewController {
     private let signUpButton = UIButton(frame: .zero)
 }
 
+// MARK: - CommonInputView Delegate
+extension SignInViewController: CommonInputViewDelegate {
+
+    func commonInputViewBeginEditing(view: CommonInputView) {
+    }
+
+    func commonInputViewEndEditing(view: CommonInputView) {
+    }
+
+    func commonInputViewDidTapNextButton(view: CommonInputView) {
+        if view == self.passwordInputView {
+            view.resignTextFieldFirstResponder()
+        } else {
+            guard let index = self.inputViews.firstIndex(of: view) else { return }
+            let nextView = self.inputViews[safe: index + 1]
+            nextView?.becomeTextFieldFirstResponder()
+        }
+    }
+}
+
 // MARK: - Setup
 extension SignInViewController {
 
     private func setupUI() {
         self.setupProperties()
         self.setupViewHierarchy()
+        self.setupContainerView()
         self.setupTitleLabel()
         self.setupSubtitleLabel()
         self.setupImageView()
@@ -71,6 +148,10 @@ extension SignInViewController {
 
     private func setupViewHierarchy() {
         self.view.do {
+            $0.addSubview(self.containerView)
+        }
+
+        self.containerView.do {
             $0.addSubview(self.titleLabel)
             $0.addSubview(self.subtitleLabel)
             $0.addSubview(self.imageView)
@@ -86,10 +167,17 @@ extension SignInViewController {
         }
     }
 
+    private func setupContainerView() {
+        self.containerView.snp.makeConstraints {
+            $0.height.equalToSuperview()
+            $0.bottom.leading.trailing.equalToSuperview()
+        }
+    }
+
     private func setupTitleLabel() {
         self.titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(66.0)
+            $0.top.equalTo(self.containerView.safeAreaLayoutGuide.snp.top).offset(66.0)
         }
 
         self.titleLabel.do {
@@ -133,7 +221,7 @@ extension SignInViewController {
 
         self.idInputView.do {
             $0.setup(title: "ID", placeholder: "Please enter the ID")
-            //$0.delegate = self
+            $0.delegate = self
         }
     }
 
@@ -146,7 +234,7 @@ extension SignInViewController {
 
         self.passwordInputView.do {
             $0.setup(title: "Password", placeholder: "Please enter the Password", isSecureTextEntry: true)
-            //$0.delegate = self
+            $0.delegate = self
         }
     }
 
@@ -169,7 +257,7 @@ extension SignInViewController {
         self.signUpContainerView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(self.loginButtonView.snp.bottom).offset(32.0)
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-40.0)
+            $0.bottom.equalTo(self.containerView.safeAreaLayoutGuide.snp.bottom).offset(-40.0)
         }
     }
 

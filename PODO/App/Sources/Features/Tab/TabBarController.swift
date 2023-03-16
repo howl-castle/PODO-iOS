@@ -70,7 +70,7 @@ final class TabBarController: UITabBarController {
         guard self.didLoginFinished == false else { return }
         let viewController = SignInViewController()
         let navigationController = PortraitNavigationController(rootViewController: viewController)
-        navigationController.modalPresentationStyle = .overFullScreen
+        navigationController.modalPresentationStyle = .fullScreen
         navigationController.isNavigationBarHidden = true
         self.present(navigationController, animated: false)
     }
