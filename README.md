@@ -8,11 +8,13 @@
   │── SupportingFiles
   │── Resources
   └── Sources
+        │── Manager
         │── Util
         │── CommonView
         │       └── Selection
         │── Network
         │       │── Data
+        │       │    └── Tab
         │       └── API
         │── Extensions
         │        └── UIKit
@@ -37,7 +39,7 @@
 ```
       
 ## Architecture
-- MVVM
+- MVVM (with Combine)
     - Data
         - API Response Model 
     - DataModel
