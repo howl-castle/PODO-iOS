@@ -16,6 +16,7 @@
 		AEE1A87929C37233008F9A49 /* CommonPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A87829C37233008F9A49 /* CommonPopupViewController.swift */; };
 		AEE1A87D29C3898F008F9A49 /* ExpertDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A87C29C3898F008F9A49 /* ExpertDetailViewModel.swift */; };
 		AEE1A87F29C389E6008F9A49 /* ExpertDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A87E29C389E6008F9A49 /* ExpertDetailDataModel.swift */; };
+		AEE1A88829C424D3008F9A49 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A88729C424D3008F9A49 /* ToastManager.swift */; };
 		AEE2585729C1B72A00607E92 /* CommonUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2585629C1B72A00607E92 /* CommonUserProfileView.swift */; };
 		AEED157F29B378270058F927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AEED157E29B378270058F927 /* SnapKit */; };
 		AEED158229B378D00058F927 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AEED158129B378D00058F927 /* Then */; };
@@ -115,6 +116,7 @@
 		AEE1A87829C37233008F9A49 /* CommonPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPopupViewController.swift; sourceTree = "<group>"; };
 		AEE1A87C29C3898F008F9A49 /* ExpertDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertDetailViewModel.swift; sourceTree = "<group>"; };
 		AEE1A87E29C389E6008F9A49 /* ExpertDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertDetailDataModel.swift; sourceTree = "<group>"; };
+		AEE1A88729C424D3008F9A49 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		AEE2585629C1B72A00607E92 /* CommonUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUserProfileView.swift; sourceTree = "<group>"; };
 		CE3F41EA29A6362B0085C436 /* PODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3F420329A647BF0085C436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -267,6 +269,14 @@
 			path = Tab;
 			sourceTree = "<group>";
 		};
+		AEE1A88629C424CA008F9A49 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				AEE1A88729C424D3008F9A49 /* ToastManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		CE3F41E129A6362B0085C436 = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +323,7 @@
 		CE3F420629A647BF0085C436 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				AEE1A88629C424CA008F9A49 /* Manager */,
 				CEFEFACC29BF6B3200052DBA /* Util */,
 				CEFEF9F329BF692100052DBA /* CommonView */,
 				AE7D10DF29C0E8DD007E6ED2 /* Network */,
@@ -1152,6 +1163,7 @@
 				CE3F421F29A647BF0085C436 /* AppDelegate.swift in Sources */,
 				CEFEFA7829BF698100052DBA /* NoticeViewController.swift in Sources */,
 				CEFEFACA29BF6AF500052DBA /* ExpertDetailQuestionTableViewCell.swift in Sources */,
+				AEE1A88829C424D3008F9A49 /* ToastManager.swift in Sources */,
 				CEFEFA0F29BF692100052DBA /* CommonOnOffButtonView.swift in Sources */,
 				CE505C4329BF8D6C007A9DC2 /* RevenueData.swift in Sources */,
 				AE1C45E629C1642F0025E7CA /* ArticleAPI.swift in Sources */,
