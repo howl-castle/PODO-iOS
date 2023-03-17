@@ -10,12 +10,10 @@ import UIKit
 final class HomeViewModel {
 
     init() {
-        // api call
-
+        self.model = HomeDataModel(data: .mock)
         Task {
             await self.requestAPI()
         }
-        self.model = HomeDataModel()
     }
 
     func updateSelectedCategory(_ category: Int) {
@@ -23,7 +21,8 @@ final class HomeViewModel {
     }
 
     private func requestAPI() async {
-        let data: Result<String, Error> = await self.network.request(api: ArticleAPI.list)
+        let data = await self.repository.fetchHome()
+        self.model = HomeDataModel(data: data ?? .mock)
     }
 
     private func setupSections() {
@@ -34,7 +33,7 @@ final class HomeViewModel {
     private var sections: [SectionType] = SectionType.allCases
     private var model: HomeDataModel?
 
-    private let network = Network()
+    private let repository = TabRepository()
 }
 
 // MARK: - API Request
@@ -95,8 +94,8 @@ extension HomeViewModel {
         guard let type = self.sections[safe: section] else { return [] }
 
         switch type {
-        case .new:      return self.model?.data?.newArticles ?? []
-        case .hottest:  return self.model?.data?.hottestArticles ?? []
+        case .new:      return self.model?.data.newArticles ?? []
+        case .hottest:  return self.model?.data.hottestArticles ?? []
         case .insight:  return self.model?.insightArticles ?? []
         }
     }

@@ -10,7 +10,15 @@ import UIKit
 final class SettingViewModel {
 
     init() {
-        // api call
+        self.model = SettingDataModel(data: .mock)
+        Task {
+            await self.requestAPI()
+        }
+    }
+
+    private func requestAPI() async {
+        let data = await self.repository.fetchSetting()
+        self.model = SettingDataModel(data: data ?? .mock)
     }
 
     private func setupSections() {
@@ -19,6 +27,9 @@ final class SettingViewModel {
     }
 
     private var rows: [RowType] = RowType.allCases
+    private var model: SettingDataModel?
+
+    private let repository = TabRepository()
 }
 
 // MARK: - API Request

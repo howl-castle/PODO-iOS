@@ -10,8 +10,15 @@ import UIKit
 final class ExpertViewModel {
 
     init() {
-        // api call
-        self.model = ExpertDataModel()
+        self.model = ExpertDataModel(data: .mock)
+        Task {
+            await self.requestAPI()
+        }
+    }
+
+    private func requestAPI() async {
+        let data = await self.repository.fetchExpert()
+        self.model = ExpertDataModel(data: data ?? .mock)
     }
 
     private func setupSections() {
@@ -21,6 +28,8 @@ final class ExpertViewModel {
 
     private var sections: [SectionType] = SectionType.allCases
     private var model: ExpertDataModel?
+
+    private let repository = TabRepository()
 }
 
 // MARK: - API Request
@@ -45,7 +54,7 @@ extension ExpertViewModel {
 
         switch type {
         case .trending:     return 1    // 갯수 체크
-        case .recommend:    return self.model?.data?.recommendQuestion?.count ?? .zero
+        case .recommend:    return self.model?.data.recommendQuestion?.count ?? .zero
         }
     }
 
@@ -79,12 +88,12 @@ extension ExpertViewModel {
 
         switch type {
         case .trending:
-            return [self.model?.data?.myQuestion,
-                    self.model?.data?.trendingQuestion]
+            return [self.model?.data.myQuestion,
+                    self.model?.data.trendingQuestion]
                 .compactMap { $0 }
                 .flatMap { $0 }
         case .recommend:
-            return self.model?.data?.recommendQuestion ?? []
+            return self.model?.data.recommendQuestion ?? []
         }
     }
 

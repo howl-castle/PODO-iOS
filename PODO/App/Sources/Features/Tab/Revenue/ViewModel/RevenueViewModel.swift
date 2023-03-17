@@ -11,7 +11,15 @@ final class RevenueViewModel {
 
     init() {
         // api call
-        self.model = RevenueDataModel()
+        self.model = RevenueDataModel(data: .newMock)
+        Task {
+            await self.requestAPI()
+        }
+    }
+
+    private func requestAPI() async {
+        let data = await self.repository.fetchRevenue()
+        self.model = RevenueDataModel(data: data ?? .newMock)
     }
 
     private func setupSections() {
@@ -21,6 +29,8 @@ final class RevenueViewModel {
 
     private var rows: [RowType] = RowType.allCases
     private var model: RevenueDataModel?
+
+    private let repository = TabRepository()
 }
 
 // MARK: - API Request
@@ -35,15 +45,15 @@ extension RevenueViewModel {
     }
 
     var totalBalance: Double? {
-        self.model?.data?.totalBalance
+        self.model?.data.totalBalance
     }
 
     var articleData: RevenueArticleData? {
-        self.model?.data?.article
+        self.model?.data.article
     }
 
     var answerData: RevenueAnswerData? {
-        self.model?.data?.answer
+        self.model?.data.answer
     }
 
     var numberOfRows: Int {  self.rows.count }
