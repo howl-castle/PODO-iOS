@@ -5,14 +5,22 @@
 //  Created by Ethan on 2023/03/01.
 //
 
+import Combine
 import UIKit
 
 final class HomeViewModel {
 
+    var fetchCompletionPublihser: AnyPublisher<Void, Never> {
+        self.fetchCompletionSubject.eraseToAnyPublisher()
+    }
+
     init() {
-        self.model = HomeDataModel(data: .mock)
         Task {
             await self.requestAPI()
+
+            await MainActor.run {
+                self.fetchCompletionSubject.send(())
+            }
         }
     }
 
@@ -33,6 +41,7 @@ final class HomeViewModel {
     private var sections: [SectionType] = SectionType.allCases
     private var model: HomeDataModel?
 
+    private let fetchCompletionSubject = PassthroughSubject<Void, Never>()
     private let repository = TabRepository()
 }
 

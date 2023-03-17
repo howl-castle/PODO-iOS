@@ -5,15 +5,22 @@
 //  Created by Ethan on 2023/03/05.
 //
 
+import Combine
 import UIKit
 
 final class RevenueViewModel {
 
+    var fetchCompletionPublihser: AnyPublisher<Void, Never> {
+        self.fetchCompletionSubject.eraseToAnyPublisher()
+    }
+
     init() {
-        // api call
-        self.model = RevenueDataModel(data: .newMock)
         Task {
             await self.requestAPI()
+
+            await MainActor.run {
+                self.fetchCompletionSubject.send(())
+            }
         }
     }
 
@@ -31,6 +38,7 @@ final class RevenueViewModel {
     private var model: RevenueDataModel?
 
     private let repository = TabRepository()
+    private let fetchCompletionSubject = PassthroughSubject<Void, Never>()
 }
 
 // MARK: - API Request

@@ -5,14 +5,22 @@
 //  Created by Ethan on 2023/03/13.
 //
 
+import Combine
 import UIKit
 
 final class SettingViewModel {
 
+    var fetchCompletionPublihser: AnyPublisher<Void, Never> {
+        self.fetchCompletionSubject.eraseToAnyPublisher()
+    }
+
     init() {
-        self.model = SettingDataModel(data: .mock)
         Task {
             await self.requestAPI()
+
+            await MainActor.run {
+                self.fetchCompletionSubject.send(())
+            }
         }
     }
 
@@ -30,6 +38,7 @@ final class SettingViewModel {
     private var model: SettingDataModel?
 
     private let repository = TabRepository()
+    private let fetchCompletionSubject = PassthroughSubject<Void, Never>()
 }
 
 // MARK: - API Request

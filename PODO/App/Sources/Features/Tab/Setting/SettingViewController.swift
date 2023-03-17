@@ -5,6 +5,7 @@
 //  Created by Ethan on 2023/02/22.
 //
 
+import Combine
 import UIKit
 import SnapKit
 import Then
@@ -14,7 +15,18 @@ final class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        self.bindViewModel()
     }
+
+    private func bindViewModel() {
+        self.viewModel.fetchCompletionPublihser
+            .sink(receiveValue: { [weak self] in
+                self?.tableView.reloadData()
+            })
+            .store(in: &self.cancellables)
+    }
+
+    private var cancellables = Set<AnyCancellable>()
 
     private let topBackgroundView = UIView(frame: .zero)
     private let tableView = UITableView(frame: .zero, style: .grouped)

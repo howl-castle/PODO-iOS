@@ -5,14 +5,22 @@
 //  Created by Ethan on 2023/03/05.
 //
 
+import Combine
 import UIKit
 
 final class ExpertViewModel {
 
+    var fetchCompletionPublihser: AnyPublisher<Void, Never> {
+        self.fetchCompletionSubject.eraseToAnyPublisher()
+    }
+
     init() {
-        self.model = ExpertDataModel(data: .mock)
         Task {
             await self.requestAPI()
+
+            await MainActor.run {
+                self.fetchCompletionSubject.send(())
+            }
         }
     }
 
@@ -30,6 +38,7 @@ final class ExpertViewModel {
     private var model: ExpertDataModel?
 
     private let repository = TabRepository()
+    private let fetchCompletionSubject = PassthroughSubject<Void, Never>()
 }
 
 // MARK: - API Request

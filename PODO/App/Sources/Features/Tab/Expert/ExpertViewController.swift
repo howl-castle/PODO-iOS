@@ -5,6 +5,7 @@
 //  Created by Ethan on 2023/02/22.
 //
 
+import Combine
 import UIKit
 import SnapKit
 import Then
@@ -14,6 +15,15 @@ final class ExpertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        self.bindViewModel()
+    }
+
+    private func bindViewModel() {
+        self.viewModel.fetchCompletionPublihser
+            .sink(receiveValue: { [weak self] in
+                self?.tableView?.reloadData()
+            })
+            .store(in: &self.cancellables)
     }
 
     @objc private func didTapWriteButton(_ sneder: UIButton) {
@@ -21,6 +31,8 @@ final class ExpertViewController: UIViewController {
         self.present(viewController, animated: true)
     }
 
+    private var cancellables = Set<AnyCancellable>()
+    
     private var navigationView: UIView?
     private var titleLabel: UILabel?
     private var subtitleLabel: UILabel?
