@@ -8,33 +8,32 @@
 import Foundation
 
 enum ArticleAPI {
-
     case list
+    case detail(id: Int)
 }
 
 extension ArticleAPI: API {
 
     var path: String {
         switch self {
-        case .list: return "article_list"
+        case .list:     return "article_list"
+        case .detail:   return "article"
         }
     }
 
     var httpMethod: APIMethod {
         switch self {
-        case .list: return .get
-        }
-    }
-
-    var allHTTPHeaderFields: [String : String] {
-        switch self {
-        case .list: return [:]
+        case .list:     fallthrough
+        case .detail:   return .get
         }
     }
 
     var task: APITask {
         switch self {
-        case .list: return .requestPlain
+        case .list:
+            return .requestPlain
+        case .detail(let id):
+            return .requestURLParameters(["id": id])
         }
     }
 }

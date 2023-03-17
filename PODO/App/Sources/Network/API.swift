@@ -25,6 +25,11 @@ extension API {
             fatalError("API Base URL Not Founded")
         }
     }
+
+    var allHTTPHeaderFields: [String : String] {
+        // UserManager 의 Token 넘기기
+        [:]
+    }
 }
 
 enum APIMethod: String {
@@ -39,5 +44,5 @@ enum APITask {
     case requestPlain
     case requestData(Data)
     case requestJSONEncodable(Encodable)
-    case requestURLParameters([String: String])
+    case requestURLParameters([String: Any])
 }
