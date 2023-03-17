@@ -1,11 +1,11 @@
 # PODO-iOS
 ------
 
-| SignIn | Home | Content |
+| SignUp | SignIn | Home |
 |---|---|---|
-|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/login.gif?raw=true)|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/home.gif?raw=true)|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/content.gif?raw=true)|
-| Q&A | Revenue | . |
-|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/Expert.gif?raw=true)|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/Revenue.gif?raw=true)| . |
+|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/SignUp.gif?raw=true)|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/login.gif?raw=true)|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/home.gif?raw=true)|
+| Content | Q&A | Revenue |
+|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/content.gif?raw=true)|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/Expert.gif?raw=true)|![](https://github.com/howl-castle/PODO-iOS/blob/develop/Media/Revenue.gif?raw=true)|
 
 
 ## Projects Hierarchy
