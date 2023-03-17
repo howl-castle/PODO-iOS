@@ -33,7 +33,7 @@ extension ArticleAPI: API {
         case .list:
             return .requestPlain
         case .detail(let id):
-            return .requestURLParameters(["id": id])
+            return .requestURLParameters(["id": "\(id)"])
         }
     }
 }

@@ -44,5 +44,5 @@ enum APITask {
     case requestPlain
     case requestData(Data)
     case requestJSONEncodable(Encodable)
-    case requestURLParameters([String: Any])
+    case requestURLParameters([String: String])
 }
