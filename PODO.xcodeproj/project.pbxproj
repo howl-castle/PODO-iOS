@@ -16,7 +16,12 @@
 		AEE1A87929C37233008F9A49 /* CommonPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A87829C37233008F9A49 /* CommonPopupViewController.swift */; };
 		AEE1A87D29C3898F008F9A49 /* ExpertDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A87C29C3898F008F9A49 /* ExpertDetailViewModel.swift */; };
 		AEE1A87F29C389E6008F9A49 /* ExpertDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A87E29C389E6008F9A49 /* ExpertDetailDataModel.swift */; };
+		AEE1A88229C4214C008F9A49 /* TabAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A88129C4214C008F9A49 /* TabAPI.swift */; };
+		AEE1A88529C42326008F9A49 /* TabRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A88429C42326008F9A49 /* TabRepository.swift */; };
 		AEE1A88829C424D3008F9A49 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A88729C424D3008F9A49 /* ToastManager.swift */; };
+		AEE1A88A29C42609008F9A49 /* SettingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A88929C42609008F9A49 /* SettingData.swift */; };
+		AEE1A88C29C42683008F9A49 /* RevenueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A88B29C42683008F9A49 /* RevenueDataModel.swift */; };
+		AEE1A88E29C426A4008F9A49 /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A88D29C426A4008F9A49 /* SettingDataModel.swift */; };
 		AEE2585729C1B72A00607E92 /* CommonUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2585629C1B72A00607E92 /* CommonUserProfileView.swift */; };
 		AEED157F29B378270058F927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AEED157E29B378270058F927 /* SnapKit */; };
 		AEED158229B378D00058F927 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AEED158129B378D00058F927 /* Then */; };
@@ -116,7 +121,12 @@
 		AEE1A87829C37233008F9A49 /* CommonPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPopupViewController.swift; sourceTree = "<group>"; };
 		AEE1A87C29C3898F008F9A49 /* ExpertDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertDetailViewModel.swift; sourceTree = "<group>"; };
 		AEE1A87E29C389E6008F9A49 /* ExpertDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertDetailDataModel.swift; sourceTree = "<group>"; };
+		AEE1A88129C4214C008F9A49 /* TabAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabAPI.swift; sourceTree = "<group>"; };
+		AEE1A88429C42326008F9A49 /* TabRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRepository.swift; sourceTree = "<group>"; };
 		AEE1A88729C424D3008F9A49 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
+		AEE1A88929C42609008F9A49 /* SettingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingData.swift; sourceTree = "<group>"; };
+		AEE1A88B29C42683008F9A49 /* RevenueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueDataModel.swift; sourceTree = "<group>"; };
+		AEE1A88D29C426A4008F9A49 /* SettingDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDataModel.swift; sourceTree = "<group>"; };
 		AEE2585629C1B72A00607E92 /* CommonUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUserProfileView.swift; sourceTree = "<group>"; };
 		CE3F41EA29A6362B0085C436 /* PODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3F420329A647BF0085C436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -246,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				AE1C45E529C1642F0025E7CA /* ArticleAPI.swift */,
+				AEE1A88129C4214C008F9A49 /* TabAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -265,8 +276,17 @@
 				CEFEFA0229BF692100052DBA /* HomeData.swift */,
 				CE505C4229BF8D6C007A9DC2 /* RevenueData.swift */,
 				CEFEFA0429BF692100052DBA /* ExpertData.swift */,
+				AEE1A88929C42609008F9A49 /* SettingData.swift */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		AEE1A88329C422FA008F9A49 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				AEE1A88429C42326008F9A49 /* TabRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		AEE1A88629C424CA008F9A49 /* Manager */ = {
@@ -425,6 +445,7 @@
 		CEFEFA1A29BF698100052DBA /* Tab */ = {
 			isa = PBXGroup;
 			children = (
+				AEE1A88329C422FA008F9A49 /* Repository */,
 				CEFEFA1B29BF698100052DBA /* Home */,
 				CEFEFA4229BF698100052DBA /* Expert */,
 				CEFEFA5329BF698100052DBA /* Revenue */,
@@ -540,6 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				CEFEFA3129BF698100052DBA /* SettingViewModel.swift */,
+				AEE1A88D29C426A4008F9A49 /* SettingDataModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -707,6 +729,7 @@
 		CEFEFA5429BF698100052DBA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				AEE1A88B29C42683008F9A49 /* RevenueDataModel.swift */,
 				CEFEFA5529BF698100052DBA /* RevenueViewModel.swift */,
 			);
 			path = ViewModel;
@@ -1084,6 +1107,7 @@
 				CEFEFA9629BF698100052DBA /* RevenueExpertTableViewCell.swift in Sources */,
 				CEFEFAB729BF6A3400052DBA /* ContentTableViewHeaderView.swift in Sources */,
 				CEFEFA8729BF698100052DBA /* ExpertDataModel.swift in Sources */,
+				AEE1A88A29C42609008F9A49 /* SettingData.swift in Sources */,
 				AEE1A87F29C389E6008F9A49 /* ExpertDetailDataModel.swift in Sources */,
 				CEFEFA9B29BF698100052DBA /* RevenueDoraListViewController.swift in Sources */,
 				CEFEFA7B29BF698100052DBA /* HomeHottestTableViewCell.swift in Sources */,
@@ -1099,14 +1123,17 @@
 				CEFEFA9029BF698100052DBA /* RevenueViewController.swift in Sources */,
 				CEFEFA8029BF698100052DBA /* SettingViewController.swift in Sources */,
 				CEFEFA7929BF698100052DBA /* HomeInsightTableViewCell.swift in Sources */,
+				AEE1A88529C42326008F9A49 /* TabRepository.swift in Sources */,
 				CEFEFAAF29BF6A3400052DBA /* ContentViewController.swift in Sources */,
 				CEFEFA7D29BF698100052DBA /* HomeNewCollectionViewCell.swift in Sources */,
 				CEFEFA1829BF692100052DBA /* ExpertData.swift in Sources */,
 				CEFEFA9C29BF698100052DBA /* TabBarController.swift in Sources */,
 				CEFEFA1729BF692100052DBA /* UserData.swift in Sources */,
+				AEE1A88E29C426A4008F9A49 /* SettingDataModel.swift in Sources */,
 				CEFEFAB629BF6A3400052DBA /* ContentUserInfoTableViewHeaderView.swift in Sources */,
 				CEFEFA8F29BF698100052DBA /* RevenueViewModel.swift in Sources */,
 				CEFEFAB129BF6A3400052DBA /* ContentDataModel.swift in Sources */,
+				AEE1A88C29C42683008F9A49 /* RevenueDataModel.swift in Sources */,
 				CEFEFAB229BF6A3400052DBA /* ContentTableViewFooterView.swift in Sources */,
 				CEFEFA1129BF692100052DBA /* CommonAccessoryView.swift in Sources */,
 				CEFEFAB329BF6A3400052DBA /* ContentUserInfoTableViewFooterView.swift in Sources */,
@@ -1129,6 +1156,7 @@
 				AE7D10DC29C06E7A007E6ED2 /* ExpertWriteViewController.swift in Sources */,
 				CEFEFA7A29BF698100052DBA /* HomeHottestCollectionViewCell.swift in Sources */,
 				CEFEFA0829BF692100052DBA /* UITableView+.swift in Sources */,
+				AEE1A88229C4214C008F9A49 /* TabAPI.swift in Sources */,
 				CEFEFA9229BF698100052DBA /* RevenueMyAnswerListViewController.swift in Sources */,
 				CEFEFAD129BF6B8400052DBA /* WebViewViewController.swift in Sources */,
 				CEFEFA9829BF698100052DBA /* RevenueListTableViewHeaderView.swift in Sources */,
