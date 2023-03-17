@@ -26,12 +26,12 @@ final class ExpertRecommendTableViewCell: UITableViewCell {
     }
 
     func updateData(_ data: QuestionData) {
-        self.profileImageView.update(imagePath: data.user?.profileImagePath, name: data.user?.name, imageIcon: data.user?.profileImage)
+        self.profileImageView.update(imagePath: data.user?.profileImage, name: data.user?.name, imageIcon: data.user?.profileImageIcon)
         self.titleLabel.text = "Q. \(data.title ?? "")"
         self.nameLabel.text = data.user?.name
         self.jobLabel.text = data.user?.job
         self.answerLabel.text = data.answers?.first?.content
-        self.doraLabel.text = "\(data.cost ?? 0)"
+        self.doraLabel.text = "\(data.dora ?? 0)"
     }
 
     private let containerView = UIView(frame: .zero)

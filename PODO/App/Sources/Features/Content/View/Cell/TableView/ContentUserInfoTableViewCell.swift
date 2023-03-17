@@ -26,7 +26,7 @@ final class ContentUserInfoTableViewCell: UITableViewCell {
     }
 
     func updateData(_ data: UserData) {
-        self.profileImageView.update(imagePath: data.profileImagePath, name: data.name, imageIcon: data.profileImage)
+        self.profileImageView.update(imagePath: data.profileImage, name: data.name, imageIcon: data.profileImageIcon)
         self.nameLabel.text = data.name
         self.jobLabel.text = data.job
     }

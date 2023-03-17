@@ -8,19 +8,22 @@
 import Foundation
 
 struct ArticleData: Decodable {
-    let imagePaths: [String]?
+    let id: Int?
     let title: String?
     let summary: String?
+    let imageUrls: [String]?
+
+    // 서버에 추가 요청
     let contents: [String]?
-    let thumbnailPath: String?
+    let image: String?
     let category: String?
     let isBookmarked: Bool?
-    let createdAt: String?
-    let author: UserData?
+    let createdAt: String?          // datetime ==> createdAt
+    let author: UserData?           // author_name: String ==> author: UserData
     let translator: UserData?
     let contributors: [UserData]?
 
-    //
+    // 제거 필요.
     var images: [String]?
     var thumbail: String?
 }
@@ -28,11 +31,12 @@ struct ArticleData: Decodable {
 // MARK: - Mock
 extension ArticleData {
 
-    static let mock1 = ArticleData(imagePaths: Self.imagePaths,
+    static let mock1 = ArticleData(id: 1,
                                    title: "행운의 편지",
                                    summary: "이 편지는 영국에서 최초로 시작되어 일년에 한바퀴를 돌면서 받는 사람에게 행운을 주었고...",
+                                   imageUrls: Self.imagePaths,
                                    contents: Self.contents,
-                                   thumbnailPath: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F222FEF3751E8AFD429",
+                                   image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F222FEF3751E8AFD429",
                                    category: "Coin",
                                    isBookmarked: true,
                                    createdAt: "1 hours ago",
@@ -40,11 +44,12 @@ extension ArticleData {
                                    translator: .mock1,
                                    contributors: [.mock1])
 
-    static let mock2 = ArticleData(imagePaths: Self.imagePaths,
+    static let mock2 = ArticleData(id: 1,
                                    title: "Rise of Stars(ROS) Silthereum Burn",
                                    summary: "행운",
+                                   imageUrls: Self.imagePaths,
                                    contents: Self.contents,
-                                   thumbnailPath: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F222FEF3751E8AFD429",
+                                   image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F222FEF3751E8AFD429",
                                    category: "Design",
                                    isBookmarked: false,
                                    createdAt: "1 hours ago",
@@ -52,11 +57,12 @@ extension ArticleData {
                                    translator: .mock1,
                                    contributors: nil)
 
-    static let mock3 = ArticleData(imagePaths: Self.imagePaths,
+    static let mock3 = ArticleData(id: 1,
                                    title: "Rise of Stars(ROS) Silthereum Burn",
                                    summary: "이 편지는 영국에서 최초로 시작되어 일년에 한바퀴를 돌면서 받는 사람에게 행운을 주었고...",
+                                   imageUrls: Self.imagePaths,
                                    contents: Self.contents,
-                                   thumbnailPath: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F222FEF3751E8AFD429",
+                                   image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F222FEF3751E8AFD429",
                                    category: "TON",
                                    isBookmarked: false,
                                    createdAt: "1 hours ago",
@@ -162,11 +168,12 @@ extension ArticleData {
     static let nowMocks: [ArticleData] = [.nowMock1, .nowMock2]
 
     static let nowMock1 = ArticleData(
-        imagePaths: nil,
+        id: 1,
         title: "UI/UX Design Trends 2023",
         summary: "Highlighting some of the trends weAr think will persist and perhaps gain even more traction in the next year.",
+        imageUrls: nil,
         contents: Self.hotContentMock1,
-        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*jOYBHA_PnToXKbupkBdI1w.png",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*jOYBHA_PnToXKbupkBdI1w.png",
         category: "TON",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",
@@ -177,11 +184,12 @@ extension ArticleData {
     )
 
     static let nowMock2 = ArticleData(
-        imagePaths: nil,
+        id: 1,
         title: "3 ChatGPT Extensions to Automate Your Life",
         summary: "ChatGPT on WhatsApp, Gmail, Google Sheets, your code editor, and more!",
+        imageUrls: nil,
         contents: Self.hotContentMock1,
-        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*jBqAOsjmedJVHwGbyP5PTw.jpeg",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*jBqAOsjmedJVHwGbyP5PTw.jpeg",
         category: "TON",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",
@@ -199,11 +207,12 @@ extension ArticleData {
     static let hottestMocks: [ArticleData] = [.hottestMock1, .hottestMock2, .hottestMock3]
 
     static let hottestMock1 = ArticleData(
-        imagePaths: nil,
+        id: 1,
         title: "Playkey users will receive cashback in TON tokens",
         summary: "Playkey is now officially supporting blockchain platform Free TON, which uses Telegram Open Network (TON) protocol.",
+        imageUrls: nil,
         contents: Self.hotContentMock1,
-        thumbnailPath: nil,
+        image: nil,
         category: "TON",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",
@@ -214,11 +223,12 @@ extension ArticleData {
         thumbail: "hot1")
 
     static let hottestMock2 = ArticleData(
-        imagePaths: nil,
+        id: 1,
         title: "Advanced Web3 Tokenomics Design ...",
         summary: "It is critical to decouple speculators from ...",
+        imageUrls: nil,
         contents: Self.contents,
-        thumbnailPath: nil,
+        image: nil,
         category: "TON",
         isBookmarked: false,
         createdAt: "1 hours ago",
@@ -229,11 +239,12 @@ extension ArticleData {
         thumbail: "hot2")
 
     static let hottestMock3 = ArticleData(
-        imagePaths: nil,
+        id: 1,
         title: "10 Predictions for Web3 and the Cryptoeconomy for 2022",
         summary: "There will be significant usability improvements in L1-L2 bridges",
+        imageUrls: nil,
         contents: Self.hotContentMock1,
-        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*xTDqHEzLmlE7uyV9HuB64w.jpeg",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*xTDqHEzLmlE7uyV9HuB64w.jpeg",
         category: "Web3.0",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",
@@ -263,11 +274,12 @@ extension ArticleData {
                                               .insightMock4, .insightMock5, .insightMock6]
 
     static let insightMock1 = ArticleData(
-        imagePaths: nil,
+        id: 1,
         title: "How To Wake Up at 5 A.M. Every Day",
         summary: "An unconventional and compassionate guide to becoming an early bird",
+        imageUrls: nil,
         contents: Self.hotContentMock1,
-        thumbnailPath:  "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*-Y9ozbNWSViiCmal1TT32w.jpeg",
+        image:  "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*-Y9ozbNWSViiCmal1TT32w.jpeg",
         category: "Self-Improvement",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",
@@ -278,11 +290,12 @@ extension ArticleData {
     )
 
     static let insightMock2 = ArticleData(
-        imagePaths: nil,
-        title: "How to use chatGPT for UI/UX design: 25 examples", 
+        id: 1,
+        title: "How to use chatGPT for UI/UX design: 25 examples",
         summary: "The practical guide to include AI in your daily workflow",
+        imageUrls: nil,
         contents: Self.hotContentMock1,
-        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*HYotfqluDW7xCqogV7ZGwQ.png",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*HYotfqluDW7xCqogV7ZGwQ.png",
         category: "Design",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",
@@ -293,11 +306,12 @@ extension ArticleData {
     )
 
     static let insightMock3 = ArticleData(
-        imagePaths: nil,
+        id: 1,
         title: "How to Instantly Improve Your Memory by Arousing Your Brain",
         summary: "No repetition required, nudity highly encouraged.",
+        imageUrls: nil,
         contents: Self.hotContentMock1,
-        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*iEfh1p_quzPDy8Za2IrVRg.jpeg",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*iEfh1p_quzPDy8Za2IrVRg.jpeg",
         category: "Self-Improvement",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",
@@ -308,11 +322,12 @@ extension ArticleData {
     )
 
     static let insightMock4 = ArticleData(
-        imagePaths: nil,
+        id: 1,
         title: "Why We Need Web 3.0",
         summary: "Ethereum co-founder Gavin Wood on why today’s internet is broken — and how we can do better next time around",
+        imageUrls: nil,
         contents: Self.hotContentMock1,
-        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*nxFBxOzzJD6fjj7mp5plPg.jpeg",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*nxFBxOzzJD6fjj7mp5plPg.jpeg",
         category: "Web3.0",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",
@@ -323,11 +338,12 @@ extension ArticleData {
     )
 
     static let insightMock5 = ArticleData(
-        imagePaths: nil,
+        id: 1,
         title: "10 Predictions for Web3 and the Cryptoeconomy for 2022",
         summary: "There will be significant usability improvements in L1-L2 bridges",
+        imageUrls: nil,
         contents: Self.hotContentMock1,
-        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*xTDqHEzLmlE7uyV9HuB64w.jpeg",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*xTDqHEzLmlE7uyV9HuB64w.jpeg",
         category: "Web3.0",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",
@@ -338,11 +354,12 @@ extension ArticleData {
     )
 
     static let insightMock6 = ArticleData(
-        imagePaths: nil,
+        id: 1,
         title: "Zero to Hero: Web3.0 and Solidity Development Roadmap 2023",
         summary: "Learning Web3.0 and blockchain development today is like buying a Bitcoin at $10 yesterday.",
+        imageUrls: nil,
         contents: Self.hotContentMock1,
-        thumbnailPath: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*K9bpGKr0zj3aEGvvXAR6Ng.jpeg",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*K9bpGKr0zj3aEGvvXAR6Ng.jpeg",
         category: "Web3.0",
         isBookmarked: false,
         createdAt: "Mar 23. 2023",

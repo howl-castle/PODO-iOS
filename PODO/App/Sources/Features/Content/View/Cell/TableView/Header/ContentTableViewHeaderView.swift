@@ -26,7 +26,7 @@ final class ContentTableViewHeaderView: UITableViewHeaderFooterView {
     }
 
     func updateData(_ data: ContentViewModel.ContentHeaderData) {
-        self.profileImageView.update(imagePath: data.user?.profileImagePath, name: data.user?.name, imageIcon: data.user?.profileImage)
+        self.profileImageView.update(imagePath: data.user?.profileImage, name: data.user?.name, imageIcon: data.user?.profileImageIcon)
         self.nameLabel.text = data.user?.name
         self.jobLabel.text = data.user?.job
         self.titleLabel.text = data.title
