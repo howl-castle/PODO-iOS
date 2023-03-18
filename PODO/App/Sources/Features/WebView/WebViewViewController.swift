@@ -64,29 +64,17 @@ final class WebViewViewController: UIViewController {
 extension WebViewViewController: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        print("@@@@@ navigationAction: \(navigationAction)")
         decisionHandler(.allow)
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        print("@@@@@ navigationResponse: \(navigationResponse)")
         decisionHandler(.allow)
     }
 
-    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-        print("@@@@@ didReceiveServerRedirectForProvisionalNavigation")
-    }
-
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        print("@@@@@ didStartProvisionalNavigation")
-    }
-
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        print("@@@@@ didCommit")
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("@@@@@ didFinish")
     }
 }
 
@@ -103,34 +91,6 @@ extension WebViewViewController: WKUIDelegate {
         }
 
         return nil
-    }
-
-    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        print("@@@@@ runJavaScriptAlertPanelWithMessage message: \(message)")
-    }
-
-    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        print("@@@@@ runJavaScriptConfirmPanelWithMessage message: \(message)")
-    }
-
-    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
-        print("@@@@@ runJavaScriptTextInputPanelWithPrompt prompt: \(prompt), defaultText: \(defaultText)")
-    }
-
-    func webView(_ webView: WKWebView, contextMenuConfigurationForElement elementInfo: WKContextMenuElementInfo, completionHandler: @escaping (UIContextMenuConfiguration?) -> Void) {
-        print("@@@@@ contextMenuConfigurationForElement elementInfo: \(elementInfo)")
-    }
-
-    func webView(_ webView: WKWebView, contextMenuWillPresentForElement elementInfo: WKContextMenuElementInfo) {
-        print("@@@@@ contextMenuWillPresentForElement elementInfo: \(elementInfo)")
-    }
-
-    func webView(_ webView: WKWebView, contextMenuForElement elementInfo: WKContextMenuElementInfo, willCommitWithAnimator animator: UIContextMenuInteractionCommitAnimating) {
-        print("@@@@@ contextMenuForElement elementInfo: \(elementInfo)")
-    }
-
-    func webView(_ webView: WKWebView, contextMenuDidEndForElement elementInfo: WKContextMenuElementInfo) {
-        print("@@@@@ contextMenuDidEndForElement elementInfo: \(elementInfo)")
     }
 }
 
