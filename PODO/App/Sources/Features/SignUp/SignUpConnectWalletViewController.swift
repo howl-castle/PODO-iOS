@@ -22,29 +22,30 @@ final class SignUpConnectWalletViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addObserver()
         self.setupUI()
     }
 
     @objc private func didTapConnectButton(_ sender: UIButton) {
-        //let viewController = SignUpFinishViewController()
-        //self.navigationController?.pushViewController(viewController, animated: false)
-        if let url = URL(string: "ton://?name=podo&url=https://naver.com") {
+        let viewController = SignUpFinishViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
 
-            UIApplication.shared.open(url) { [weak self] isSucceed in
-                if isSucceed == false {
-                    self?.openAppstore()
-                }
-            }
-        }
-        return
-        let viewController = WebViewViewController()
-        self.present(viewController, animated: true)
+    @objc private func didBecomeActiveNotification() {
+        //let viewController = SignUpFinishViewController()
+        //self.navigationController?.pushViewController(viewController, animated: true)
     }
 
     private func openAppstore() {
         guard let url = URL(string: "itms-apps://itunes.apple.com/app/1607656232") else { return }
         guard UIApplication.shared.canOpenURL(url)                                 else { return }
         UIApplication.shared.open(url)
+    }
+
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.didBecomeActiveNotification),
+                                               name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
     private let titleLabel = UILabel(frame: .zero)

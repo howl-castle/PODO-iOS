@@ -959,6 +959,10 @@ extension ContentViewController {
         self.lockContainerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+
+        self.lockContainerView.do {
+            $0.isHidden = true
+        }
     }
 
     private func setupLockDimView() {
